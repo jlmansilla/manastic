@@ -8,27 +8,54 @@
     <link rel="shortcut icon" href="imagenes/favicon.ico" type="image/vnd.microsoft.icon" sizes="32x32">
     <style>
         /* Estilos responsive */
+        @media (max-width: 1200px) {
+            /* Estilos para pantallas de hasta 1200px de ancho */
+            .container {
+                max-width: 960px; /* Ajusta el ancho máximo del contenedor */
+            }
+        }
+    
+        @media (max-width: 992px) {
+            /* Estilos para pantallas de hasta 992px de ancho */
+            .container {
+                max-width: 720px; /* Ajusta el ancho máximo del contenedor */
+            }
+        }
+    
         @media (max-width: 768px) {
+            /* Estilos para pantallas de hasta 768px de ancho */
             nav {
                 flex-direction: column;
                 align-items: center;
             }
+    
             .nav-links {
                 margin-top: 1rem;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
             }
+    
             .nav-links a {
                 margin: 0.5rem 0;
             }
+    
             .service-cards {
                 flex-direction: column;
                 align-items: center;
             }
+    
             .card {
                 max-width: 100%;
                 margin: 1rem 0;
+            }
+        }
+    
+        @media (max-width: 576px) {
+            /* Estilos para pantallas de hasta 576px de ancho */
+            .container {
+                max-width: 100%;
+                padding: 0 1rem;
             }
         }
     </style>

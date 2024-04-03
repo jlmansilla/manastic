@@ -94,11 +94,11 @@ footer {
 }
 
 .logo img {
-    max-width: 200px; /* Ajusta este valor según tus necesidades */
+    max-width: 100px; /* Ajusta este valor según tus necesidades */
 }
 
 @media (max-width: 768px) {
     .logo img {
-        max-width: 150px; /* Ajusta el tamaño para pantallas más pequeñas */
+        max-width: 50px; /* Ajusta el tamaño para pantallas más pequeñas */
     }
 }

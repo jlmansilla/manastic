@@ -92,3 +92,13 @@ footer {
     padding: 20px;
     text-align: center;
 }
+
+.logo img {
+    max-width: 200px; /* Ajusta este valor según tus necesidades */
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        max-width: 150px; /* Ajusta el tamaño para pantallas más pequeñas */
+    }
+}

@@ -1,5 +1,3 @@
 name = "prueba-manastic"
 compatibility_date = "2025-07-08"
 
-[site]
-bucket = "assets/dist"

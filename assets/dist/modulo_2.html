@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Fundamentos del Desarrollo Front End</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .mindmap {
+            position: relative;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            min-height: 450px;
+            overflow: hidden;
+        }
+        .mindmap-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #6366f1;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            z-index: 10;
+            text-align: center;
+        }
+        .mindmap-node {
+            position: absolute;
+            background-color: #fff;
+            color: #374151;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 10;
+            text-align: center;
+            min-width: 120px;
+        }
+        .mindmap-line {
+            position: absolute;
+            background-color: #d1d5db;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-72 bg-white shadow-md flex-shrink-0 overflow-y-auto">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-indigo-600">Fundamentos Front End</h1>
+                <p class="text-sm text-gray-500 mt-1">Guía de Aprendizaje</p>
+            </div>
+            <nav class="mt-4">
+                <a href="#ae1" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-globe fa-fw mr-3"></i> AE1: Fundamentos Web
+                </a>
+                <a href="#ae2" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-html5 fa-fw mr-3"></i> AE2: El Lenguaje HTML
+                </a>
+                <a href="#ae3" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-css3-alt fa-fw mr-3"></i> AE3: Estilos y Responsividad
+                </a>
+                <a href="#ae4" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-bootstrap fa-fw mr-3"></i> AE4: Framework Bootstrap
+                </a>
+                 <a href="#ae5" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-js-square fa-fw mr-3"></i> AE5: Bases de JavaScript
+                </a>
+                <a href="#ae6" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-code fa-fw mr-3"></i> AE6: Librería jQuery
+                </a>
+                <a href="#ae7" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-git-alt fa-fw mr-3"></i> AE7: Git y GitHub
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+            
+            <!-- AE1: Fundamentos Web -->
+            <section id="ae1" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE1: Fundamentos del Desarrollo Web</h2>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce los conceptos esenciales del desarrollo web, diferenciando los roles de Front-End (lo que el usuario ve e interactúa), Back-End (la lógica del servidor y la base de datos) y Full-Stack (combina ambos). Se explica que HTML es el lenguaje para estructurar el contenido, mientras que la "triada" fundamental (HTML, CSS, JavaScript) define el contenido, la presentación y el comportamiento de un sitio. Se destaca el papel del navegador como intérprete del código y la importancia del W3C como organismo que estandariza las tecnologías web.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>Desarrollo Web:</strong> Es el proceso de construir y mantener sitios web. Se divide principalmente en dos áreas:
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Front-End:</strong> Es la parte del cliente, la interfaz con la que el usuario interactúa. Utiliza HTML, CSS y JavaScript.</li>
+                                <li><strong>Back-End:</strong> Es la parte del servidor, donde se procesan los datos, se gestiona la lógica de negocio y se interactúa con la base de datos. Utiliza lenguajes como PHP, Python, Ruby o Java.</li>
+                            </ul>
+                        </li>
+                        <li><strong>HTML (HyperText Markup Language):</strong> Es el lenguaje de marcado estándar para crear la estructura de las páginas web mediante un sistema de etiquetas.</li>
+                        <li><strong>La Triada del Desarrollo Web:</strong>
+                             <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>HTML:</strong> Define el <strong>contenido</strong> y la estructura.</li>
+                                <li><strong>CSS:</strong> Define la <strong>presentación</strong> (estilos, colores, diseño).</li>
+                                <li><strong>JavaScript:</strong> Define el <strong>comportamiento</strong> (interactividad, dinamismo).</li>
+                             </ul>
+                        </li>
+                         <li><strong>Entorno de Desarrollo:</strong> Incluye herramientas como el editor de código (ej. Visual Studio Code) para escribir el código, y el navegador (ej. Chrome, Firefox) que no solo muestra el sitio, sino que también ofrece herramientas de desarrollo como el "Inspector de Elementos" para depurar y analizar el código en tiempo real.</li>
+                         <li><strong>W3C (World Wide Web Consortium):</strong> Es la comunidad internacional que desarrolla los estándares web (como HTML5 y CSS3) para asegurar el crecimiento y la interoperabilidad de la Web.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap1">
+                        <div class="mindmap-center">Desarrollo Web</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Roles</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Tecnologías (La Triada)</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Herramientas</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Estándares</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 25%;">Front-End</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 75%;">Back-End</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">HTML</div>
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 25%;">CSS</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">JavaScript</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 80%;">W3C</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://www.w3.org/" target="_blank" class="text-blue-600 hover:underline">World Wide Web Consortium (W3C)</a></li>
+                        <li><a href="https://developer.mozilla.org/es/docs/Learn" target="_blank" class="text-blue-600 hover:underline">MDN Web Docs: Aprende Desarrollo Web</a></li>
+                        <li><a href="https://code.visualstudio.com/" target="_blank" class="text-blue-600 hover:underline">Visual Studio Code</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AE2: HTML -->
+            <section id="ae2" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE2: El Lenguaje HTML</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo se centra en HTML5, la versión moderna del lenguaje para estructurar contenido web. Se destacan sus características clave como la semántica (con etiquetas como <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>), la conectividad y el soporte multimedia nativo. Se explica la anatomía de un elemento HTML (etiqueta, atributo, contenido) y la estructura básica de un documento, incluyendo el <code>&lt;head&gt;</code> para metadatos y el <code>&lt;body&gt;</code> para el contenido visible. Se cubren elementos esenciales como encabezados, enlaces, imágenes, listas, tablas y formularios.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Estructura Básica de un Documento HTML</h4>
+                            <p class="text-gray-700 mt-1">Todo documento HTML sigue una estructura jerárquica fundamental:</p>
+                            <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong><code>&lt;!DOCTYPE html&gt;</code>:</strong> Declara que el documento es de tipo HTML5.</li>
+                                <li><strong><code>&lt;html&gt;</code>:</strong> Es el elemento raíz que engloba todo el contenido.</li>
+                                <li><strong><code>&lt;head&gt;</code>:</strong> Contiene metadatos sobre la página (título, codificación de caracteres, enlaces a CSS) que no son visibles directamente.</li>
+                                <li><strong><code>&lt;body&gt;</code>:</strong> Contiene todo el contenido visible de la página web.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Etiquetas Semánticas de Estructura</h4>
+                            <p class="text-gray-700 mt-1">HTML5 introdujo etiquetas que describen el propósito de su contenido, mejorando la accesibilidad y el SEO.</p>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong><code>&lt;header&gt;</code>:</strong> El encabezado de una página o sección.</li>
+                                <li><strong><code>&lt;nav&gt;</code>:</strong> Contiene los enlaces de navegación principales.</li>
+                                <li><strong><code>&lt;main&gt;</code>:</strong> El contenido principal y único de la página.</li>
+                                <li><strong><code>&lt;section&gt;</code>:</strong> Una sección temática del documento.</li>
+                                <li><strong><code>&lt;article&gt;</code>:</strong> Contenido independiente y autocontenido (ej. un post de blog).</li>
+                                <li><strong><code>&lt;aside&gt;</code>:</strong> Contenido relacionado de forma tangencial (ej. una barra lateral).</li>
+                                <li><strong><code>&lt;footer&gt;</code>:</strong> El pie de página de una página o sección.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Elementos Comunes de Contenido</h4>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong><code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code>:</strong> Encabezados para jerarquizar el contenido.</li>
+                                <li><strong><code>&lt;p&gt;</code>:</strong> Un párrafo de texto.</li>
+                                <li><strong><code>&lt;a href="..."&gt;</code>:</strong> Un hipervínculo a otra página o recurso.</li>
+                                <li><strong><code>&lt;img src="..." alt="..."&gt;</code>:</strong> Inserta una imagen.</li>
+                                <li><strong><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code>:</strong> Listas desordenadas y ordenadas.</li>
+                                <li><strong><code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>:</strong> Para crear tablas de datos.</li>
+                                <li><strong><code>&lt;form&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;button&gt;</code>:</strong> Para crear formularios interactivos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap2">
+                         <div class="mindmap-center">Documento HTML</div>
+                         <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">&lt;head&gt;</div>
+                         <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">&lt;body&gt;</div>
+                         <!-- Sub-nodos Head -->
+                         <div class="mindmap-node text-sm" style="top: 5%; left: 30%;">&lt;title&gt;</div>
+                         <div class="mindmap-node text-sm" style="top: 5%; left: 70%;">&lt;meta&gt;</div>
+                         <!-- Sub-nodos Body -->
+                         <div class="mindmap-node text-sm" style="top: 70%; left: 10%;">Estructura Semántica</div>
+                         <div class="mindmap-node text-sm" style="top: 95%; left: 25%;">Texto</div>
+                         <div class="mindmap-node text-sm" style="top: 95%; left: 50%;">Listas y Tablas</div>
+                         <div class="mindmap-node text-sm" style="top: 95%; left: 75%;">Formularios</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank" class="text-blue-600 hover:underline">Referencia de HTML en MDN</a></li>
+                        <li><a href="https://www.w3schools.com/html/" target="_blank" class="text-blue-600 hover:underline">Tutorial de HTML en W3Schools</a></li>
+                        <li><a href="https://html5test.com/" target="_blank" class="text-blue-600 hover:underline">HTML5Test (Prueba la compatibilidad de tu navegador)</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- AE3: CSS -->
+            <section id="ae3" class="content-section">
+                 <h2 class="text-3xl font-bold mb-4 text-gray-900">AE3: Aplicación de Estilos y Responsividad</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce CSS (Hojas de Estilo en Cascada) como el lenguaje para dar diseño y presentación a los documentos HTML. Se explican las tres formas de aplicar CSS (en línea, incrustado y externo), la sintaxis de una regla CSS (selector y propiedades), y la importancia de los selectores por clase e ID. Se profundiza en el fundamental <strong>Modelo de Cajas</strong> (box model) y se introduce el <strong>diseño responsivo</strong>, explicando cómo usar la etiqueta <code>&lt;meta name="viewport"&gt;</code> y las <strong>Media Queries</strong> para adaptar el layout a diferentes dispositivos (Mobile First).
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>¿Qué es CSS?:</strong> Es un lenguaje de diseño gráfico para definir y crear la presentación de un documento estructurado escrito en un lenguaje de marcado como HTML.</li>
+                        <li><strong>Formas de incluir CSS:</strong>
+                            <ol class="list-decimal list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>En línea (Inline):</strong> Usando el atributo <code>style</code> directamente en una etiqueta HTML. (No recomendado).</li>
+                                <li><strong>Incrustado (Embedded):</strong> Dentro de una etiqueta <code>&lt;style&gt;</code> en el <code>&lt;head&gt;</code> del documento.</li>
+                                <li><strong>Externo (External):</strong> En un archivo <code>.css</code> separado, enlazado mediante la etiqueta <code>&lt;link&gt;</code>. (La mejor práctica).</li>
+                            </ol>
+                        </li>
+                        <li><strong>Selectores:</strong> Permiten apuntar a los elementos HTML que se quieren estilizar. Los más comunes son por etiqueta (<code>p</code>), por clase (<code>.nombre-clase</code>) y por ID (<code>#nombre-id</code>).</li>
+                        <li><strong>Modelo de Cajas (Box Model):</strong> Cada elemento HTML es una caja rectangular compuesta por: <strong>contenido</strong>, <strong>padding</strong> (relleno interior), <strong>borde</strong> y <strong>margen</strong> (espacio exterior).</li>
+                        <li><strong>Diseño Responsivo:</strong> Es la práctica de diseñar sitios web que se vean bien en una variedad de dispositivos y tamaños de pantalla.
+                             <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Viewport:</strong> La etiqueta <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> es esencial para que el diseño responsivo funcione correctamente.</li>
+                                <li><strong>Media Queries:</strong> Permiten aplicar diferentes estilos CSS según las características del dispositivo, como el ancho de la pantalla (ej. <code>@media (max-width: 600px) { ... }</code>).</li>
+                                <li><strong>Mobile First:</strong> Una estrategia donde se diseñan primero los estilos para dispositivos móviles y luego se añaden estilos para pantallas más grandes mediante media queries con <code>min-width</code>.</li>
+                             </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap3">
+                        <div class="mindmap-center">CSS</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Selectores</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Modelo de Cajas</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Propiedades</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Responsividad</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 25%;">Clase</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 75%;">ID</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">Margen</div>
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 25%;">Borde</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">Padding</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 80%;">Media Queries</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank" class="text-blue-600 hover:underline">Guía de CSS en MDN</a></li>
+                        <li><a href="https://css-tricks.com/a-complete-guide-to-flexbox/" target="_blank" class="text-blue-600 hover:underline">Guía Completa de Flexbox (CSS-Tricks)</a></li>
+                        <li><a href="https://www.w3schools.com/css/css_rwd_intro.asp" target="_blank" class="text-blue-600 hover:underline">Introducción al Diseño Web Responsivo (W3Schools)</a></li>
+                        <li><a href="https://www.responsinator.com/" target="_blank" class="text-blue-600 hover:underline">Responsinator (Herramienta para probar responsividad)</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AE4: Bootstrap -->
+            <section id="ae4" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE4: El Framework Bootstrap</h2>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo se enfoca en Bootstrap, el framework de CSS, HTML y JS más popular del mundo. Se explica que Bootstrap permite construir sitios web responsivos y "mobile-first" de manera rápida y sencilla. Sus principales beneficios son un potente sistema de cuadrícula (grid) de 12 columnas, una vasta colección de componentes pre-diseñados (Navbars, Cards, Alerts, etc.) y un conjunto de clases de utilidad que simplifican el diseño. Se detalla cómo incorporarlo a un proyecto, ya sea a través de un CDN o descargando los archivos.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>¿Qué es Bootstrap?</strong> Un framework de front-end de código abierto para desarrollar sitios web responsivos de forma rápida. Proporciona plantillas de diseño basadas en HTML y CSS para tipografía, formularios, botones, navegación y otros componentes de la interfaz.</li>
+                        <li><strong>Sistema de Cuadrícula (Grid System):</strong>
+                            <p class="mt-1">Es la base para crear layouts. Se compone de:</p>
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong><code>.container</code> o <code>.container-fluid</code>:</strong> El contenedor principal que envuelve y centra el contenido.</li>
+                                <li><strong><code>.row</code>:</strong> Filas que actúan como contenedores para las columnas.</li>
+                                <li><strong><code>.col-*</code>:</strong> Columnas. La página se divide en 12 columnas, y se puede especificar cuántas columnas ocupa un elemento en diferentes tamaños de pantalla (ej. <code>.col-md-6</code> ocupa 6 de 12 columnas en dispositivos medianos y superiores).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Componentes:</strong> Bootstrap ofrece una gran cantidad de componentes listos para usar, que ahorran mucho tiempo de desarrollo. Algunos ejemplos son:
+                             <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li>Alerts (Alertas)</li>
+                                <li>Buttons (Botones)</li>
+                                <li>Cards (Tarjetas)</li>
+                                <li>Carousel (Carrusel de imágenes)</li>
+                                <li>Forms (Formularios)</li>
+                                <li>Navbar (Barra de navegación)</li>
+                             </ul>
+                        </li>
+                         <li><strong>Instalación:</strong> Se puede incluir en un proyecto de dos maneras principales:
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>CDN (Content Delivery Network):</strong> Enlazando los archivos CSS y JS directamente desde los servidores de Bootstrap. Es la forma más rápida y sencilla.</li>
+                                <li><strong>Descarga Local:</strong> Descargando los archivos precompilados y alojándolos en el propio proyecto.</li>
+                            </ul>
+                         </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap4">
+                        <div class="mindmap-center">Bootstrap</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Sistema de Grid</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Componentes</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Instalación</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Utilidades</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 25%;">.container</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 50%;">.row</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 75%;">.col</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">Navbar</div>
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 25%;">Cards</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">Buttons</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://getbootstrap.com/" target="_blank" class="text-blue-600 hover:underline">Sitio Oficial de Bootstrap</a></li>
+                        <li><a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" target="_blank" class="text-blue-600 hover:underline">Documentación de Bootstrap 5</a></li>
+                        <li><a href="https://www.w3schools.com/bootstrap5/" target="_blank" class="text-blue-600 hover:underline">Tutorial de Bootstrap 5 en W3Schools</a></li>
+                        <li><a href="https://themes.getbootstrap.com/" target="_blank" class="text-blue-600 hover:underline">Temas Oficiales de Bootstrap</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- AE5: JavaScript -->
+            <section id="ae5" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE5: Bases del Lenguaje JavaScript</h2>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce JavaScript, el lenguaje de programación esencial para añadir interactividad a las páginas web. Se explica su rol como la capa de "comportamiento" en la triada web. Se cubren los fundamentos, incluyendo cómo incorporar JS en un archivo HTML, la declaración de variables (<code>var</code>, <code>let</code>, <code>const</code>), operadores aritméticos y de comparación, y estructuras de control como las sentencias condicionales (<code>if/else</code>, <code>switch</code>). Además, se introduce el DOM (Document Object Model) como la representación de la página que JS puede manipular, y se muestran eventos básicos como <code>onclick</code> para responder a las acciones del usuario.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>¿Qué es JavaScript?</strong> Es un lenguaje de programación de alto nivel, interpretado, que se ejecuta en el navegador del cliente. Permite crear contenido dinámico, controlar multimedia, animar imágenes y prácticamente todo lo que implique interactividad en una página web.</li>
+                        <li><strong>Inclusión en HTML:</strong> El código JavaScript se incluye dentro de etiquetas <code>&lt;script&gt;</code>. La mejor práctica es colocarlo justo antes del cierre de la etiqueta <code>&lt;/body&gt;</code> para asegurar que todo el HTML se haya cargado antes de que el script intente manipularlo.</li>
+                        <li><strong>Variables:</strong> Contenedores para almacenar datos. Se declaran con:
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong><code>var</code>:</strong> Alcance de función (versión antigua, se evita su uso).</li>
+                                <li><strong><code>let</code>:</strong> Alcance de bloque, su valor puede ser reasignado.</li>
+                                <li><strong><code>const</code>:</strong> Alcance de bloque, su valor es constante y no puede ser reasignado.</li>
+                            </ul>
+                        </li>
+                        <li><strong>DOM (Document Object Model):</strong> Es una API que representa el documento HTML como un árbol de objetos. JavaScript puede acceder y manipular este árbol para cambiar dinámicamente el contenido, la estructura y los estilos de la página. Se accede a los elementos con métodos como <code>document.getElementById()</code>.</li>
+                        <li><strong>Eventos:</strong> Son acciones que ocurren en la página, como un clic de ratón o la pulsación de una tecla. JavaScript puede "escuchar" estos eventos y ejecutar una función en respuesta. Ejemplos: <code>onclick</code>, <code>onchange</code>.</li>
+                        <li><strong>Funciones:</strong> Bloques de código reutilizables que realizan una tarea específica. Se definen con la palabra clave <code>function</code> y se ejecutan cuando son "llamadas".</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap5">
+                        <div class="mindmap-center">JavaScript</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Variables</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">DOM</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Funciones</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Eventos</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 25%;">let / const</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">Seleccionar</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">Manipular</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 80%;">onclick</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript" target="_blank" class="text-blue-600 hover:underline">Guía de JavaScript en MDN</a></li>
+                        <li><a href="https://javascript.info/" target="_blank" class="text-blue-600 hover:underline">The Modern JavaScript Tutorial (excelente recurso, en inglés)</a></li>
+                        <li><a href="https://www.w3schools.com/js/" target="_blank" class="text-blue-600 hover:underline">Tutorial de JavaScript en W3Schools</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- AE6: jQuery -->
+            <section id="ae6" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE6: Conociendo la Librería jQuery</h2>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo presenta jQuery, una biblioteca de JavaScript rápida y ligera cuyo lema es "escribe menos, haz más". Su objetivo es simplificar enormemente la manipulación de documentos HTML, el manejo de eventos y las animaciones. Se explica cómo incluir jQuery en un proyecto y cómo su sintaxis, que utiliza el signo de dólar <code>$()</code>, facilita la selección de elementos del DOM y la aplicación de métodos de forma encadenada. También se aborda el concepto de plugins, que extienden aún más la funcionalidad de jQuery para tareas complejas.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>¿Qué es jQuery?</strong> Una biblioteca de JavaScript que simplifica la interacción con el DOM y el manejo de eventos. Permite realizar tareas complejas con menos líneas de código en comparación con el JavaScript "nativo".</li>
+                        <li><strong>Sintaxis Básica:</strong> La sintaxis de jQuery está diseñada para seleccionar elementos HTML y realizar alguna acción sobre ellos. La función principal es <code>$()</code>.
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Selector:</strong> <code>$("p")</code> selecciona todos los párrafos. <code>$("#miId")</code> selecciona un elemento por su ID. <code>$(".miClase")</code> selecciona elementos por su clase.</li>
+                                <li><strong>Acción:</strong> <code>.hide()</code>, <code>.show()</code>, <code>.click()</code>, <code>.css()</code> son ejemplos de métodos que realizan acciones.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Manejo del DOM:</strong> jQuery facilita enormemente la selección y manipulación de elementos. El código se suele ejecutar dentro de <code>$(document).ready(function(){ ... });</code> para asegurar que la página se ha cargado completamente.</li>
+                        <li><strong>Manejo de Eventos:</strong> Se simplifica la asignación de funciones a eventos. Por ejemplo, <code>$("#miBoton").click(function(){ ... });</code> ejecuta una función cuando se hace clic en el botón.</li>
+                        <li><strong>Plugins:</strong> Son complementos que añaden funcionalidades específicas a jQuery, como galerías de imágenes (Fancybox), tablas de datos avanzadas (DataTables) o selectores mejorados (Select2).</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap6">
+                        <div class="mindmap-center">jQuery</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Selectores</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Manipulación DOM</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Plugins</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Eventos</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 50%; transform: translateX(-50%);">$()</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">.html()</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">.css()</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 80%;">.click()</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://jquery.com/" target="_blank" class="text-blue-600 hover:underline">Sitio Oficial de jQuery</a></li>
+                        <li><a href="https://api.jquery.com/" target="_blank" class="text-blue-600 hover:underline">Documentación de la API de jQuery</a></li>
+                        <li><a href="https://www.w3schools.com/jquery/" target="_blank" class="text-blue-600 hover:underline">Tutorial de jQuery en W3Schools</a></li>
+                        <li><a href="https://fancyapps.com/fancybox/" target="_blank" class="text-blue-600 hover:underline">Plugin Fancybox</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- AE7: Git y GitHub -->
+            <section id="ae7" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE7: Fundamentos de Git y GitHub</h2>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce Git como el sistema de control de versiones distribuido más utilizado, y GitHub como la plataforma líder para alojar repositorios Git y colaborar en proyectos. Se explica la necesidad de un repositorio para el versionamiento del código, el trabajo en equipo y la contribución a proyectos de código abierto. Se detallan los comandos básicos y el flujo de trabajo esencial: crear ramas para nuevas funcionalidades, hacer "commits" para guardar cambios, y usar "push" y "pull" para sincronizar con un repositorio remoto. Finalmente, se introduce el flujo de colaboración de GitHub a través de "forks" y "pull requests".
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>¿Qué es Git?</strong> Un sistema de control de versiones que permite rastrear los cambios en los archivos de un proyecto a lo largo del tiempo. Permite volver a versiones anteriores, trabajar en diferentes características en paralelo (ramas) y colaborar con otros desarrolladores.</li>
+                        <li><strong>¿Qué es GitHub?</strong> Una plataforma web que utiliza Git para alojar repositorios de código. Facilita la colaboración, la revisión de código y la gestión de proyectos.</li>
+                        <li><strong>Flujo de Trabajo Básico Local:</strong>
+                            <ol class="list-decimal list-inside ml-6 mt-1 space-y-1">
+                                <li><strong><code>git init</code>:</strong> Inicializa un nuevo repositorio Git en una carpeta.</li>
+                                <li><strong><code>git add [archivo]</code>:</strong> Añade los cambios de un archivo al "staging area" (área de preparación).</li>
+                                <li><strong><code>git commit -m "mensaje"</code>:</strong> Guarda una instantánea de los cambios preparados en el historial del repositorio.</li>
+                            </ol>
+                        </li>
+                        <li><strong>Ramas (Branches):</strong> Son líneas de desarrollo independientes. Permiten trabajar en nuevas funcionalidades sin afectar la rama principal (generalmente llamada `main` o `master`).
+                             <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong><code>git branch [nombre]</code>:</strong> Crea una nueva rama.</li>
+                                <li><strong><code>git checkout [nombre]</code>:</strong> Cambia a una rama existente.</li>
+                                <li><strong><code>git merge [nombre]</code>:</strong> Fusiona los cambios de una rama en la rama actual.</li>
+                             </ul>
+                        </li>
+                        <li><strong>Trabajo con Repositorios Remotos (GitHub):</strong>
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong><code>git clone [url]</code>:</strong> Crea una copia local de un repositorio remoto.</li>
+                                <li><strong><code>git push</code>:</strong> Sube los commits locales al repositorio remoto.</li>
+                                <li><strong><code>git pull</code>:</strong> Descarga los cambios del repositorio remoto y los fusiona con la rama local.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Flujo de Colaboración en GitHub:</strong>
+                             <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Fork:</strong> Crear una copia personal de un repositorio ajeno en tu propia cuenta de GitHub.</li>
+                                <li><strong>Pull Request (PR):</strong> Proponer que los cambios que has hecho en tu fork se incorporen al repositorio original. Esto permite la revisión y discusión del código antes de la fusión.</li>
+                             </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap7">
+                        <div class="mindmap-center">Git y GitHub</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Flujo Local (Git)</div>
+                        <div class="mindmap-node" style="top: 50%; left: 75%;">Flujo Remoto (GitHub)</div>
+                        <!-- Sub-nodos Local -->
+                        <div class="mindmap-node text-sm" style="top: 15%; left: 5%;">add</div>
+                        <div class="mindmap-node text-sm" style="top: 35%; left: 5%;">commit</div>
+                        <div class="mindmap-node text-sm" style="top: 65%; left: 5%;">branch</div>
+                        <div class="mindmap-node text-sm" style="top: 85%; left: 5%;">merge</div>
+                        <!-- Sub-nodos Remoto -->
+                        <div class="mindmap-node text-sm" style="top: 15%; left: 80%;">clone</div>
+                        <div class="mindmap-node text-sm" style="top: 35%; left: 80%;">push</div>
+                        <div class="mindmap-node text-sm" style="top: 65%; left: 80%;">pull</div>
+                        <div class="mindmap-node text-sm" style="top: 85%; left: 80%;">Pull Request</div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://git-scm.com/" target="_blank" class="text-blue-600 hover:underline">Sitio Oficial de Git</a></li>
+                        <li><a href="https://github.com/" target="_blank" class="text-blue-600 hover:underline">GitHub</a></li>
+                        <li><a href="https://www.atlassian.com/es/git/tutorials" target="_blank" class="text-blue-600 hover:underline">Tutoriales de Git de Atlassian</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=jGehuhFhtnE" target="_blank" class="text-blue-600 hover:underline">Video: Git desde cero</a></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function updateContent(hash) {
+                if (!hash) {
+                    hash = '#ae1';
+                }
+
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                const activeSection = document.querySelector(hash);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                } else {
+                    document.querySelector('#ae1').classList.add('active');
+                }
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    } else {
+                        link.classList.remove('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    }
+                });
+
+                // Redraw mind map for the active section
+                const activeMindMapId = activeSection ? activeSection.querySelector('.mindmap')?.id : null;
+                if (activeMindMapId) {
+                    drawMindMapLines(activeMindMapId);
+                }
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    history.pushState(null, null, targetId);
+                    updateContent(targetId);
+                    window.scrollTo(0, 0);
+                });
+            });
+
+            window.addEventListener('popstate', function() {
+                updateContent(window.location.hash);
+            });
+
+            function drawMindMapLines(mapId) {
+                const map = document.getElementById(mapId);
+                if (!map) return;
+                
+                const oldLines = map.querySelectorAll('.mindmap-line');
+                oldLines.forEach(line => line.remove());
+
+                const center = map.querySelector('.mindmap-center');
+                const nodes = map.querySelectorAll('.mindmap-node');
+                
+                if (!center) return;
+
+                const centerX = center.offsetLeft + center.offsetWidth / 2;
+                const centerY = center.offsetTop + center.offsetHeight / 2;
+
+                nodes.forEach(node => {
+                    const nodeX = node.offsetLeft + node.offsetWidth / 2;
+                    const nodeY = node.offsetTop + node.offsetHeight / 2;
+
+                    const line = document.createElement('div');
+                    line.classList.add('mindmap-line');
+                    
+                    const distance = Math.sqrt(Math.pow(nodeX - centerX, 2) + Math.pow(nodeY - centerY, 2));
+                    const angle = Math.atan2(nodeY - centerY, nodeX - centerX) * (180 / Math.PI);
+
+                    line.style.width = `${distance}px`;
+                    line.style.height = '2px';
+                    line.style.left = `${centerX}px`;
+                    line.style.top = `${centerY}px`;
+                    line.style.transformOrigin = 'left center';
+                    line.style.transform = `rotate(${angle}deg)`;
+                    
+                    map.prepend(line);
+                });
+            }
+            
+            const observer = new ResizeObserver(() => {
+                const activeMindMap = document.querySelector('.content-section.active .mindmap');
+                if (activeMindMap) {
+                    drawMindMapLines(activeMindMap.id);
+                }
+            });
+            observer.observe(document.body);
+
+            // Initial load
+            updateContent(window.location.hash);
+            
+            // A short delay to ensure elements are rendered before drawing lines
+            setTimeout(() => {
+                const activeMindMap = document.querySelector('.content-section.active .mindmap');
+                if (activeMindMap) {
+                    drawMindMapLines(activeMindMap.id);
+                }
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>

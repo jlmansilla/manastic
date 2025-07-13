@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Estudio Interactivo: Vue.js Full-Stack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Stone, Slate, Teal) -->
+    <!-- Application Structure Plan: A tabbed SPA interface with four main sections: Roadmap (interactive sprint cards), Proyecto Final (details and metrics), Recursos (templates and guides), and Reglas Clave (highlighted constraints). This structure categorizes the dense report information into logical, user-selectable themes, making it more digestible than a single linear document. The interactive roadmap provides a high-level overview with drill-down capabilities for details. -->
+    <!-- Visualization & Content Choices: Syllabus Table -> Interactive Cards (Goal: Show progression, Method: JS toggle, Justification: More engaging). Evaluation Rubric -> Donut Chart (Goal: Compare, Method: Chart.js, Justification: Quick visual breakdown). Pedagogy Split -> Donut Chart (Goal: Proportions, Method: Chart.js, Justification: Simple visual fact). Tech Stack -> Styled Text Grid (Goal: Inform, Method: HTML/Tailwind, Justification: No images allowed). -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #1e293b; /* slate-800 */
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link-active {
+            color: #0d9488; /* teal-600 */
+            border-bottom-color: #0d9488; /* teal-600 */
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .details-content {
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+            max-height: 0;
+        }
+        .details-content.show {
+            display: block;
+            max-height: 1500px;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="app" class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900">Plan de Estudio: Vue.js 3 Full-Stack Profesional</h1>
+            <p class="mt-2 text-lg text-slate-600">Un viaje de 12 semanas para convertirte en un desarrollador experto.</p>
+        </header>
+
+        <nav class="flex justify-center border-b border-slate-200 mb-8 space-x-4 sm:space-x-8">
+            <a data-tab="roadmap" class="nav-link font-medium text-slate-600 hover:text-teal-600 py-3 px-2">Roadmap del Curso</a>
+            <a data-tab="project" class="nav-link font-medium text-slate-600 hover:text-teal-600 py-3 px-2">Proyecto Final</a>
+            <a data-tab="resources" class="nav-link font-medium text-slate-600 hover:text-teal-600 py-3 px-2">Recursos</a>
+            <a data-tab="rules" class="nav-link font-medium text-slate-600 hover:text-teal-600 py-3 px-2">Reglas Clave</a>
+        </nav>
+
+        <main id="content-area">
+        </main>
+    </div>
+
+    <script>
+        const appData = {
+            sprints: [
+                { id: 1, weeks: "1-2", module: "Fundamentos y Setup del Frontend", objectives: "Configurar un entorno de desarrollo profesional con Vite, TS y TailwindCSS en 1 día. Construir 5 componentes de UI reutilizables y accesibles al final del sprint.", skills: "Vite, `setup` script, Composition API (`ref`, `reactive`, `computed`), Single File Components (SFCs), Props & Emits, `v-model`, TypeScript Básico.", deliverable: "Repositorio configurado. UI base estática con 5 componentes (botones, inputs, modales, cards, layout principal) accesibles.", gherkin: "Dado un usuario cuando abre la aplicación en el navegador entonces ve el layout principal con un header, un sidebar y un área de contenido." },
+                { id: 2, weeks: "3-4", module: "State Management y Navegación", objectives: "Implementar un sistema de gestión de estado global con Pinia para manejar la autenticación. Configurar y proteger 3 rutas principales con Vue Router al finalizar el sprint.", skills: "Vue Router (rutas dinámicas, `useRouter`), Navigation Guards, Pinia (Stores, Actions, Getters), persistencia de estado.", deliverable: "Sistema de Login/Logout funcional. Rutas `/login`, `/dashboard`, `/proyectos` protegidas. Estado de usuario persistido.", gherkin: "Dado un usuario no autenticado cuando intenta acceder a `/proyectos` entonces es redirigido a la página de `/login`." },
+                { id: 3, weeks: "5-6", module: "Backend y Colaboración en Tiempo Real", objectives: "Integrar Firebase Auth para autenticación con JWT. Implementar las 4 operaciones CRUD para \"proyectos\" y \"tareas\" usando Firebase Realtime Database.", skills: "Firebase SDK, autenticación con JWT, reglas de seguridad de Firestore, operaciones CRUD asíncronas, suscripción a cambios en tiempo real.", deliverable: "CRUD completo para proyectos y tareas. Las actualizaciones de otros usuarios se reflejan en la UI en menos de 1 segundo.", gherkin: "Dado un usuario autenticado cuando otro usuario crea una nueva tarea en el mismo proyecto entonces la nueva tarea aparece en su tablero sin necesidad de recargar la página." },
+                { id: 4, weeks: "7-8", module: "Testing de Calidad Profesional", objectives: "Alcanzar una cobertura de tests unitarios del 90% en los Pinia stores y componentes críticos. Crear 3 flujos de tests E2E con Cypress para las funcionalidades clave.", skills: "Vitest, Vue Test Utils (`mount`, `shallowMount`), mocks, spies, testing de componentes y stores. Cypress, selectores, aserciones, testing de flujos de usuario.", deliverable: "Suite de tests unitarios y de integración. Pipeline de E2E que valida los flujos de login, creación de proyecto y asignación de tarea.", gherkin: "Dado un test E2E de login cuando se ejecuta con credenciales válidas entonces el test pasa y verifica la redirección al `/dashboard`." },
+                { id: 5, weeks: "9-10", module: "Optimización y Pipeline de CI/CD", objectives: "Implementar lazy loading en todas las rutas de la aplicación para reducir el LCP. Configurar un pipeline en GitHub Actions que ejecute tests y despliegue a producción automáticamente.", skills: "Code Splitting (Lazy Loading), `Suspense`, `defineAsyncComponent`, análisis de bundle (Source Map Explorer), GitHub Actions (workflows, secrets), Vercel/Netlify CLI.", deliverable: "Rutas y componentes pesados cargados de forma asíncrona. Pipeline de CI/CD que en cada push a `main` ejecuta linting, tests y deploy.", gherkin: "Dado un `push` a la rama `main` cuando el pipeline de GitHub Actions se completa entonces la nueva versión está desplegada en Vercel y se genera un reporte de Lighthouse." },
+                { id: 6, weeks: "11-12", module: "Accesibilidad y Features Avanzadas", objectives: "Auditar y corregir toda la aplicación para cumplir con el nivel WCAG 2.1 AA. Implementar un dashboard de analíticas con gráficos dinámicos usando Chart.js.", skills: "ARIA attributes, focus management, `prefers-reduced-motion`, testing con `axe-devtools-vue`, integración de librerías de terceros (Chart.js), patrones de componentes avanzados (slots, provide/inject).", deliverable: "Aplicación 100% accesible validada con axe. Dashboard con al menos 2 gráficos que muestran el progreso del proyecto. Presentación final del proyecto.", gherkin: "Dado un usuario utilizando un lector de pantalla cuando navega por el formulario de creación de tareas entonces todos los campos son anunciados correctamente y son operables vía teclado." }
+            ],
+            project: {
+                title: "Zenith - Project Hub",
+                summary: "Una plataforma SaaS para la gestión de proyectos ágiles que permite a los equipos colaborar en tiempo real, visualizar el progreso y analizar el rendimiento.",
+                requirements: [
+                    "Gestión de Autenticación: Registro, login/logout con persistencia de JWT.",
+                    "CRUD de Proyectos y Tareas: Gestión completa de proyectos y tableros de tareas.",
+                    "Colaboración en Tiempo Real: Cambios reflejados instantáneamente con Firebase.",
+                    "Asignación de Usuarios: Invitar colaboradores a proyectos.",
+                    "Panel de Analíticas: Gráficos de rendimiento con Chart.js.",
+                    "Filtros y Búsqueda: Filtrar y buscar tareas de forma eficiente."
+                ],
+                metrics: [
+                    { name: "Puntuación Lighthouse", value: ">95", category: "Rendimiento" },
+                    { name: "Cobertura de Tests", value: "90%+", category: "Calidad" },
+                    { name: "Accesibilidad", value: "WCAG 2.1 AA", category: "Accesibilidad" },
+                    { name: "First Contentful Paint", value: "<1.8s (3G)", category: "Rendimiento" },
+                    { name: "Bundle Size Inicial", value: "<150KB", category: "Rendimiento" },
+                ],
+                evaluation: {
+                    labels: ['Funcionalidad', 'Calidad del Código', 'Testing', 'Rendimiento y A11y'],
+                    data: [40, 20, 20, 20],
+                }
+            },
+            pedagogy: {
+                labels: ['Práctica (Labs, Talleres)', 'Teoría Breve'],
+                data: [70, 30]
+            }
+        };
+
+        const contentArea = document.getElementById('content-area');
+        let activeCharts = [];
+
+        function clearContent() {
+            activeCharts.forEach(chart => chart.destroy());
+            activeCharts = [];
+            contentArea.innerHTML = '';
+        }
+
+        function renderRoadmap() {
+            clearContent();
+            const intro = `<div class="text-center mb-10 max-w-3xl mx-auto">
+                            <h2 class="text-2xl font-bold text-slate-800 mb-2">Roadmap del Curso</h2>
+                            <p class="text-slate-600">Este es el viaje de 12 semanas, dividido en 6 sprints de dos semanas. Cada sprint se enfoca en un módulo técnico clave, construyendo progresivamente el proyecto final. Haz clic en cualquier sprint para ver los detalles.</p>
+                        </div>`;
+            const grid = document.createElement('div');
+            grid.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6";
+
+            appData.sprints.forEach(sprint => {
+                const card = document.createElement('div');
+                card.className = "card bg-white rounded-lg shadow-md border border-slate-200 overflow-hidden";
+                card.innerHTML = `
+                    <div class="sprint-header cursor-pointer px-6 py-4 bg-slate-100 font-semibold text-teal-700 text-lg">${sprint.weeks}: ${sprint.module}</div>
+                    <div class="details-content px-6 py-4">
+                        <p><span class="font-bold">Objetivos:</span> ${sprint.objectives}</p>
+                        <p class="mt-2"><span class="font-bold">Skills:</span> ${sprint.skills}</p>
+                        <p class="mt-2"><span class="font-bold">Entregable:</span> ${sprint.deliverable}</p>
+                        <p class="mt-2"><span class="font-bold">Criterio (Gherkin):</span> <code class="bg-slate-50 px-1 rounded">${sprint.gherkin}</code></p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            contentArea.innerHTML = intro;
+            contentArea.appendChild(grid);
+
+            // Activar toggle de detalles
+            document.querySelectorAll('.sprint-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    content.classList.toggle('show');
+                });
+            });
+        }
+
+        function renderProject() {
+            clearContent();
+            const project = appData.project;
+            const content = `
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg border border-slate-200">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">${project.title}</h2>
+                    <p class="mb-4 text-slate-600">${project.summary}</p>
+                    <h3 class="font-semibold text-lg text-slate-700 mb-2">Requisitos clave:</h3>
+                    <ul class="list-disc list-inside mb-4 text-slate-600">
+                        ${project.requirements.map(r => `<li>${r}</li>`).join('')}
+                    </ul>
+                    <h3 class="font-semibold text-lg text-slate-700 mb-2">Métricas:</h3>
+                    <ul class="list-disc list-inside mb-4 text-slate-600">
+                        ${project.metrics.map(m => `<li><span class="font-bold">${m.name}:</span> ${m.value} <span class="text-slate-500">(${m.category})</span></li>`).join('')}
+                    </ul>
+                    <div class="chart-container mt-6">
+                        <canvas id="evaluationChart"></canvas>
+                    </div>
+                </div>
+            `;
+            contentArea.innerHTML = content;
+            // Ejemplo de datos para evaluación
+            createChart(
+                'evaluationChart',
+                'doughnut',
+                ['Funcionalidad', 'Calidad de Código', 'UX/UI', 'Testing'],
+                [40, 30, 20, 10],
+                'Evaluación del Proyecto'
+            );
+        }
+
+        function renderResources() {
+            clearContent();
+            const content = `
+                 <div class="text-center mb-10 max-w-3xl mx-auto">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Recursos y Plantillas</h2>
+                    <p class="text-slate-600">Accede a la estructura recomendada, guías y plantillas para acelerar tu desarrollo.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-xl mb-4 text-slate-700">📁 Estructura de Proyecto Sugerida</h3>
+                        <pre class="bg-slate-50 rounded p-4 text-left text-xs overflow-x-auto"><code>
+├── /assets
+├── /components
+│   ├── /ui
+│   └── /layout
+├── /features
+├── /router
+├── /store
+├── /utils
+├── App.vue
+└── main.ts
+                        </code></pre>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                        <h3 class="font-bold text-xl mb-4 text-slate-700">🧠 Estilo Pedagógico 70/30</h3>
+                        <p class="mb-4 text-slate-600">Combinamos teoría concisa con una inmersión profunda en la práctica para un aprendizaje efectivo.</p>
+                        <div class="chart-container" style="max-width: 280px; height: 280px;">
+                            <canvas id="pedagogyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                         <h3 class="font-bold text-xl mb-4 text-slate-700">🛠️ Guías y Plantillas</h3>
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-lg text-slate-800 mb-2">Checklist de Deploy</h4>
+                                <ul class="space-y-2 text-slate-600 list-disc list-inside">
+                                    <li>Verifica variables de entorno y secrets.</li>
+                                    <li>Ejecuta tests y linting antes de hacer deploy.</li>
+                                    <li>Revisa accesibilidad y performance.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-slate-800 mb-2">Guía de Debugging</h4>
+                                <p class="text-slate-600">Aprende a usar Vue Devtools para inspeccionar estado, y Chrome Devtools para analizar rendimiento y peticiones de red.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg text-slate-800 mb-2">Peer Review Template</h4>
+                                <p class="text-slate-600">Plantillas estructuradas para realizar revisiones de código constructivas entre compañeros.</p>
+                            </div>
+                            <div></div>
+                         </div>
+                    </div>
+                </div>
+            `;
+            contentArea.innerHTML = content;
+            createChart('pedagogyChart', 'pie', appData.pedagogy.labels, appData.pedagogy.data, 'Enfoque Pedagógico');
+        }
+
+        function renderRules() {
+            clearContent();
+            const content = `
+                <div class="text-center mb-10 max-w-3xl mx-auto">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Reglas Técnicas No Negociables</h2>
+                    <p class="text-slate-600">Para garantizar la calidad profesional del proyecto final, estas restricciones son obligatorias. Representan las mejores prácticas de la industria en desarrollo de software moderno.</p>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-l-4 border-teal-500">
+                        <ul class="list-disc list-inside text-slate-700 space-y-2">
+                            <li>No se permite usar librerías de UI comerciales (solo Tailwind y HeadlessUI).</li>
+                            <li>Cobertura mínima de tests unitarios: 90% en stores y componentes críticos.</li>
+                            <li>Accesibilidad: Cumplimiento WCAG 2.1 AA obligatorio.</li>
+                            <li>Deploy automático vía CI/CD en cada push a main.</li>
+                            <li>No se permite código legacy ni anti-patrones (ej: mutaciones directas de estado).</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            contentArea.innerHTML = content;
+        }
+
+        function createChart(canvasId, type, labels, data, title) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return; // Previene error si el canvas no existe
+            const ctx = canvas.getContext('2d');
+            const newChart = new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        backgroundColor: [
+                            '#14b8a6', // teal-500
+                            '#f0abfc', // fuchsia-300
+                            '#67e8f9', // cyan-300
+                            '#fdba74', // orange-300
+                        ],
+                        borderColor: '#f8fafc',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#475569', // slate-600
+                                font: { size: 14 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            activeCharts.push(newChart);
+        }
+
+        function handleNavigation(e) {
+            if (e.target.matches('[data-tab]')) {
+                const tab = e.target.getAttribute('data-tab');
+
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('nav-link-active');
+                });
+                e.target.classList.add('nav-link-active');
+
+                switch (tab) {
+                    case 'roadmap':
+                        renderRoadmap();
+                        break;
+                    case 'project':
+                        renderProject();
+                        break;
+                    case 'resources':
+                        renderResources();
+                        break;
+                    case 'rules':
+                        renderRules();
+                        break;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.nav-link[data-tab="roadmap"]').classList.add('nav-link-active');
+            renderRoadmap();
+            document.querySelector('nav').addEventListener('click', handleNavigation);
+        });
+    </script>
+</body>
+</html>

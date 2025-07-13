@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Desarrollo Front-End Trainee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .mindmap {
+            position: relative;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            min-height: 450px;
+        }
+        .mindmap-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #6366f1;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            z-index: 10;
+            text-align: center;
+        }
+        .mindmap-node {
+            position: absolute;
+            background-color: #fff;
+            color: #374151;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 10;
+            text-align: center;
+        }
+        .mindmap-line {
+            position: absolute;
+            background-color: #d1d5db;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-72 bg-white shadow-md flex-shrink-0 overflow-y-auto">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-indigo-600">Curso Front-End</h1>
+                <p class="text-sm text-gray-500 mt-1">Módulos de Aprendizaje</p>
+            </div>
+            <nav class="mt-4">
+                <a href="#m1" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-user-tie fa-fw mr-3"></i> M1: Orientación al Perfil
+                </a>
+                <a href="#m2" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-html5 fa-fw mr-3"></i> M2: Fundamentos Front-End
+                </a>
+                <a href="#m3" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-palette fa-fw mr-3"></i> M3: Interfaz de Usuario
+                </a>
+                <a href="#m4" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-js-square fa-fw mr-3"></i> M4: Fundamentos JavaScript
+                </a>
+                <a href="#m5" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-code fa-fw mr-3"></i> M5: JavaScript Avanzado
+                </a>
+                <a href="#m6" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-vuejs fa-fw mr-3"></i> M6: Framework Vue.js
+                </a>
+                <a href="#m7" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-react fa-fw mr-3"></i> M7: Frameworks Componentes
+                </a>
+                <a href="#m8" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-briefcase fa-fw mr-3"></i> M8: Portafolio Profesional
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+            
+            <!-- M1: Orientación al Perfil -->
+            <section id="m1" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">M1: Orientación al Perfil y Metodología del Curso</h2>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce Git como el sistema de control de versiones distribuido más utilizado, y GitHub como la plataforma líder para alojar repositorios Git y colaborar en proyectos. Se explica la necesidad de un repositorio para el versionamiento del código, el trabajo en equipo y la contribución a proyectos de código abierto.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Git como sistema de control de versiones.</li>
+                        <li>Flujo de trabajo básico: ramas, commits, push/pull.</li>
+                        <li>Colaboración con forks y pull requests en GitHub.</li>
+                        <li>Importancia del control de versiones en desarrollo profesional.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap1">
+                        <div class="mindmap-center">Control de Versiones</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Git</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">Comandos Básicos</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">GitHub</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Flujo de Trabajo</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">init</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">commit</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">Repositorios</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">Pull Requests</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://git-scm.com/" target="_blank" class="text-blue-600 hover:underline">Sitio Oficial de Git</a></li>
+                        <li><a href="https://github.com/" target="_blank" class="text-blue-600 hover:underline">GitHub</a></li>
+                        <li><a href="https://try.github.io/" target="_blank" class="text-blue-600 hover:underline">Curso Introductorio de Git</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- M2: Fundamentos Front-End -->
+            <section id="m2" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">M2: Fundamentos de Desarrollo Front-End</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce los conceptos esenciales del desarrollo web, diferenciando los roles de Front-End (lo que el usuario ve e interactúa), Back-End (la lógica del servidor y la base de datos) y Full-Stack (combina ambos). Se explica que HTML es el lenguaje para estructurar el contenido, mientras que la "triada" fundamental (HTML, CSS, JavaScript) define el contenido, la presentación y el comportamiento de un sitio.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Introducción al desarrollo web y roles profesionales.</li>
+                        <li>Estructura básica de documentos HTML5.</li>
+                        <li>Sintaxis y aplicación de CSS para estilizado visual.</li>
+                        <li>Introducción a JavaScript para interactividad básica.</li>
+                        <li>Diseño responsivo y Mobile First con Media Queries.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap2">
+                        <div class="mindmap-center">Front-End</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">HTML</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">CSS</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">JavaScript</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Responsive</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">Selectores</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">Flexbox/Grid</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">DOM</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">Eventos</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://developer.mozilla.org/es/docs/Web/HTML" target="_blank" class="text-blue-600 hover:underline">Guía de HTML en MDN</a></li>
+                        <li><a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank" class="text-blue-600 hover:underline">Guía de CSS en MDN</a></li>
+                        <li><a href="https://javascript.info/" target="_blank" class="text-blue-600 hover:underline">The Modern JavaScript Tutorial</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- M3: Interfaz de Usuario -->
+            <section id="m3" class="content-section">
+                 <h2 class="text-3xl font-bold mb-4 text-gray-900">M3: Desarrollo de la Interfaz de Usuario Web</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce el proceso completo de creación de un producto digital, desde la conceptualización hasta la implementación. Se enfatiza que el diseño va más allá de la estética, centrándose en la resolución de problemas. Se definen los roles clave del diseñador UX/UI y del desarrollador Front-End, y se subraya la importancia de las guías de estilo para mantener la consistencia.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Rol del desarrollador front-end vs diseñador UX/UI.</li>
+                        <li>Métodos BEM, OOCSS y SMACSS para organización de estilos.</li>
+                        <li>Uso de preprocesadores como Sass y Less.</li>
+                        <li>Metodologías ágiles y principios de diseño centrado en el usuario.</li>
+                        <li>Creación y uso de guías de estilo y componentes reutilizables.</li>
+                    </ul>
+                </div>
+                
+                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap3">
+                        <div class="mindmap-center">UI Web</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Diseño UX/UI</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">Metodologías CSS</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">Preprocesadores</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Guías de Estilo</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">BEM</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">SMACSS</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">Sass</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">Less</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://sass-lang.com/" target="_blank" class="text-blue-600 hover:underline">Sitio Oficial de Sass</a></li>
+                        <li><a href="https://sass-guidelin.es/es/" target="_blank" class="text-blue-600 hover:underline">Sass Guidelines</a></li>
+                        <li><a href="https://bem.info/methodology/" target="_blank" class="text-blue-600 hover:underline">Documentación de BEM</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- M4: Fundamentos JavaScript -->
+            <section id="m4" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">M4: Fundamentos de Programación en JavaScript</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce JavaScript, el lenguaje de programación esencial para añadir interactividad a las páginas web. Se explica su rol como la capa de "comportamiento" en la triada web. Se cubren los fundamentos, incluyendo cómo incorporar JS en un archivo HTML, la declaración de variables, operadores aritméticos y de comparación, y estructuras de control como las sentencias condicionales.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Variables: var, let, const y ámbito.</li>
+                        <li>Operadores aritméticos, lógicos y de comparación.</li>
+                        <li>Estructuras de control: if/else, switch, bucles.</li>
+                        <li>Funciones: declarativas, expresivas y flecha.</li>
+                        <li>Manipulación del DOM y eventos básicos (click, input).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap4">
+                        <div class="mindmap-center">JavaScript</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Variables</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">Estructuras</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">Funciones</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">DOM</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">if/else</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">bucles</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">declarativas</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">flecha</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://developer.mozilla.org/es/docs/Web/JavaScript" target="_blank" class="text-blue-600 hover:underline">Guía de JavaScript en MDN</a></li>
+                        <li><a href="https://javascript.info/" target="_blank" class="text-blue-600 hover:underline">The Modern JavaScript Tutorial</a></li>
+                        <li><a href="https://www.w3schools.com/js/" target="_blank" class="text-blue-600 hover:underline">Tutorial de JavaScript en W3Schools</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- M5: JavaScript Avanzado -->
+            <section id="m5" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">M5: Programación Avanzada en JavaScript</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo profundiza en JavaScript para construir aplicaciones más complejas. Se abordan conceptos como objetos y prototipos, ES6+ (arrow functions, destructuring, spread operator), promesas, async/await, y patrones comunes de diseño.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Objetos y prototipos en JavaScript.</li>
+                        <li>ES6+: arrow functions, template literals, destructuring.</li>
+                        <li>Promesas, async/await y manejo de errores asíncronos.</li>
+                        <li>Patrones de diseño: módulo, factory, observer.</li>
+                        <li>Closures, hoisting, this y scope en distintos contextos.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap5">
+                        <div class="mindmap-center">JS Avanzado</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">ES6+</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">Objetos</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">Asincronía</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Patrones</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">Prototipos</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">Closures</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">Promesas</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">Async/Await</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://eloquentjavascript.net/" target="_blank" class="text-blue-600 hover:underline">Eloquent JavaScript</a></li>
+                        <li><a href="https://javascript.info/object" target="_blank" class="text-blue-600 hover:underline">Trabajo con Objetos en JavaScript</a></li>
+                        <li><a href="https://exploringjs.com/" target="_blank" class="text-blue-600 hover:underline">Exploring ES6+</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- M6: Framework Vue -->
+            <section id="m6" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">M6: Desarrollo de Interfaces Interactivas con Framework Vue</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce Vue.js, uno de los frameworks más populares para el desarrollo frontend. Se enseña cómo crear aplicaciones dinámicas con componentes reutilizables, comunicación entre padres e hijos, ciclo de vida de componentes y transiciones entre rutas.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Introducción a Vue.js y sus características principales.</li>
+                        <li>Componentes reutilizables y comunicación entre ellos.</li>
+                        <li>Directivas personalizadas y renderizado condicional/listas.</li>
+                        <li>Vue Router para navegación y transiciones entre vistas.</li>
+                        <li>Manejo de estado global con Vuex o Pinia.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap6">
+                        <div class="mindmap-center">Vue.js</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Componentes</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">Directivas</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">Estado</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Router</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">v-if</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">v-for</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">Vuex</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">Pinia</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://vuejs.org/guide/introduction.html" target="_blank" class="text-blue-600 hover:underline">Guía Oficial de Vue.js</a></li>
+                        <li><a href="https://vueschool.io/" target="_blank" class="text-blue-600 hover:underline">Vue School</a></li>
+                        <li><a href="https://www.youtube.com/c/Vuejs" target="_blank" class="text-blue-600 hover:underline">Canal Oficial de Vue.js en YouTube</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- M7: Frameworks Componentes -->
+            <section id="m7" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">M7: Desarrollo de Aplicaciones Web Usando Framework Orientado a Componentes</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo amplía el conocimiento en frameworks modernos como React o Angular, enfocándose en el desarrollo de aplicaciones completas con manejo de estado, integración con APIs REST, testing end-to-end y despliegue final.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Arquitectura de aplicaciones con React/Angular.</li>
+                        <li>Consumo de APIs REST con Axios y Fetch API.</li>
+                        <li>Manejo de estado global con Redux, Context API o servicios.</li>
+                        <li>Testing unitario y E2E con Jest, Cypress o similares.</li>
+                        <li>Optimización de rendimiento y SEO en aplicaciones SPA.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap7">
+                        <div class="mindmap-center">Frameworks</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">React</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">Angular</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">Estado</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">APIs</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">Componentes</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">Servicios</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">Redux</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">Context</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://react.dev/learn" target="_blank" class="text-blue-600 hover:underline">Guía Oficial de React</a></li>
+                        <li><a href="https://angular.io/docs" target="_blank" class="text-blue-600 hover:underline">Documentación Oficial de Angular</a></li>
+                        <li><a href="https://jestjs.io/docs/getting-started" target="_blank" class="text-blue-600 hover:underline">Testing con Jest</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- M8: Portafolio Profesional -->
+            <section id="m8" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">M8: Portafolio de Producto</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo enseña a utilizar plataformas como GitHub y Behance para crear un portafolio profesional que destaque los proyectos realizados durante el curso. Incluye buenas prácticas de documentación, versionamiento y presentación de proyectos.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Contenido Detallado</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li>Configuración de perfil y repositorios en GitHub.</li>
+                        <li>Uso de Readme.md y documentación efectiva en proyectos.</li>
+                        <li>Deploy de proyectos con GitHub Pages.</li>
+                        <li>Construcción de portafolio en Behance u otras plataformas.</li>
+                        <li>Mejores prácticas para destacar en entornos profesionales.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap8">
+                        <div class="mindmap-center">Portafolio</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">GitHub</div>
+                        <div class="mindmap-node" style="top: 50%; left: 15%;">Documentación</div>
+                        <div class="mindmap-node" style="top: 50%; left: 85%; transform: translateX(-100%);">Deploy</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Presentación</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 15%;">Readme</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">Estructura</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 85%; transform: translateX(-100%);">GitHub Pages</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 85%; transform: translateX(-100%);">Netlify</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://docs.github.com/en/pages" target="_blank" class="text-blue-600 hover:underline">GitHub Pages Documentation</a></li>
+                        <li><a href="https://www.behance.net/" target="_blank" class="text-blue-600 hover:underline">Behance</a></li>
+                        <li><a href="https://www.freecodecamp.org/news/how-to-create-a-developer-portfolio/" target="_blank" class="text-blue-600 hover:underline">Cómo Crear un Portafolio de Desarrollador</a></li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function updateContent(hash) {
+                if (!hash) {
+                    hash = '#m1';
+                }
+
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                const activeSection = document.querySelector(hash);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                } else {
+                    document.querySelector('#m1').classList.add('active');
+                }
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    } else {
+                        link.classList.remove('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    }
+                });
+
+                // Redraw mind map for the active section
+                const activeMindMapId = activeSection ? activeSection.querySelector('.mindmap')?.id : null;
+                if (activeMindMapId) {
+                    drawMindMapLines(activeMindMapId);
+                }
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    history.pushState(null, null, targetId);
+                    updateContent(targetId);
+                    window.scrollTo(0, 0);
+                });
+            });
+
+            window.addEventListener('popstate', function() {
+                updateContent(window.location.hash);
+            });
+
+            function drawMindMapLines(mapId) {
+                const map = document.getElementById(mapId);
+                if (!map) return;
+                
+                const oldLines = map.querySelectorAll('.mindmap-line');
+                oldLines.forEach(line => line.remove());
+
+                const center = map.querySelector('.mindmap-center');
+                const nodes = map.querySelectorAll('.mindmap-node');
+                
+                if (!center) return;
+
+                const centerX = center.offsetLeft + center.offsetWidth / 2;
+                const centerY = center.offsetTop + center.offsetHeight / 2;
+
+                nodes.forEach(node => {
+                    const nodeX = node.offsetLeft + node.offsetWidth / 2;
+                    const nodeY = node.offsetTop + node.offsetHeight / 2;
+
+                    const line = document.createElement('div');
+                    line.classList.add('mindmap-line');
+                    
+                    const distance = Math.sqrt(Math.pow(nodeX - centerX, 2) + Math.pow(nodeY - centerY, 2));
+                    const angle = Math.atan2(nodeY - centerY, nodeX - centerX) * (180 / Math.PI);
+
+                    line.style.width = `${distance}px`;
+                    line.style.height = '2px';
+                    line.style.left = `${centerX}px`;
+                    line.style.top = `${centerY}px`;
+                    line.style.transformOrigin = 'left center';
+                    line.style.transform = `rotate(${angle}deg)`;
+                    
+                    map.prepend(line);
+                });
+            }
+            
+            const observer = new ResizeObserver(() => {
+                const activeMindMap = document.querySelector('.content-section.active .mindmap');
+                if (activeMindMap) {
+                    drawMindMapLines(activeMindMap.id);
+                }
+            });
+            observer.observe(document.body);
+
+            // Initial load
+            updateContent(window.location.hash);
+            
+            // A short delay to ensure elements are rendered before drawing lines
+            setTimeout(() => {
+                const activeMindMap = document.querySelector('.content-section.active .mindmap');
+                if (activeMindMap) {
+                    drawMindMapLines(activeMindMap.id);
+                }
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estudio: Fundamentos de Git y GitHub</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons for UI icons -->
+    <script src="https://unpkg.com/lucide-react@0.292.0/dist/lucide-react.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Mermaid.js for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark background */
+            color: #d1d5db; /* Light gray text */
+        }
+        /* Custom scrollbar for a better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+        /* Style for code blocks */
+        code {
+            background-color: #374151;
+            color: #a7f3d0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        pre > code {
+            display: block;
+            padding: 1rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        /* Style for active navigation link */
+        .nav-link.active {
+            background-color: #374151;
+            color: #ffffff;
+            font-weight: 600;
+        }
+        /* Hiding content sections by default */
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="w-64 bg-gray-900 text-gray-300 p-4 flex-shrink-0 overflow-y-auto">
+        <div class="flex items-center mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-check text-emerald-400 mr-3"><path d="M8 3H2v15h7c1.7 0 3 1.3 3 3V7c0-2.2-1.8-4-4-4Z"/><path d="M16 3h6v15h-7c-1.7 0-3 1.3-3 3V7c0-2.2 1.8-4 4-4Z"/><path d="m9 12 2 2 4-4"/></svg>
+            <h1 class="text-xl font-bold text-white">Guía de Estudio</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="nav-link flex items-center p-3 rounded-lg mb-2 transition-colors duration-200 hover:bg-gray-700 active" data-target="inicio"><i data-lucide="home" class="w-5 h-5 mr-3"></i>Inicio</a></li>
+                
+                <li class="mt-4 mb-2 px-3 text-xs font-semibold uppercase text-gray-500">Git</li>
+                <li><a href="#" class="nav-link flex items-center p-3 rounded-lg mb-2 transition-colors duration-200 hover:bg-gray-700" data-target="git-fundamentos"><i data-lucide="terminal-square" class="w-5 h-5 mr-3"></i>Fundamentos</a></li>
+                <li><a href="#" class="nav-link flex items-center p-3 rounded-lg mb-2 transition-colors duration-200 hover:bg-gray-700" data-target="git-ramas"><i data-lucide="git-branch-plus" class="w-5 h-5 mr-3"></i>Ramas y Fusiones</a></li>
+                
+                <li class="mt-4 mb-2 px-3 text-xs font-semibold uppercase text-gray-500">GitHub</li>
+                <li><a href="#" class="nav-link flex items-center p-3 rounded-lg mb-2 transition-colors duration-200 hover:bg-gray-700" data-target="github-colaboracion"><i data-lucide="github" class="w-5 h-5 mr-3"></i>Colaboración</a></li>
+                <li><a href="#" class="nav-link flex items-center p-3 rounded-lg mb-2 transition-colors duration-200 hover:bg-gray-700" data-target="github-actions"><i data-lucide="play-circle" class="w-5 h-5 mr-3"></i>GitHub Actions</a></li>
+                
+                <li class="mt-4 mb-2 px-3 text-xs font-semibold uppercase text-gray-500">Recursos</li>
+                <li><a href="#" class="nav-link flex items-center p-3 rounded-lg mb-2 transition-colors duration-200 hover:bg-gray-700" data-target="mapas-mentales"><i data-lucide="brain-circuit" class="w-5 h-5 mr-3"></i>Mapas Mentales</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6 md:p-10 bg-gray-800 overflow-y-auto">
+
+        <!-- Section: Inicio -->
+        <section id="inicio" class="content-section active">
+            <h2 class="text-3xl font-bold text-white mb-4">Módulo: Fundamentos del Desarrollo Front End</h2>
+            <p class="text-lg text-gray-300 mb-6">
+                Bienvenido a la guía de estudio interactiva. El objetivo de este módulo es que aprendas a <strong>gestionar el código fuente de un proyecto utilizando Git y GitHub</strong>. 
+                Estas herramientas son esenciales en el mundo del desarrollo para mantener un repositorio seguro, versionado y, lo más importante, permitir el trabajo colaborativo en equipo de manera eficiente.
+            </p>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-700">
+                <h3 class="text-xl font-semibold text-white mb-3 flex items-center"><i data-lucide="compass" class="w-6 h-6 mr-3 text-emerald-400"></i>Cómo usar esta guía</h3>
+                <p class="text-gray-400">Utiliza el menú de la izquierda para navegar por los diferentes temas. Cada sección cubre conceptos clave extraídos del documento original, presentados de una forma clara y concisa para facilitar tu aprendizaje.</p>
+            </div>
+        </section>
+
+        <!-- Section: Git Fundamentos -->
+        <section id="git-fundamentos" class="content-section">
+            <h2 class="text-3xl font-bold text-white mb-6">Fundamentos de Git</h2>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">¿Qué es Git?</h3>
+                    <p>Git es un sistema de control de versiones distribuido. Imagina que es como una máquina del tiempo para tu código: te permite guardar "instantáneas" (commits) de tu proyecto en diferentes momentos. Si algo sale mal, puedes volver a una versión anterior que funcionaba.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">El Flujo de Trabajo Básico</h3>
+                    <p class="mb-4">El ciclo de vida de los cambios en Git tiene tres estados principales:</p>
+                    <ol class="list-decimal list-inside space-y-4 text-gray-300">
+                        <li><strong>Working Directory:</strong> Tu carpeta de proyecto, donde modificas los archivos.</li>
+                        <li><strong>Staging Area:</strong> Un área intermedia donde preparas los cambios que quieres guardar. Es como una lista de la compra antes de pasar por caja.</li>
+                        <li><strong>Repositorio (.git):</strong> La base de datos donde Git almacena permanentemente tus cambios.</li>
+                    </ol>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">Comandos Esenciales</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git init</p>
+                            <p class="text-sm text-gray-400">Inicializa un nuevo repositorio de Git en tu carpeta actual.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git add [archivo]</p>
+                            <p class="text-sm text-gray-400">Añade un archivo al Staging Area. Usa <code>git add .</code> para añadir todos.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git commit -m "mensaje"</p>
+                            <p class="text-sm text-gray-400">Guarda los cambios del Staging Area en el repositorio con un mensaje descriptivo.</p>
+                        </div>
+                         <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git log</p>
+                            <p class="text-sm text-gray-400">Muestra el historial de todos los commits realizados.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git status</p>
+                            <p class="text-sm text-gray-400">Muestra el estado de tus archivos y qué cambios están pendientes.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git checkout [hash]</p>
+                            <p class="text-sm text-gray-400">Viaja en el tiempo a un commit específico.</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">Ignorando Archivos (.gitignore)</h3>
+                    <p>No todos los archivos de tu proyecto deben ser guardados (ej: dependencias, logs, archivos de configuración de tu editor). Crea un archivo llamado <code>.gitignore</code> en la raíz de tu proyecto y escribe en él los nombres de los archivos o carpetas que Git debe ignorar.</p>
+                    <pre><code class="language-text"># Ignorar la carpeta de dependencias de Node.js
+node_modules/
+
+# Ignorar todos los archivos .log
+*.log
+
+# Ignorar un archivo específico de macOS
+.DS_Store</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Git Ramas -->
+        <section id="git-ramas" class="content-section">
+            <h2 class="text-3xl font-bold text-white mb-6">Ramas (Branches) y Fusiones (Merges)</h2>
+            
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">¿Qué es una Rama?</h3>
+                    <p>Una rama es una línea de desarrollo independiente. La rama principal se llama <code>master</code> o <code>main</code>. Cuando quieres trabajar en una nueva funcionalidad o corregir un error, creas una nueva rama para no afectar el código estable de la rama principal.</p>
+                    <img src="https://placehold.co/800x250/1f2937/d1d5db?text=Ilustración+de+Ramas" alt="Diagrama de ramas en Git" class="rounded-lg mt-4 w-full object-cover">
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">Comandos para Ramas</h3>
+                     <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git branch [nombre]</p>
+                            <p class="text-sm text-gray-400">Crea una nueva rama.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git checkout [nombre]</p>
+                            <p class="text-sm text-gray-400">Te mueves a la rama especificada para empezar a trabajar en ella.</p>
+                        </div>
+                         <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git checkout -b [nombre]</p>
+                            <p class="text-sm text-gray-400">Un atajo que crea y se mueve a la nueva rama en un solo paso.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <p class="font-mono text-lg text-white">git merge [nombre]</p>
+                            <p class="text-sm text-gray-400">Fusiona los cambios de la rama especificada en tu rama actual.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">Resolviendo Conflictos de Fusión</h3>
+                    <p class="mb-4">Un conflicto ocurre cuando dos ramas modifican la misma línea del mismo archivo. Git no sabe cuál versión es la correcta y detiene la fusión. Para resolverlo:</p>
+                    <ol class="list-decimal list-inside space-y-2">
+                        <li>Abre el archivo con el conflicto. Git habrá marcado las zonas problemáticas.</li>
+                        <li>Edita el archivo manualmente para dejar el código como debería ser, eliminando los marcadores de Git (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>).</li>
+                        <li>Guarda el archivo y añádelo con <code>git add</code>.</li>
+                        <li>Realiza un <code>git commit</code> para finalizar la fusión.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: GitHub Colaboración -->
+        <section id="github-colaboracion" class="content-section">
+            <h2 class="text-3xl font-bold text-white mb-6">Colaboración con GitHub</h2>
+
+             <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">¿Qué es GitHub?</h3>
+                    <p>GitHub es una plataforma web para alojar tus repositorios de Git en la nube. Añade una capa social y de colaboración sobre Git, permitiendo que equipos de todo el mundo trabajen juntos.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">Sincronización: Local y Remoto</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <h4 class="font-mono text-lg text-white">git clone [URL]</h4>
+                            <p class="text-sm text-gray-400">Crea una copia local de un repositorio que existe en GitHub.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <h4 class="font-mono text-lg text-white">git push</h4>
+                            <p class="text-sm text-gray-400">Sube tus commits locales al repositorio remoto en GitHub.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-lg">
+                            <h4 class="font-mono text-lg text-white">git pull</h4>
+                            <p class="text-sm text-gray-400">Descarga y fusiona los cambios del repositorio remoto a tu copia local.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">El Flujo de Colaboración</h3>
+                    <p class="mb-4">Para contribuir a un proyecto en GitHub, el flujo de trabajo más común es el de <strong>Fork & Pull Request</strong>:</p>
+                    <ol class="list-decimal list-inside space-y-3">
+                        <li><strong>Fork:</strong> Creas una copia personal (un "fork") del repositorio original en tu propia cuenta de GitHub.</li>
+                        <li><strong>Clone:</strong> Clonas tu fork a tu máquina local para poder trabajar en el código.</li>
+                        <li><strong>Branch:</strong> Creas una nueva rama para tus cambios.</li>
+                        <li><strong>Commit & Push:</strong> Haces tus cambios, los guardas con commits y los subes a tu fork en GitHub.</li>
+                        <li><strong>Pull Request (PR):</strong> Desde la interfaz de GitHub, creas un "Pull Request". Esta es una solicitud formal para que el dueño del proyecto original revise tus cambios y los incorpore a su repositorio.</li>
+                    </ol>
+                </div>
+                 
+                 <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">Markdown</h3>
+                    <p>Markdown es un lenguaje de marcado simple para dar formato a texto. Se usa en todo GitHub para escribir archivos `README.md`, comentarios, etc.</p>
+                    <pre><code class="language-markdown"># Encabezado 1
+## Encabezado 2
+
+**Texto en negrita**
+*Texto en cursiva*
+`código en línea`
+
+- Elemento de lista 1
+- Elemento de lista 2
+
+[Esto es un enlace](https://github.com)
+</code></pre>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Section: GitHub Actions -->
+        <section id="github-actions" class="content-section">
+            <h2 class="text-3xl font-bold text-white mb-6">Automatización con GitHub Actions</h2>
+            
+             <div class="space-y-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">¿Qué son las GitHub Actions?</h3>
+                    <p>Son flujos de trabajo (workflows) automatizados que puedes configurar en tu repositorio. Te permiten automatizar tareas del ciclo de vida del software, como compilar, probar y desplegar tu código cada vez que haces un `push` o se crea un Pull Request.</p>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">¿Cómo funcionan?</h3>
+                    <p class="mb-4">Los flujos de trabajo se definen en archivos de texto con formato <strong>YAML</strong> (`.yml`) y se guardan en una carpeta especial llamada <code>.github/workflows</code> en tu repositorio.</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Eventos (Events):</strong> Son los disparadores que inician un flujo de trabajo (ej. `push`, `pull_request`).</li>
+                        <li><strong>Trabajos (Jobs):</strong> Un flujo de trabajo se compone de uno o más trabajos que se ejecutan en paralelo o secuencialmente.</li>
+                        <li><strong>Pasos (Steps):</strong> Cada trabajo contiene una secuencia de tareas llamadas pasos. Un paso puede ser un comando de terminal o una acción predefinida.</li>
+                        <li><strong>Acciones (Actions):</strong> Son aplicaciones reutilizables que realizan tareas complejas (ej. `actions/checkout` para clonar el repo, o `actions/setup-node` para configurar Node.js).</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-emerald-300 mb-3">Ejemplo de un Flujo de Trabajo Simple</h3>
+                    <p>Este es un ejemplo de un archivo <code>.yml</code> que se ejecuta cada vez que se hace un `push` a la rama `main`, y simplemente imprime un mensaje.</p>
+                    <pre><code class="language-yaml">name: Saludo de CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Imprimir un saludo
+        run: echo "¡Hola, mundo! El flujo de trabajo se ha ejecutado."
+</code></pre>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: Mapas Mentales -->
+        <section id="mapas-mentales" class="content-section">
+            <h2 class="text-3xl font-bold text-white mb-6">Mapas Mentales</h2>
+            <p class="mb-8">Visualiza los conceptos clave con estos diagramas. Te ayudarán a conectar las ideas y a tener una visión general del ecosistema de Git y GitHub.</p>
+
+            <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-semibold text-white mb-4">1. Fundamentos de Git</h3>
+                    <div class="mermaid">
+                    mindmap
+                      root((Git))
+                        (Concepto)
+                          ::icon(fa fa-book)
+                          Sistema de Control de Versiones
+                          Distribuido
+                        (Configuración Inicial)
+                          ::icon(fa fa-cogs)
+                          git init
+                          git add
+                          git commit
+                        (Historial y Versiones)
+                          ::icon(fa fa-history)
+                          git log (Ver historial)
+                          git checkout (Restaurar)
+                        (Manejo de Archivos)
+                          ::icon(fa fa-file-alt)
+                          git mv (Renombrar)
+                          .gitignore (Ignorar)
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-700">
+                    <h3 class="text-xl font-semibold text-white mb-4">2. Ramas y Fusiones en Git</h3>
+                    <div class="mermaid">
+                    mindmap
+                      root((Ramas y Fusiones))
+                        (Ramas - Branches)
+                          ::icon(fa fa-code-branch)
+                          Propósito: Desarrollo aislado
+                          Comandos
+                            git branch
+                            git checkout
+                        (Fusiones - Merges)
+                          ::icon(fa fa-project-diagram)
+                          Propósito: Integrar cambios
+                          Comando: git merge
+                        (Conflictos)
+                          ::icon(fa fa-exclamation-triangle)
+                          Causa: Cambios superpuestos
+                          Resolución: Manual
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl border border-gray-700 lg:col-span-2">
+                    <h3 class="text-xl font-semibold text-white mb-4">3. Colaboración con GitHub</h3>
+                     <div class="mermaid">
+                    mindmap
+                      root((GitHub))
+                        (Concepto)
+                          ::icon(fa fa-cloud)
+                          Plataforma de colaboración
+                          para repositorios Git
+                        (Sincronización)
+                          ::icon(fa fa-sync)
+                          git clone (Bajar copia)
+                          git push (Subir cambios)
+                          git pull (Bajar cambios)
+                        (Flujo de Colaboración)
+                          ::icon(fa fa-users)
+                          1. Fork (Copia personal)
+                          2. Clone (Trabajar en local)
+                          3. Push (Subir a tu fork)
+                          4. Pull Request (Proponer)
+                        (Características Clave)
+                          ::icon(fa fa-star)
+                          Markdown
+                          GitHub Actions
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // Initialize Mermaid.js
+            mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            // Function to switch between sections
+            function switchTab(targetId) {
+                // Update content sections
+                contentSections.forEach(section => {
+                    if (section.id === targetId) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                // Update navigation links
+                navLinks.forEach(link => {
+                    if (link.dataset.target === targetId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            // Add click event listeners to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.dataset.target;
+                    switchTab(targetId);
+                });
+            });
+
+            // Set the initial active tab
+            switchTab('inicio');
+        });
+    </script>
+
+</body>
+</html>

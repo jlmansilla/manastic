@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Desarrollo de Interfaz de Usuario Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .mindmap {
+            position: relative;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+        .mindmap-center {
+            position: relative;
+            background-color: #6366f1;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            z-index: 10;
+        }
+        .mindmap-node {
+            position: absolute;
+            background-color: #fff;
+            color: #374151;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 10;
+        }
+        .mindmap-line {
+            position: absolute;
+            background-color: #d1d5db;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md flex-shrink-0">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-indigo-600">Guía de UI Web</h1>
+                <p class="text-sm text-gray-500 mt-1">Resúmenes y Recursos</p>
+            </div>
+            <nav class="mt-4">
+                <a href="#ae1" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-palette fa-fw mr-3"></i> AE1: Diseño e Impl.
+                </a>
+                <a href="#ae2" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-sitemap fa-fw mr-3"></i> AE2: Metodologías
+                </a>
+                <a href="#ae3" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-sass fa-fw mr-3"></i> AE3: Preprocesador SASS
+                </a>
+                <a href="#ae4" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-box-open fa-fw mr-3"></i> AE4: Modelo de Cajas
+                </a>
+                <a href="#ae5" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fab fa-bootstrap fa-fw mr-3"></i> AE5: Framework Bootstrap
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+            
+            <!-- AE1 Section -->
+            <section id="ae1" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE1: Del Diseño a la Implementación de un Producto Digital</h2>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce el proceso completo de creación de un producto digital, desde la conceptualización hasta la implementación. Se enfatiza que el diseño va más allá de la estética, centrándose en la resolución de problemas. Se definen los roles clave del diseñador UX/UI y del desarrollador Front-End, y se subraya la importancia de las guías de estilo para mantener la consistencia. Finalmente, se presentan metodologías de organización de CSS (BEM, OOCSS, SMACSS) y preprocesadores (Sass, Less) como herramientas fundamentales para un desarrollo eficiente y escalable.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Diseño de Producto Digital:</strong> Proceso de idear, crear, testear y producir soluciones digitales (apps, webs) que resuelven problemas específicos de los usuarios. Prioriza la función sobre la forma.</li>
+                        <li><strong>Rol del Diseñador UX/UI:</strong>
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>UX (Experiencia de Usuario):</strong> Se enfoca en la usabilidad y en cómo se siente el usuario al interactuar con el producto. Busca que la navegación sea fluida, lógica y satisfactoria.</li>
+                                <li><strong>UI (Interfaz de Usuario):</strong> Se centra en el aspecto visual de la interfaz (colores, tipografía, iconos). Su objetivo es crear una conexión visual y comunicar la identidad de la marca.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Rol del Desarrollador Front-End:</strong> Es el encargado de traducir los diseños (creados por los diseñadores UI) a código funcional (HTML, CSS, JavaScript), estructurando la información y asegurando una correcta interacción y visualización en el navegador.</li>
+                        <li><strong>Guías de Estilo:</strong> Documentos que establecen normativas sobre el aspecto visual (colores, tipografía, componentes) de una interfaz para garantizar consistencia en todo el producto.</li>
+                        <li><strong>Metodologías CSS:</strong> Sistemas como <strong>BEM</strong> (Bloque, Elemento, Modificador), <strong>OOCSS</strong> (CSS Orientado a Objetos) y <strong>SMACSS</strong> (Arquitectura Escalable y Modular para CSS) que proveen reglas para organizar el código CSS, haciéndolo más mantenible y escalable.</li>
+                        <li><strong>Preprocesadores CSS:</strong> Herramientas como <strong>Sass</strong> y <strong>Less</strong> que extienden las funcionalidades de CSS, permitiendo usar variables, funciones (mixins) y anidación, lo que optimiza y simplifica la escritura de estilos.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap h-96" id="mindmap1">
+                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Producto Digital</div>
+                        <!-- Nodos -->
+                        <div class="mindmap-node" style="top: 10%; left: 45%;">Diseño (UX/UI)</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Desarrollo Front-End</div>
+                        <div class="mindmap-node" style="top: 85%; left: 45%;">Herramientas</div>
+                        <div class="mindmap-node" style="top: 50%; left: 75%;">Guías de Estilo</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 15%;">UX: Usabilidad</div>
+                        <div class="mindmap-node text-sm" style="top: 20%; left: 15%;">UI: Visual</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">Metodologías CSS</div>
+                        <div class="mindmap-node text-sm" style="top: 90%; left: 15%;">Preprocesadores</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://www.uifrommars.com/que-es-diseno-producto-digital/" target="_blank" class="text-blue-600 hover:underline">¿Qué es el diseño de producto digital?</a></li>
+                        <li><a href="https://desarrolloweb.com/articulos/1513.php" target="_blank" class="text-blue-600 hover:underline">Guías de estilo: diseño, normalización y usabilidad</a></li>
+                        <li><a href="https://www.acens.com/comunicacion/white-papers/preprocesadores-css-una-forma-diferente-de-crear-nuestras-hojas-de-estilos/" target="_blank" class="text-blue-600 hover:underline">Preprocesadores CSS</a></li>
+                        <li><a href="https://www.canva.com/es_mx/aprende/50-guias-estilo-que-debes-ver-antes-lanzar-tu-startup/" target="_blank" class="text-blue-600 hover:underline">50 Guías de Estilo Inspiradoras</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AE2 Section -->
+            <section id="ae2" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE2: Metodologías de Organización y Modularización de Estilos</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este apartado profundiza en las metodologías CSS, que son esenciales para escribir un código limpio, mantenible y escalable, especialmente en proyectos grandes o colaborativos. Se explican en detalle BEM, OOCSS y SMACSS, mostrando sus principios, convenciones de nomenclatura y cómo cada una aborda el desafío de la modularidad en CSS.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">BEM (Block, Element, Modifier)</h4>
+                            <p class="text-gray-700 mt-1">Divide la interfaz en bloques independientes y reutilizables.</p>
+                            <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Bloque:</strong> Un componente independiente (ej. <code>.card</code>, <code>.header</code>).</li>
+                                <li><strong>Elemento:</strong> Una parte de un bloque (ej. <code>.card__title</code>, <code>.header__logo</code>). Se separa con doble guion bajo (<code>__</code>).</li>
+                                <li><strong>Modificador:</strong> Una variante de un bloque o elemento (ej. <code>.card--dark</code>, <code>.card__title--large</code>). Se separa con doble guion medio (<code>--</code>).</li>
+                                <li><strong>Ventaja:</strong> Muy explícito y previene colisiones de estilos. Crea una estructura clara.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">OOCSS (Object-Oriented CSS)</h4>
+                            <p class="text-gray-700 mt-1">Trata los elementos de la interfaz como "objetos" reutilizables. Se basa en dos principios:</p>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Separar estructura y apariencia (skin):</strong> Las propiedades de layout (<code>width</code>, <code>margin</code>) se definen en clases separadas de las propiedades visuales (<code>color</code>, <code>background</code>).</li>
+                                <li><strong>Separar contenedor y contenido:</strong> Los estilos no deben depender de su ubicación en la página. Un objeto debe verse igual sin importar dónde se coloque.</li>
+                                <li><strong>Ventaja:</strong> Alta reutilización de código y menor tamaño de los archivos CSS.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">SMACSS (Scalable and Modular Architecture for CSS)</h4>
+                            <p class="text-gray-700 mt-1">Categoriza las reglas CSS en cinco tipos para estructurar el proyecto.</p>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Base:</strong> Estilos por defecto para elementos HTML (<code>body</code>, <code>a</code>, <code>h1</code>).</li>
+                                <li><strong>Layout:</strong> Divide la página en secciones principales (<code>#header</code>, <code>#footer</code>). Se prefijan con <code>l-</code>.</li>
+                                <li><strong>Module:</strong> Partes reutilizables de la interfaz (<code>.card</code>, <code>.product-list</code>).</li>
+                                <li><strong>State:</strong> Estilos que describen cómo se ve un módulo en un estado particular (<code>.is-hidden</code>, <code>.is-active</code>).</li>
+                                <li><strong>Theme:</strong> Estilos visuales que pueden cambiar la apariencia general (temas).</li>
+                                <li><strong>Ventaja:</strong> Ofrece una guía de organización muy estructurada y predecible.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap h-96" id="mindmap2">
+                         <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Metodologías CSS</div>
+                         <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">BEM</div>
+                         <div class="mindmap-node" style="top: 50%; left: 10%;">OOCSS</div>
+                         <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">SMACSS</div>
+                         <!-- Sub-nodos BEM -->
+                         <div class="mindmap-node text-sm" style="top: 5%; left: 20%;">Bloque</div>
+                         <div class="mindmap-node text-sm" style="top: 5%; left: 50%; transform: translateX(-50%);">Elemento</div>
+                         <div class="mindmap-node text-sm" style="top: 5%; left: 80%; transform: translateX(-100%);">Modificador</div>
+                         <!-- Sub-nodos OOCSS -->
+                         <div class="mindmap-node text-sm" style="top: 30%; left: 5%;">Separar Estructura y Skin</div>
+                         <div class="mindmap-node text-sm" style="top: 70%; left: 5%;">Separar Contenedor y Contenido</div>
+                         <!-- Sub-nodos SMACSS -->
+                         <div class="mindmap-node text-sm" style="top: 85%; left: 5%;">Base</div>
+                         <div class="mindmap-node text-sm" style="top: 95%; left: 25%;">Layout</div>
+                         <div class="mindmap-node text-sm" style="top: 95%; left: 50%; transform: translateX(-50%);">Module</div>
+                         <div class="mindmap-node text-sm" style="top: 95%; left: 75%; transform: translateX(-100%);">State</div>
+                         <div class="mindmap-node text-sm" style="top: 85%; left: 95%; transform: translateX(-100%);">Theme</div>
+                    </div>
+                </div>
+
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://blog.ida.cl/desarrollo/metodologia-bem-desarrollo-front-end/" target="_blank" class="text-blue-600 hover:underline">Introducción a la metodología BEM</a></li>
+                        <li><a href="https://en.bem.info/" target="_blank" class="text-blue-600 hover:underline">Documentación Oficial de BEM</a></li>
+                        <li><a href="https://www.espai.es/blog/2016/07/metodologias-css-oocss-bem-smacss/" target="_blank" class="text-blue-600 hover:underline">Comparativa: OOCSS, BEM y SMACSS</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=tUldrlfIGb4" target="_blank" class="text-blue-600 hover:underline">Video: Arquitectura en CSS ¡Cómo ordenar tus carpetas!</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- AE3 Section -->
+            <section id="ae3" class="content-section">
+                 <h2 class="text-3xl font-bold mb-4 text-gray-900">AE3: Implementación de un Preprocesador CSS (Sass)</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo se enfoca en Sass (Syntactically Awesome Stylesheets), el preprocesador CSS más popular. Se explica qué es, por qué usarlo, y cómo instalarlo (vía Node.js/NPM o Ruby). Se detallan sus características principales como variables, anidación, mixins, e imports, que permiten escribir CSS de forma más eficiente y organizada. Se introduce el patrón de arquitectura "7-1" como una buena práctica para estructurar proyectos Sass complejos, asegurando modularidad y fácil mantenimiento.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>¿Qué es Sass?</strong> Es un preprocesador que añade funcionalidades de lenguaje de programación a CSS. El código Sass (escrito en sintaxis <code>.scss</code> o <code>.sass</code>) se compila a CSS estándar que los navegadores pueden entender.</li>
+                        <li><strong>Características Principales:</strong>
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Variables:</strong> Para almacenar valores reutilizables (ej. <code>$primary-color: #333;</code>).</li>
+                                <li><strong>Anidación (Nesting):</strong> Permite anidar selectores CSS dentro de otros, replicando la estructura del HTML y evitando la repetición.</li>
+                                <li><strong>Parciales e Imports (<code>@import</code>):</strong> Permite dividir el CSS en múltiples archivos (parciales, ej. <code>_variables.scss</code>) y luego importarlos en un archivo principal, mejorando la organización.</li>
+                                <li><strong>Mixins (<code>@mixin</code> / <code>@include</code>):</strong> Permiten crear grupos de declaraciones CSS reutilizables, como si fueran funciones. Pueden aceptar argumentos para mayor flexibilidad.</li>
+                                <li><strong>Herencia (<code>@extend</code>):</strong> Permite que un selector herede los estilos de otro, promoviendo la reutilización de código.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Instalación y Compilación:</strong> Se puede instalar a través de NPM (<code>npm install -g sass</code>) o Ruby. La compilación se realiza desde la terminal, usando un comando "watcher" (<code>sass --watch input.scss:output.css</code>) que compila automáticamente los cambios.</li>
+                        <li><strong>Patrón 7-1:</strong> Una arquitectura para organizar archivos Sass que consiste en <strong>7 carpetas</strong> (<code>abstracts</code>, <code>base</code>, <code>components</code>, <code>layout</code>, <code>pages</code>, <code>themes</code>, <code>vendors</code>) y <strong>1 archivo principal</strong> (<code>main.scss</code>) que importa todo en el orden correcto.</li>
+                    </ul>
+                </div>
+                
+                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap h-[450px]" id="mindmap3">
+                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">SASS</div>
+                        <!-- Nodos -->
+                        <div class="mindmap-node" style="top: 5%; left: 50%; transform: translateX(-50%);">Características</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Instalación</div>
+                        <div class="mindmap-node" style="top: 90%; left: 50%; transform: translateX(-50%);">Estructura</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Compilación</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 15%; left: 10%;">Variables</div>
+                        <div class="mindmap-node text-sm" style="top: 15%; left: 30%;">Anidación</div>
+                        <div class="mindmap-node text-sm" style="top: 15%; left: 50%;">Mixins</div>
+                        <div class="mindmap-node text-sm" style="top: 15%; left: 70%;">Imports</div>
+                        <div class="mindmap-node text-sm" style="top: 15%; left: 90%;">Extend</div>
+                        <div class="mindmap-node text-sm" style="top: 90%; left: 20%; transform: translateX(-50%);">Patrón 7-1</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://sass-lang.com/" target="_blank" class="text-blue-600 hover:underline">Sitio Oficial de Sass</a></li>
+                        <li><a href="https://desarrolloweb.com/articulos/que-es-sass-usar-sass.html" target="_blank" class="text-blue-600 hover:underline">Qué es Sass y cómo usarlo</a></li>
+                        <li><a href="https://sass-guidelin.es/es/" target="_blank" class="text-blue-600 hover:underline">Sass Guidelines (incluye el patrón 7-1)</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=RmFLCeD6l8k" target="_blank" class="text-blue-600 hover:underline">Video: Curso de SASS</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AE4 Section -->
+            <section id="ae4" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE4: El Modelo de Cajas y el Layout</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este tema es fundamental en CSS. Explica que cada elemento HTML en una página es una "caja" rectangular. Se desglosa el <strong>Modelo de Cajas</strong> (contenido, padding, borde, margen) y se diferencia entre elementos de <strong>bloque</strong> y en <strong>línea</strong>. Además, se cubren las distintas propiedades de <strong>posicionamiento</strong> (static, relative, absolute, fixed, float) que permiten controlar la ubicación de estas cajas para construir layouts complejos, superando las antiguas técnicas basadas en tablas.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">El Modelo de Cajas (Box Model)</h4>
+                            <p class="text-gray-700 mt-1">Cada elemento HTML está compuesto por cuatro áreas, de adentro hacia afuera:</p>
+                            <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Content:</strong> El contenido real del elemento (texto, imagen).</li>
+                                <li><strong>Padding:</strong> Un espacio transparente alrededor del contenido, dentro del borde.</li>
+                                <li><strong>Border:</strong> Una línea que rodea el padding y el contenido.</li>
+                                <li><strong>Margin:</strong> Un espacio transparente que rodea el borde, separando la caja de otras cajas.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Tipos de Cajas</h4>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Elementos de Bloque (<code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>):</strong> Ocupan todo el ancho disponible y empiezan en una nueva línea. Se les puede aplicar <code>width</code> y <code>height</code>.</li>
+                                <li><strong>Elementos en Línea (<code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code>):</strong> Ocupan solo el ancho necesario y no empiezan en una nueva línea. No respetan <code>width</code>, <code>height</code>, ni márgenes verticales.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Propiedades de Posicionamiento (<code>position</code>)</h4>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong><code>static</code>:</strong> El valor por defecto. El elemento sigue el flujo normal del documento.</li>
+                                <li><strong><code>relative</code>:</strong> El elemento se posiciona relativo a su posición normal. Se puede mover con <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, pero el espacio original que ocupaba se mantiene.</li>
+                                <li><strong><code>absolute</code>:</strong> El elemento se saca del flujo normal y se posiciona relativo a su ancestro posicionado más cercano (que no sea <code>static</code>).</li>
+                                <li><strong><code>fixed</code>:</strong> El elemento se saca del flujo normal y se posiciona relativo a la ventana del navegador (viewport). No se mueve con el scroll.</li>
+                                <li><strong><code>float</code>:</strong> Saca un elemento del flujo y lo coloca a la izquierda o derecha de su contenedor, permitiendo que el texto y otros elementos fluyan a su alrededor.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap h-[450px]" id="mindmap4">
+                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Layout CSS</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Modelo de Cajas</div>
+                        <div class="mindmap-node" style="top: 50%; left: 10%;">Tipos de Elementos</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Posicionamiento</div>
+                        <!-- Sub-nodos Modelo de Cajas -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 20%;">Margin</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 40%;">Border</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 60%;">Padding</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 80%;">Content</div>
+                        <!-- Sub-nodos Tipos -->
+                        <div class="mindmap-node text-sm" style="top: 30%; left: 5%;">Bloque</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 5%;">En Línea</div>
+                        <!-- Sub-nodos Posicionamiento -->
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 10%;">Static</div>
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 30%;">Relative</div>
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 50%;">Absolute</div>
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 70%;">Fixed</div>
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 90%;">Float</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://developer.mozilla.org/es/docs/Learn/CSS/Building_blocks/The_box_model" target="_blank" class="text-blue-600 hover:underline">MDN: El Modelo de Cajas</a></li>
+                        <li><a href="https://css-tricks.com/almanac/properties/p/position/" target="_blank" class="text-blue-600 hover:underline">CSS-Tricks: Position</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=tHBzx-mmiuQ" target="_blank" class="text-blue-600 hover:underline">Video: Modelo de Caja en CSS</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=t3iLtfyx8Qo" target="_blank" class="text-blue-600 hover:underline">Video: Proyecto con Flexbox + Grid</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AE5 Section -->
+            <section id="ae5" class="content-section">
+                 <h2 class="text-3xl font-bold mb-4 text-gray-900">AE5: Utilizando Bootstrap 4 como Framework CSS</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo presenta los frameworks CSS como herramientas que aceleran el desarrollo web. Se enfoca en <strong>Bootstrap 4</strong>, el framework más popular, destacando su filosofía "mobile-first" y su potente sistema de rejilla (grid system) basado en Flexbox. Se explican sus ventajas, como la rápida maquetación y la gran cantidad de componentes pre-diseñados (botones, formularios, modales, etc.), y cómo instalarlo y personalizarlo usando Sass.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">¿Qué es un Framework CSS?</h4>
+                            <p class="text-gray-700 mt-1">Un conjunto de herramientas, estilos y componentes reutilizables que provee un marco de trabajo para construir sitios web de forma rápida y consistente. Ejemplos: Bootstrap, Foundation, Bulma.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Bootstrap 4</h4>
+                            <p class="text-gray-700 mt-1">Un kit de herramientas de código abierto para desarrollar con HTML, CSS y JS. Sus características clave son:</p>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Sistema de Rejilla (Grid System):</strong> Potente sistema de 12 columnas basado en Flexbox para crear layouts responsive. Se usan las clases <code>.container</code>, <code>.row</code>, y <code>.col</code>.</li>
+                                <li><strong>Componentes Pre-diseñados:</strong> Una enorme librería de componentes listos para usar: Alertas, Botones, Tarjetas (Cards), Carruseles, Formularios, Modales, Navbars, etc.</li>
+                                <li><strong>Utilidades (Utilities):</strong> Clases de ayuda para tareas comunes como espaciado (<code>m-1</code>, <code>p-2</code>), colores, bordes, display, etc., que aceleran el desarrollo.</li>
+                                <li><strong>Personalización con Sass:</strong> Bootstrap está construido con Sass, lo que permite modificar fácilmente sus variables (colores, fuentes, espaciados) para adaptar el framework a la identidad de una marca.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Ventajas de Bootstrap</h4>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Rapidez:</strong> Permite construir prototipos y sitios funcionales en muy poco tiempo.</li>
+                                <li><strong>Consistencia:</strong> Asegura un diseño coherente en todo el sitio.</li>
+                                <li><strong>Responsive:</strong> Su enfoque "mobile-first" garantiza que los sitios se vean bien en todos los dispositivos.</li>
+                                <li><strong>Comunidad y Documentación:</strong> Gran comunidad de soporte y una documentación excelente.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap h-[450px]" id="mindmap5">
+                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Bootstrap 4</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Sistema de Rejilla</div>
+                        <div class="mindmap-node" style="top: 50%; left: 10%;">Componentes</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Utilidades</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Personalización</div>
+                        <!-- Sub-nodos Grid -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 30%;">.container</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 50%;">.row</div>
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 70%;">.col</div>
+                        <!-- Sub-nodos Componentes -->
+                        <div class="mindmap-node text-sm" style="top: 30%; left: 5%;">Botones</div>
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 5%;">Tarjetas</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 5%;">Modales</div>
+                         <!-- Sub-nodos Utilidades -->
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 30%;">Espaciado</div>
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 50%;">Colores</div>
+                        <div class="mindmap-node text-sm" style="top: 95%; left: 70%;">Bordes</div>
+                        <!-- Sub-nodos Personalización -->
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 95%; transform: translateX(-100%);">Sass</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://getbootstrap.com/docs/4.1/getting-started/introduction/" target="_blank" class="text-blue-600 hover:underline">Documentación Oficial de Bootstrap 4</a></li>
+                        <li><a href="https://geekflare.com/es/best-css-frameworks/" target="_blank" class="text-blue-600 hover:underline">16 mejores marcos/bibliotecas CSS</a></li>
+                        <li><a href="https://www.silocreativo.com/mejores-frameworks-css/" target="_blank" class="text-blue-600 hover:underline">Mejores Frameworks CSS para diseño web responsive</a></li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function updateContent(hash) {
+                // Si no hay hash, activa el primero
+                if (!hash) {
+                    hash = '#ae1';
+                }
+
+                // Ocultar todas las secciones
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Mostrar la sección correspondiente
+                const activeSection = document.querySelector(hash);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                } else {
+                    // Si el hash no es válido, mostrar el primero por defecto
+                    document.querySelector('#ae1').classList.add('active');
+                }
+
+                // Actualizar el estado activo del enlace de navegación
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    } else {
+                        link.classList.remove('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    }
+                });
+            }
+            
+            // Manejar clics en los enlaces de navegación
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    // Actualizar el hash en la URL para permitir el historial del navegador
+                    history.pushState(null, null, targetId);
+                    updateContent(targetId);
+                });
+            });
+
+            // Manejar los botones de retroceso/avance del navegador
+            window.addEventListener('popstate', function() {
+                updateContent(window.location.hash);
+            });
+
+            // Mostrar el contenido inicial basado en el hash de la URL
+            updateContent(window.location.hash);
+            
+            // --- Funciones para dibujar los mapas mentales ---
+            function drawMindMapLines(mapId) {
+                const map = document.getElementById(mapId);
+                if (!map) return;
+                
+                const center = map.querySelector('.mindmap-center');
+                const nodes = map.querySelectorAll('.mindmap-node');
+                
+                const centerX = center.offsetLeft + center.offsetWidth / 2;
+                const centerY = center.offsetTop + center.offsetHeight / 2;
+
+                nodes.forEach(node => {
+                    const nodeX = node.offsetLeft + node.offsetWidth / 2;
+                    const nodeY = node.offsetTop + node.offsetHeight / 2;
+
+                    const line = document.createElement('div');
+                    line.classList.add('mindmap-line');
+                    
+                    const distance = Math.sqrt(Math.pow(nodeX - centerX, 2) + Math.pow(nodeY - centerY, 2));
+                    const angle = Math.atan2(nodeY - centerY, nodeX - centerX) * (180 / Math.PI);
+
+                    line.style.width = `${distance}px`;
+                    line.style.height = '2px';
+                    line.style.left = `${centerX}px`;
+                    line.style.top = `${centerY}px`;
+                    line.style.transformOrigin = 'left center';
+                    line.style.transform = `rotate(${angle}deg)`;
+                    
+                    map.prepend(line); // Usar prepend para que las líneas estén detrás de los nodos
+                });
+            }
+
+            // Dibujar todas las líneas de los mapas mentales
+            drawMindMapLines('mindmap1');
+            drawMindMapLines('mindmap2');
+            drawMindMapLines('mindmap3');
+            drawMindMapLines('mindmap4');
+            drawMindMapLines('mindmap5');
+        });
+    </script>
+
+</body>
+</html>

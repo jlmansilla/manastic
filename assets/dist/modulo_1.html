@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Orientación al Perfil y Metodología</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .mindmap {
+            position: relative;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            min-height: 450px;
+        }
+        .mindmap-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #6366f1;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            z-index: 10;
+            text-align: center;
+        }
+        .mindmap-node {
+            position: absolute;
+            background-color: #fff;
+            color: #374151;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            z-index: 10;
+            text-align: center;
+        }
+        .mindmap-line {
+            position: absolute;
+            background-color: #d1d5db;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-md flex-shrink-0 overflow-y-auto">
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-indigo-600">Guía del Curso</h1>
+                <p class="text-sm text-gray-500 mt-1">Perfil y Metodología</p>
+            </div>
+            <nav class="mt-4">
+                <a href="#ae1" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-user-tie fa-fw mr-3"></i> AE1: Perfil y Mercado
+                </a>
+                <a href="#ae2" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-book-open fa-fw mr-3"></i> AE2: Currícula y Portafolio
+                </a>
+                <a href="#ae3" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-users fa-fw mr-3"></i> AE3: Metodología
+                </a>
+                <a href="#ae4" class="nav-link flex items-center px-6 py-3 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-robot fa-fw mr-3"></i> AE4: Herramientas IA
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+            
+            <!-- AE1: Perfil y Mercado -->
+            <section id="ae1" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE1: Perfil Profesional y Contexto Laboral en TI</h2>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo explora el dinámico sector de las Tecnologías de la Información (TI), destacando su rápida evolución y el impacto de la IA, la nube y la ciberseguridad. Se detallan los perfiles profesionales más demandados, como desarrolladores (Front-end, Back-end, Full-stack), DevOps y especialistas en datos. Se enfatiza la importancia de combinar competencias técnicas (programación, cloud, IA) con habilidades personales (comunicación, trabajo en equipo, pensamiento crítico) para tener éxito en el mercado laboral actual, que muestra una alta demanda y salarios competitivos para los profesionales TI.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>Industria TI:</strong> Un sector en constante innovación, impulsado por la digitalización, la inteligencia artificial, la computación en la nube y la ciberseguridad. Chile se posiciona como un mercado clave en Latinoamérica con un crecimiento proyectado del 11% para 2024.</li>
+                        <li><strong>Perfiles Profesionales Comunes:</strong>
+                            <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Desarrolladores (Front-end, Back-end, Full-stack, Mobile):</strong> Encargados de construir las partes visibles e invisibles de las aplicaciones.</li>
+                                <li><strong>Ingeniero DevOps:</strong> Integra el desarrollo de software con las operaciones de TI para acelerar los ciclos de entrega.</li>
+                                <li><strong>Scrum Master / Product Owner:</strong> Roles clave en metodologías ágiles para facilitar proyectos y maximizar el valor del producto.</li>
+                                <li><strong>Especialistas (Ciberseguridad, Big Data, IA):</strong> Perfiles altamente demandados para proteger información y extraer valor de los datos.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Competencias Valoradas:</strong>
+                             <ul class="list-['-_'] list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Técnicas:</strong> Machine Learning, IA, Cloud, Ciberseguridad, Big Data, y lenguajes de programación como JavaScript, Python y Java.</li>
+                                <li><strong>Personales (Blandas):</strong> Comunicación, trabajo en equipo, liderazgo, autogestión, pensamiento crítico y conocimiento del negocio.</li>
+                             </ul>
+                        </li>
+                         <li><strong>Mercado Laboral:</strong> Alta demanda de profesionales TI, con un 94.5% de empleabilidad. Los desarrolladores Full Stack y Front-end están entre los más buscados, con rentas competitivas que varían según el tamaño de la empresa y la experiencia.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap1">
+                        <div class="mindmap-center">Perfil TI</div>
+                        <div class="mindmap-node" style="top: 10%; left: 50%; transform: translateX(-50%);">Industria TI</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Roles Profesionales</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Mercado Laboral</div>
+                        <div class="mindmap-node" style="top: 50%; left: 75%;">Competencias</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">Front-End</div>
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 25%;">Back-End</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">Full-Stack</div>
+                        <div class="mindmap-node text-sm" style="top: 30%; left: 80%;">Técnicas</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 80%;">Personales</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://www.roberthalf.cl/guia-salarial" target="_blank" class="text-blue-600 hover:underline">Guía Salarial Robert Half</a></li>
+                        <li><a href="https://www.it-hunter.cl/estudios-de-rentas-ti/" target="_blank" class="text-blue-600 hover:underline">Estudios de Renta TI Hunter</a></li>
+                        <li><a href="https://insights.stackoverflow.com/survey" target="_blank" class="text-blue-600 hover:underline">Stack Overflow Developer Survey</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AE2: Currícula y Portafolio -->
+            <section id="ae2" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE2: Currícula del Curso y Portafolio Profesional</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo detalla la estructura del curso "Desarrollo de Aplicaciones Front End Trainee", diseñado para formar profesionales en HTML, CSS y JavaScript. Se presenta la currícula completa, compuesta por 9 módulos. Se destaca la importancia del portafolio de productos como una herramienta clave para demostrar las competencias adquiridas, reconstruyendo el proceso de aprendizaje a través de evidencias evaluadas y reflexionadas que potencian la identidad y el perfil profesional del egresado.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Currícula del Curso</h4>
+                            <p class="text-gray-700 mt-1">El plan formativo está compuesto por 9 módulos que cubren desde los fundamentos hasta el desarrollo de aplicaciones complejas y la empleabilidad:</p>
+                            <ol class="list-decimal list-inside ml-4 mt-2 text-gray-700 space-y-1">
+                                <li>Orientación al Perfil y Metodología</li>
+                                <li>Fundamentos de Desarrollo Front-End</li>
+                                <li>Desarrollo de la Interfaz de Usuario Web</li>
+                                <li>Fundamentos de Programación en JavaScript</li>
+                                <li>Programación Avanzada en JavaScript</li>
+                                <li>Desarrollo con Framework Vue.js (Interfaces)</li>
+                                <li>Desarrollo con Framework Vue.js (Aplicaciones)</li>
+                                <li>Desarrollo de Portafolio de Producto Digital</li>
+                                <li>Desarrollo de Empleabilidad en la Industria Digital</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">El Portafolio de Producto</h4>
+                            <p class="text-gray-700 mt-1">Es una colección de trabajos y evidencias que demuestra tus habilidades y tu proceso de aprendizaje. Es fundamental para tu identidad profesional.</p>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Propósito:</strong> Reconstruir tu proceso de aprendizaje y demostrar tu nivel de competencia a potenciales empleadores.</li>
+                                <li><strong>Construcción:</strong> Se basa en seleccionar las mejores evidencias (proyectos, ejercicios), reflexionar sobre ellas, evaluarlas y mejorarlas continuamente.</li>
+                                <li><strong>Características:</strong> Debe ser una selección representativa de tu trabajo, organizada, evaluada (con rúbricas) y reflexionada. El trabajo colaborativo y la socialización del portafolio son clave.</li>
+                                <li><strong>Importancia en TI:</strong> Un buen portafolio es un activo clave que enlaza tu formación con las necesidades del negocio y demuestra tu capacidad para resolver problemas reales.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap2">
+                         <div class="mindmap-center">Formación Front-End</div>
+                         <div class="mindmap-node" style="top: 50%; left: 5%;">Currícula</div>
+                         <div class="mindmap-node" style="top: 50%; left: 78%;">Portafolio Profesional</div>
+                         <!-- Sub-nodos Currícula -->
+                         <div class="mindmap-node text-sm" style="top: 15%; left: 5%;">Módulos Técnicos</div>
+                         <div class="mindmap-node text-sm" style="top: 85%; left: 5%;">Módulos Profesionales</div>
+                         <!-- Sub-nodos Portafolio -->
+                         <div class="mindmap-node text-sm" style="top: 15%; left: 80%;">Evidencias</div>
+                         <div class="mindmap-node text-sm" style="top: 40%; left: 80%;">Reflexión</div>
+                         <div class="mindmap-node text-sm" style="top: 65%; left: 80%;">Evaluación</div>
+                         <div class="mindmap-node text-sm" style="top: 90%; left: 80%;">Mejora</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://www.freecodecamp.org/news/how-to-build-a-developer-portfolio-website/" target="_blank" class="text-blue-600 hover:underline">Cómo construir un sitio web de portafolio de desarrollador (artículo en inglés)</a></li>
+                        <li><a href="https://dev.to/theme_selection/10-developer-portfolios-to-inspire-you-4g36" target="_blank" class="text-blue-600 hover:underline">10 Portafolios de Desarrolladores para Inspirarte (artículo en inglés)</a></li>
+                        <li><a href="https://www.trello.com" target="_blank" class="text-blue-600 hover:underline">Trello (Herramienta de gestión de proyectos)</a></li>
+                        <li><a href="https://github.com" target="_blank" class="text-blue-600 hover:underline">GitHub (Para alojar tu código y portafolio)</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- AE3: Metodología -->
+            <section id="ae3" class="content-section">
+                 <h2 class="text-3xl font-bold mb-4 text-gray-900">AE3: Metodología Bootcamp y Trabajo en Equipo</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo describe la metodología de un bootcamp como un entrenamiento intensivo y corto, enfocado en habilidades demandadas por el mercado. Se subraya la importancia crítica del trabajo en equipo, diferenciándolo de un simple grupo, y se explican sus 5 etapas de desarrollo. Se abordan las aptitudes necesarias para la colaboración efectiva, como la comunicación y la empatía, junto con estrategias para manejar la frustración y la importancia de seguir un código ético profesional en la industria TI.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <ul class="list-disc list-inside space-y-3 text-gray-700">
+                        <li><strong>Metodología Bootcamp:</strong> Un programa de formación intensivo y de corta duración que capacita en habilidades tecnológicas específicas y relevantes para la industria. Su éxito radica en su agilidad para adaptarse a las necesidades del mercado.</li>
+                        <li><strong>Trabajo en Equipo vs. Grupo:</strong> Un equipo comparte objetivos propios, tiene roles flexibles, un ambiente de confianza y un liderazgo estructural, a diferencia de un grupo donde las tareas y objetivos son impuestos externamente.</li>
+                        <li><strong>5 Etapas del Desarrollo de un Equipo:</strong>
+                            <ol class="list-decimal list-inside ml-6 mt-1 space-y-1">
+                                <li><strong>Formación:</strong> El equipo se conoce y define roles y objetivos.</li>
+                                <li><strong>Tormenta (Conflicto):</strong> Surgen desacuerdos y se cuestionan las ideas. Es una etapa necesaria para crecer.</li>
+                                <li><strong>Normalización:</strong> El equipo empieza a trabajar como una unidad cohesionada, apreciando las fortalezas de cada miembro.</li>
+                                <li><strong>Actuación (Desempeño):</strong> El equipo es autónomo, motivado y altamente productivo.</li>
+                                <li><strong>Clausura (Disolución):</strong> El proyecto termina y el equipo se disuelve.</li>
+                            </ol>
+                        </li>
+                        <li><strong>Tolerancia a la Frustración:</strong> Es clave aprender a gestionar los errores. Estrategias incluyen cambiar la actitud hacia el error, identificar creencias irracionales y diferenciar deseos de necesidades.</li>
+                        <li><strong>Ética Profesional en TI:</strong> Conjunto de responsabilidades como contribuir al bienestar social, ser honesto, respetar la propiedad intelectual y la privacidad, y mantener la competencia profesional.</li>
+                    </ul>
+                </div>
+                
+                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap3">
+                        <div class="mindmap-center">Metodología Bootcamp</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Aprendizaje Intensivo</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Trabajo en Equipo</div>
+                        <div class="mindmap-node" style="top: 85%; left: 20%;">Tolerancia a la Frustración</div>
+                        <div class="mindmap-node" style="top: 85%; left: 80%; transform: translateX(-100%);">Ética Profesional</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">5 Etapas</div>
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 25%;">Aptitudes</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">Eficacia</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://blogs.iadb.org/innovacion/es/bootcamps-de-programacion-america-latina-y-el-caribe/" target="_blank" class="text-blue-600 hover:underline">Bootcamps de programación: ¿Cuáles son sus resultados?</a></li>
+                        <li><a href="https://www.apd.es/equipos-trabajo-eficaces/" target="_blank" class="text-blue-600 hover:underline">7 características de los equipos de trabajo eficaces</a></li>
+                        <li><a href="https://blog.cognifit.com/es/intolerancia-frustracion/" target="_blank" class="text-blue-600 hover:underline">Intolerancia a la frustración: 8 estrategias para combatirla</a></li>
+                        <li><a href="https://www.acm.org/code-of-ethics" target="_blank" class="text-blue-600 hover:underline">Código de Ética de la ACM (Asociación para la Maquinaria Computacional)</a></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AE4: Herramientas IA -->
+            <section id="ae4" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">AE4: Herramientas de IA para la Productividad en Programación</h2>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Resumen</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Este módulo introduce el uso de la Inteligencia Artificial (IA) como una herramienta para potenciar la productividad en el desarrollo de software. Se repasan conceptos básicos como algoritmos, seudocódigo y diagramas de flujo, y se muestra cómo las herramientas de IA, como ChatGPT y GitHub Copilot, pueden asistir en la generación, corrección y optimización de código. Se hace hincapié en las buenas prácticas, como verificar siempre el código generado, no compartir datos sensibles y usar la IA como un complemento al aprendizaje, no un sustituto.
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Explicación del Contenido</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Fundamentos de Algoritmos</h4>
+                            <p class="text-gray-700 mt-1">La base de la programación es el pensamiento algorítmico.</p>
+                            <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Algoritmo:</strong> Una secuencia de pasos finitos y ordenados para resolver un problema.</li>
+                                <li><strong>Seudocódigo:</strong> Una forma de escribir los pasos de un algoritmo en un lenguaje simple y parecido al humano, antes de codificarlo.</li>
+                                <li><strong>Diagrama de Flujo:</strong> Una representación gráfica de un algoritmo usando símbolos estandarizados.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Aplicaciones de la IA en Programación</h4>
+                            <p class="text-gray-700 mt-1">La IA puede actuar como un asistente de programación para diversas tareas:</p>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Generación de Código:</strong> Crear fragmentos de código (snippets), funciones o componentes completos a partir de una descripción en lenguaje natural (prompt).</li>
+                                <li><strong>Corrección de Errores (Debugging):</strong> Identificar y sugerir soluciones para errores en el código.</li>
+                                <li><strong>Optimización:</strong> Refactorizar código para hacerlo más eficiente, legible o para reducir redundancias.</li>
+                                <li><strong>Documentación:</strong> Generar comentarios o documentación explicando qué hace una porción de código.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Consideraciones y Buenas Prácticas</h4>
+                             <ul class="list-disc list-inside ml-4 mt-2 text-gray-700">
+                                <li><strong>Verificar Siempre:</strong> El código generado por IA no es perfecto. Siempre debe ser revisado y comprendido por el desarrollador.</li>
+                                <li><strong>No Compartir Datos Sensibles:</strong> Evitar introducir información confidencial, contraseñas o datos personales en los prompts.</li>
+                                <li><strong>Usar como Complemento:</strong> La IA es una herramienta de apoyo, no un sustituto del conocimiento y la capacidad de resolución de problemas del programador.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
+                    <div class="mindmap" id="mindmap4">
+                        <div class="mindmap-center">IA en Programación</div>
+                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Fundamentos</div>
+                        <div class="mindmap-node" style="top: 50%; left: 5%;">Aplicaciones</div>
+                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Herramientas</div>
+                        <div class="mindmap-node" style="top: 50%; left: 80%;">Buenas Prácticas</div>
+                        <!-- Sub-nodos -->
+                        <div class="mindmap-node text-sm" style="top: 5%; left: 50%; transform: translateX(-50%);">Algoritmos</div>
+                        <div class="mindmap-node text-sm" style="top: 25%; left: 5%;">Generar Código</div>
+                        <div class="mindmap-node text-sm" style="top: 50%; left: 25%;">Depurar</div>
+                        <div class="mindmap-node text-sm" style="top: 75%; left: 5%;">Optimizar</div>
+                        <div class="mindmap-node text-sm" style="top: 70%; left: 80%;">Verificar Código</div>
+                        <div class="mindmap-node text-sm" style="top: 30%; left: 80%;">No Datos Sensibles</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><a href="https://github.com/features/copilot" target="_blank" class="text-blue-600 hover:underline">GitHub Copilot</a></li>
+                        <li><a href="https://chat.openai.com/" target="_blank" class="text-blue-600 hover:underline">ChatGPT</a></li>
+                        <li><a href="https://www.tabnine.com/" target="_blank" class="text-blue-600 hover:underline">Tabnine</a></li>
+                        <li><a href="https://pseint.sourceforge.net/" target="_blank" class="text-blue-600 hover:underline">PSeInt (Para practicar algoritmos)</a></li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            function updateContent(hash) {
+                // Si no hay hash, activa el primero
+                if (!hash) {
+                    hash = '#ae1';
+                }
+
+                // Ocultar todas las secciones
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Mostrar la sección correspondiente
+                const activeSection = document.querySelector(hash);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                } else {
+                    // Si el hash no es válido, mostrar el primero por defecto
+                    document.querySelector('#ae1').classList.add('active');
+                }
+
+                // Actualizar el estado activo del enlace de navegación
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === hash) {
+                        link.classList.add('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    } else {
+                        link.classList.remove('bg-indigo-100', 'text-indigo-700', 'font-semibold');
+                    }
+                });
+            }
+            
+            // Manejar clics en los enlaces de navegación
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    // Actualizar el hash en la URL para permitir el historial del navegador
+                    history.pushState(null, null, targetId);
+                    updateContent(targetId);
+                    window.scrollTo(0, 0); // Scroll to top on section change
+                });
+            });
+
+            // Manejar los botones de retroceso/avance del navegador
+            window.addEventListener('popstate', function() {
+                updateContent(window.location.hash);
+            });
+
+            // Mostrar el contenido inicial basado en el hash de la URL
+            updateContent(window.location.hash);
+            
+            // --- Funciones para dibujar los mapas mentales ---
+            function drawMindMapLines(mapId) {
+                const map = document.getElementById(mapId);
+                if (!map) return;
+                
+                // Limpiar líneas viejas si se redibuja
+                const oldLines = map.querySelectorAll('.mindmap-line');
+                oldLines.forEach(line => line.remove());
+
+                const center = map.querySelector('.mindmap-center');
+                const nodes = map.querySelectorAll('.mindmap-node');
+                
+                if (!center) return;
+
+                const centerX = center.offsetLeft + center.offsetWidth / 2;
+                const centerY = center.offsetTop + center.offsetHeight / 2;
+
+                nodes.forEach(node => {
+                    const nodeX = node.offsetLeft + node.offsetWidth / 2;
+                    const nodeY = node.offsetTop + node.offsetHeight / 2;
+
+                    const line = document.createElement('div');
+                    line.classList.add('mindmap-line');
+                    
+                    const distance = Math.sqrt(Math.pow(nodeX - centerX, 2) + Math.pow(nodeY - centerY, 2));
+                    const angle = Math.atan2(nodeY - centerY, nodeX - centerX) * (180 / Math.PI);
+
+                    line.style.width = `${distance}px`;
+                    line.style.height = '2px';
+                    line.style.left = `${centerX}px`;
+                    line.style.top = `${centerY}px`;
+                    line.style.transformOrigin = 'left center';
+                    line.style.transform = `rotate(${angle}deg)`;
+                    
+                    map.prepend(line);
+                });
+            }
+
+            // Redibujar en resize para ajustar las líneas
+            new ResizeObserver(() => {
+                drawMindMapLines('mindmap1');
+                drawMindMapLines('mindmap2');
+                drawMindMapLines('mindmap3');
+                drawMindMapLines('mindmap4');
+            }).observe(document.body);
+
+            // Dibujar inicialmente
+            setTimeout(() => {
+                drawMindMapLines('mindmap1');
+                drawMindMapLines('mindmap2');
+                drawMindMapLines('mindmap3');
+                drawMindMapLines('mindmap4');
+            }, 100);
+        });
+    </script>
+
+</body>
+</html>

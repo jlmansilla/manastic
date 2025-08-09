@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Módulo 3: Git y Terminal</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5a623;
+      --bg-color: #1e1e1e;
+      --surface-color: #2d2d2d;
+      --text-color: #e0e0e0;
+      --text-muted-color: #aaa;
+      --border-color: #444;
+      --font-family: 'Segoe UI', sans-serif;
+      --code-font-family: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted-color);
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+    }
+
+    nav {
+      background-color: var(--bg-color);
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+      display: inline-block;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(74, 144, 226, 0.1);
+      color: var(--primary-color);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: var(--secondary-color);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      color: var(--text-muted-color);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    code {
+      background-color: var(--surface-color);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: var(--code-font-family);
+      color: #fff;
+    }
+
+    pre {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #fff;
+      font-family: var(--code-font-family);
+      margin: 1rem 0;
+    }
+
+    ul {
+      list-style: disc inside;
+      margin-left: 1rem;
+    }
+
+    .card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .task-title {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .quiz-question {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .quiz-answer {
+      color: var(--text-muted-color);
+      font-size: 0.95rem;
+    }
+
+    .mapa-mental {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      padding: 1rem;
+      border-radius: 6px;
+      color: var(--primary-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted-color);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Módulo 3: Git y Terminal</h1>
+    <p>Aprende desde cero a usar la terminal y Git para gestionar tu código y colaborar en proyectos reales.</p>
+  </header>
+
+  <nav id="menu">
+    <a href="#leccion-1" class="active">Lección 1: Introducción a la Terminal</a>
+    <a href="#leccion-2">Lección 2: Comandos Básicos</a>
+    <a href="#leccion-3">Lección 3: Configuración de Git y GitHub</a>
+    <a href="#leccion-4">Lección 4: Ciclo de Vida de Git</a>
+    <a href="#leccion-5">Lección 5: Ramas y Merge</a>
+    <a href="#leccion-6">Lección 6: Resolver Conflictos</a>
+    <a href="#leccion-7">Lección 7: Repositorios Remotos</a>
+    <a href="#leccion-8">Lección 8: Flujo de Trabajo con Git</a>
+  </nav>
+
+  <main>
+
+    <!-- Lección 1 -->
+    <section id="leccion-1">
+      <h2>Lección 1: Introducción a la Terminal</h2>
+      <p>La terminal es una herramienta fundamental para cualquier desarrollador. Permite interactuar directamente con el sistema operativo mediante comandos.</p>
+
+      <h3>Ejemplo: Abrir la terminal</h3>
+      <ul>
+        <li><strong>Windows:</strong> Win + R → Escribe `cmd` o `powershell`</li>
+        <li><strong>Mac:</strong> Abre "Terminal" desde Spotlight</li>
+        <li><strong>Linux:</strong> Ctrl + Alt + T</li>
+      </ul>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Abre tu terminal y escribe:</p>
+      <pre><code>echo "¡Hola Mundo!"</code></pre>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Terminal -> Sistema Operativo -> Comandos -> Navegación -> Archivos y Directorios
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué hace el comando `cd ..`?</span>
+            <span class="quiz-answer">Vuelve al directorio anterior.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Para qué sirve `ls` o `dir`?</span>
+            <span class="quiz-answer">Listar archivos y carpetas del directorio actual.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://cli.learncodethehardway.org/book/ " target="_blank">Learn Command Line the Hard Way</a></li>
+          <li><a href="https://www.w3schools.io/os-terminal/ " target="_blank">W3Schools - Guía de Terminal</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 2 -->
+    <section id="leccion-2">
+      <h2>Lección 2: Comandos Básicos</h2>
+      <p>Conoce los comandos más usados en la terminal para navegar, crear, eliminar y manipular archivos y carpetas.</p>
+
+      <h3>Ejemplo: Crear carpeta y archivo</h3>
+      <pre><code>mkdir mi-carpeta
+cd mi-carpeta
+touch README.md</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Organiza tu espacio de trabajo:</p>
+      <p class="task-desc">Crea una carpeta llamada `proyecto-git`, entra en ella y crea tres archivos: `index.html`, `style.css`, `script.js`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Comandos -> mkdir, touch, rm, ls, cd, pwd
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo eliminas un archivo en la terminal?</span>
+            <span class="quiz-answer"><code>rm nombre-del-archivo</code></span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué muestra el comando `pwd`?</span>
+            <span class="quiz-answer">El directorio actual donde estás trabajando.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://developer.mozilla.org/es/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line " target="_blank">MDN Web Docs - Línea de Comandos</a></li>
+          <li><a href="https://linuxize.com/ " target="_blank">Linuxize - Tutoriales de Terminal</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 3 -->
+    <section id="leccion-3">
+      <h2>Lección 3: Configuración de Git y GitHub</h2>
+      <p>Instala Git y configura tu perfil de usuario en GitHub. Es esencial tener un repositorio personal asociado a tu identidad.</p>
+
+      <h3>Ejemplo: Configurar Git</h3>
+      <pre><code>git config --global user.name "TuNombre"
+git config --global user.email "tu@email.com"</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Configura tu cuenta de GitHub:</p>
+      <p class="task-desc">Regístrate en GitHub si no lo has hecho y crea un repositorio público llamado `mi-primer-repo`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Git (Control de Versiones) -> GitHub (Repositorio en la Nube) -> Configuración (user.name, user.email)
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Dónde se guardan las configuraciones globales de Git?</span>
+            <span class="quiz-answer">En el archivo <code>~/.gitconfig</code></span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué es GitHub?</span>
+            <span class="quiz-answer">Una plataforma de alojamiento de repositorios Git en la nube.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://git-scm.com/book/es/v2/Inicio-R ápido---Configuración-de-Git" target="_blank">Git Book - Configuración</a></li>
+          <li><a href="https://guides.github.com/introduction/git-handbook/ " target="_blank">GitHub - Git Handbook</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 4 -->
+    <section id="leccion-4">
+      <h2>Lección 4: El Ciclo de Vida de Git</h2>
+      <p>Aprende los pasos básicos de Git: inicializar un repositorio, agregar cambios y hacer commits.</p>
+
+      <h3>Ejemplo: Inicializar y hacer commit</h3>
+      <pre><code>git init
+git add .
+git commit -m "Primer commit"</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Haz tu primer commit:</p>
+      <p class="task-desc">Ingresa a la carpeta `proyecto-git`, inicializa un repositorio Git, agrega tus archivos y haz un commit con mensaje claro.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          git init -> git add -> git commit -> Historial
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué hace el comando <code>git status</code>?</span>
+            <span class="quiz-answer">Muestra el estado de los archivos en el repositorio.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Para qué sirve el archivo <code>.gitignore</code>?</span>
+            <span class="quiz-answer">Para ignorar ciertos archivos que no queremos rastrear con Git.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://git-scm.com/book/es/v2/Fundamentos-de-Git-Registrando-Cambios-en-el-Repositorio " target="_blank">Git Book - Cambios y Commits</a></li>
+          <li><a href="https://learngitbranching.js.org/ " target="_blank">Learn Git Branching (Interactivo)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 5 -->
+    <section id="leccion-5">
+      <h2>Lección 5: Ramas y Fusión</h2>
+      <p>Aprende a trabajar con ramas (`branch`) y cómo fusionar cambios entre ellas.</p>
+
+      <h3>Ejemplo: Usar ramas</h3>
+      <pre><code>git branch nueva-rama
+git checkout nueva-rama
+git merge nueva-rama</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Trabaja con ramas:</p>
+      <p class="task-desc">Crea una rama `feature/login`, realiza algunos cambios y fusiónala con `main`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          main -> feature -> checkout -> merge -> conflicto
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo creas y cambias a una nueva rama en un solo paso?</span>
+            <span class="quiz-answer"><code>git checkout -b nombre-rama</code></span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cuál es la rama principal por defecto en Git?</span>
+            <span class="quiz-answer"><code>main</code> o <code>master</code> (dependiendo de la configuración)</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://git-scm.com/book/es/v2/Ramas-en-Git-Conceptos-b ásicos" target="_blank">Git Book - Ramas</a></li>
+          <li><a href="https://learngitbranching.js.org/ " target="_blank">Aprende Git con ejercicios interactivos</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 6 -->
+    <section id="leccion-6">
+      <h2>Lección 6: Resolver Conflictos</h2>
+      <p>Cuando varias personas editan el mismo archivo, pueden surgir conflictos. Aquí aprenderás a resolverlos manualmente.</p>
+
+      <h3>Ejemplo: Resolviendo un conflicto</h3>
+      <p>Al fusionar ramas, Git marca conflictos así:</p>
+      <pre><code><<< HEAD
+// Tu versión
+=======
+// Versión de otro colaborador
+>>> branch-name</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Simula y resuelve un conflicto:</p>
+      <p class="task-desc">En dos ramas diferentes, modifica la misma línea del archivo `README.md`. Fusiona ambas y corrige el conflicto manualmente.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Edición simultánea -> Conflicto -> Selección manual -> Guardar -> Marcar como resuelto
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué indica el mensaje <<<HEAD?</span>
+            <span class="quiz-answer">Es tu versión local actual.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo marcas un conflicto como resuelto?</span>
+            <span class="quiz-answer">Elimina las marcas de conflicto y ejecuta <code>git add</code> sobre el archivo.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://git-scm.com/book/es/v2/Ramas-en-Git-Fusi ón-de-ramas" target="_blank">Git Book - Fusión de Ramas</a></li>
+          <li><a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts " target="_blank">Atlassian - Conflictos de Fusión</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 7 -->
+    <section id="leccion-7">
+      <h2>Lección 7: Repositorios Remotos</h2>
+      <p>Conecta tu repositorio local con uno remoto en GitHub para compartir y sincronizar tu trabajo con otros.</p>
+
+      <h3>Ejemplo: Subir cambios a GitHub</h3>
+      <pre><code>git remote add origin https://github.com/tuusuario/turepo.git 
+git push -u origin main</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Sube tu proyecto a GitHub:</p>
+      <p class="task-desc">Usa los comandos anteriores para conectar tu repositorio local con GitHub y subir tus cambios.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Local -> Remote -> fetch/pull/push -> Sincronización
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Para qué sirve el comando <code>git clone</code>?</span>
+            <span class="quiz-answer">Para descargar una copia de un repositorio remoto.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué diferencia hay entre <code>git pull</code> y <code>git fetch</code>?</span>
+            <span class="quiz-answer"><code>fetch</code> descarga cambios, <code>pull</code> también los integra automáticamente.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories " target="_blank">GitHub Docs - Repositorios Remotos</a></li>
+          <li><a href="https://git-scm.com/book/es/v2/Git-en-Entornos-Equipo-Trabajar-con-un-Proyecto-Distribuido " target="_blank">Git Book - Trabajo Distribuido</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 8 -->
+    <section id="leccion-8">
+      <h2>Lección 8: Flujo de Trabajo con Git</h2>
+      <p>Domina un flujo básico pero eficaz usando Git en equipo: clonar, crear rama, editar, probar, fusionar y subir.</p>
+
+      <h3>Ejemplo: Flujo completo</h3>
+      <pre><code>git clone https://github.com/tuusuario/tuproyecto.git 
+git checkout -b feature/nueva-funcion
+# Realiza cambios
+git add .
+git commit -m "Agrega nueva función"
+git push origin feature/nueva-funcion</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Simula un flujo de trabajo real:</p>
+      <p class="task-desc">Clona un repo, crea una rama, haz cambios, haz un PR y fusiónalo.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Clone -> Feature -> Commit -> Push -> Pull Request -> Merge
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué es un Pull Request?</span>
+            <span class="quiz-answer">Solicitud para fusionar cambios desde una rama hacia otra.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Por qué es útil trabajar en ramas separadas?</span>
+            <span class="quiz-answer">Permite trabajar en nuevas funciones sin afectar el código principal.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://guides.github.com/introduction/flow/ " target="_blank">GitHub Flow - Guía Oficial</a></li>
+          <li><a href="https://www.atlassian.com/git/tutorials/comparing-workflows " target="_blank">Comparativa de Flujos de Git</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Curso Fullstack | Todos los derechos reservados
+    </footer>
+
+  </main>
+
+</body>
+</html>

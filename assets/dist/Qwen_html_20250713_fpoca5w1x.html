@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Módulo 6: Node.js y SQL</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5a623;
+      --bg-color: #1e1e1e;
+      --surface-color: #2d2d2d;
+      --text-color: #e0e0e0;
+      --text-muted-color: #aaa;
+      --border-color: #444;
+      --font-family: 'Segoe UI', sans-serif;
+      --code-font-family: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted-color);
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+    }
+
+    nav {
+      background-color: var(--bg-color);
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+      display: inline-block;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(74, 144, 226, 0.1);
+      color: var(--primary-color);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: var(--secondary-color);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      color: var(--text-muted-color);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    code {
+      background-color: var(--surface-color);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: var(--code-font-family);
+      color: #fff;
+    }
+
+    pre {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #fff;
+      font-family: var(--code-font-family);
+      margin: 1rem 0;
+    }
+
+    ul {
+      list-style: disc inside;
+      margin-left: 1rem;
+    }
+
+    .card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .task-title {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .quiz-question {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .quiz-answer {
+      color: var(--text-muted-color);
+      font-size: 0.95rem;
+    }
+
+    .mapa-mental {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      padding: 1rem;
+      border-radius: 6px;
+      color: var(--primary-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted-color);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Módulo 6: Node.js y SQL</h1>
+    <p>Aprende desde cero a construir servidores backend con Node.js y gestionar datos usando bases de datos relacionales.</p>
+  </header>
+
+  <nav id="menu">
+    <a href="#leccion-1" class="active">Lección 1: Introducción a Node.js</a>
+    <a href="#leccion-2">Lección 2: Módulos y NPM</a>
+    <a href="#leccion-3">Lección 3: Crear un Servidor HTTP</a>
+    <a href="#leccion-4">Lección 4: Express.js Básico</a>
+    <a href="#leccion-5">Lección 5: Rutas y Controladores</a>
+    <a href="#leccion-6">Lección 6: Middleware en Express</a>
+    <a href="#leccion-7">Lección 7: Introducción a SQL</a>
+    <a href="#leccion-8">Lección 8: Sentencias SQL</a>
+    <a href="#leccion-9">Lección 9: JOIN entre Tablas</a>
+    <a href="#leccion-10">Lección 10: Conectar Node.js a una Base de Datos</a>
+    <a href="#leccion-11">Lección 11: API RESTful Básica</a>
+  </nav>
+
+  <main>
+
+    <!-- Lección 1 -->
+    <section id="leccion-1">
+      <h2>Lección 1: Introducción a Node.js</h2>
+      <p>Node.js es un entorno de ejecución de JavaScript del lado del servidor basado en el motor V8 de Chrome. Permite crear aplicaciones escalables y de alto rendimiento sin necesidad de recargar la página.</p>
+
+      <h3>Ejemplo: Hola Mundo en Node.js</h3>
+      <pre><code>// index.js
+console.log("¡Hola Mundo desde Node.js");</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea tu primer script:</p>
+      <p class="task-desc">Escribe un archivo `index.js` que imprima tu nombre y edad en consola. Luego ejecútalo con `node index.js`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Node.js -> Motor V8 -> Sistema No Bloqueante -> Event Loop -> Asincronía
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué motor usa Node.js para ejecutar JavaScript?</span>
+            <span class="quiz-answer">El motor V8 de Google Chrome</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Para qué sirve `npm`?</span>
+            <span class="quiz-answer">Para instalar paquetes y dependencias para proyectos en Node.js</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://nodejs.org/es/docs/ " target="_blank">Documentación Oficial de Node.js</a></li>
+          <li><a href="https://developer.mozilla.org/es/docs/Learn/Server-side/Express_Node_featured_in_the_full_stack " target="_blank">MDN Web Docs - Node.js</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 2 -->
+    <section id="leccion-2">
+      <h2>Lección 2: Módulos y NPM</h2>
+      <p>Node.js permite dividir tu aplicación en módulos reutilizables. El gestor de paquetes `npm` te ayuda a compartir e integrar bibliotecas fácilmente.</p>
+
+      <h3>Ejemplo: Usar módulos</h3>
+      <pre><code>// math.js
+exports.sum = function(a, b) {
+  return a + b;
+};
+
+// app.js
+const math = require('./math');
+console.log(math.sum(2, 3));</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Organiza tu proyecto modularmente:</p>
+      <p class="task-desc">Separa tus funciones matemáticas en un módulo y úsalas en otro archivo principal.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Módulos -> require / import -> exports -> organización -> reutilización
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cuál es la diferencia entre `module.exports` y `exports`?</span>
+            <span class="quiz-answer">`module.exports` es el objeto real exportado, `exports` es solo una referencia a él.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo instalas un paquete de npm?</span>
+            <span class="quiz-answer"><code>npm install nombre-del-paquete</code></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://nodejs.org/es/docs/guides/getting-started-guide/ " target="_blank">Guía Inicial - Node.js</a></li>
+          <li><a href="https://www.w3schools.com/nodejs/ " target="_blank">W3Schools - Node.js Tutorial</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 3 -->
+    <section id="leccion-3">
+      <h2>Lección 3: Crear un Servidor HTTP</h2>
+      <p>Con el módulo nativo `http`, puedes crear servidores simples que respondan a solicitudes HTTP sin librerías adicionales.</p>
+
+      <h3>Ejemplo: Servidor básico</h3>
+      <pre><code>const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('¡Bienvenido al servidor!');
+});
+
+server.listen(3000, () => {
+  console.log('Servidor corriendo en puerto 3000');
+});</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea un servidor que devuelva JSON:</p>
+      <p class="task-desc">Haz que el servidor responda con un objeto JSON `{ mensaje: "OK", status: 200 }` cuando se accede a `/api`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          HTTP -> request -> response -> headers -> status codes -> listen
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué método usas para iniciar un servidor en Node.js?</span>
+            <span class="quiz-answer"><code>.listen()</code></span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo estableces las cabeceras de respuesta?</span>
+            <span class="quiz-answer"><code>res.writeHead(statusCode, headers)</code></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://nodejs.org/api/http.html " target="_blank">Node.js - Módulo HTTP</a></li>
+          <li><a href="https://javascript.info/server#basic-http-server" target="_blank">JavaScript.info - Servidor HTTP</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 4 -->
+    <section id="leccion-4">
+      <h2>Lección 4: Express.js Básico</h2>
+      <p>Express es un marco minimalista para construir aplicaciones web y APIs en Node.js. Es rápido de configurar y muy flexible.</p>
+
+      <h3>Ejemplo: Tu primera app con Express</h3>
+      <pre><code>const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('¡Hola desde Express!');
+});
+
+app.listen(3000, () => {
+  console.log('Servidor Express corriendo...');
+});</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea una ruta personalizada:</p>
+      <p class="task-desc">Define una ruta `/about` que devuelva un mensaje de texto plano o JSON.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Express -> app.get() -> req/res -> middlewares -> rutas
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué hace `express()`?</span>
+            <span class="quiz-answer">Crea una nueva aplicación Express</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo defines una ruta GET en Express?</span>
+            <span class="quiz-answer"><code>app.get('/ruta', handler)</code></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href=" https://expressjs.com/es/starter/hello-world.html " target="_blank">Express.js - Hello World</a></li>
+          <li><a href="https://developer.mozilla.org/es/docs/Learn/Server-side/Express_Node_featuring_a_database " target="_blank">MDN - Express con Base de Datos</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 5 -->
+    <section id="leccion-5">
+      <h2>Lección 5: Rutas y Controladores</h2>
+      <p>Aprende a definir múltiples rutas y delegar su lógica a controladores separados para mantener el código organizado.</p>
+
+      <h3>Ejemplo: Separación de controlador</h3>
+      <pre><code>// controllers/homeController.js
+exports.index = (req, res) => {
+  res.send('Página de inicio');
+};
+
+// app.js
+const homeCtrl = require('./controllers/homeController');
+app.get('/', homeCtrl.index);</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Organiza por controladores:</p>
+      <p class="task-desc">Crea una carpeta `controllers` con archivos por funcionalidad y enruta desde `app.js`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          app.get() -> controller -> router -> modularización -> separación de responsabilidades
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Por qué organizar controladores en archivos separados?</span>
+            <span class="quiz-answer">Mejora la legibilidad y mantenibilidad del código.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué es un middleware en Express?</span>
+            <span class="quiz-answer">Una función que tiene acceso a `req`, `res` y `next` para procesar solicitudes.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://expressjs.com/es/guide/routing.html " target="_blank">Express - Enrutamiento</a></li>
+          <li><a href="https://github.com/expressjs/express/wiki " target="_blank">Express Wiki - Guía de Uso</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 6 -->
+    <section id="leccion-6">
+      <h2>Lección 6: Middleware en Express</h2>
+      <p>Los middlewares son funciones intermedias que pueden modificar `req`, `res` o pasar el control a la siguiente función con `next()`.</p>
+
+      <h3>Ejemplo: Middleware de registro</h3>
+      <pre><code>app.use((req, res, next) => {
+  console.log(`Petición recibida: ${req.method} ${req.url}`);
+  next();
+});</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Agrega un middleware de autenticación básica:</p>
+      <p class="task-desc">Verifica si el usuario tiene una clave especial (`?clave=123`) antes de permitir el acceso.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Middleware -> req/res -> next() -> logging -> auth -> errores
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿En qué orden se ejecutan los middlewares?</span>
+            <span class="quiz-answer">De arriba hacia abajo en el archivo `app.js`.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué pasa si no llamas a `next()`?</span>
+            <span class="quiz-answer">La solicitud se queda colgada y no llega al controlador final.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://expressjs.com/es/guide/writing-middleware.html " target="_blank">Express - Escribir Middlewares</a></li>
+          <li><a href="https://medium.com/ @stasonmars/%D0%BF%D1%80%D0%BE%D0%B8%D0%B7%D0%B2%D0%BE%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%BE%D0%B5-%D0%B2%D1%8B%D0%B0%D1%83%D0%B8%D0%B0%D0%BA%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F-%D0%B2-express-js-8c9b746850e4" target="_blank">Medium - Middlewares en Express</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 7 -->
+    <section id="leccion-7">
+      <h2>Lección 7: Introducción a SQL</h2>
+      <p>SQL (Structured Query Language) es el lenguaje estándar para interactuar con bases de datos relacionales. Te permite consultar, insertar, actualizar y eliminar datos.</p>
+
+      <h3>Ejemplo: Consulta básica</h3>
+      <pre><code>SELECT * FROM usuarios;</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Consulta tus datos:</p>
+      <p class="task-desc">Crea una tabla `usuarios` e inserta 3 registros. Realiza una consulta para obtener todos los usuarios.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Bases de Datos -> Relacionales -> SQL -> Tablas -> Registros -> Consultas
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué significa CRUD?</span>
+            <span class="quiz-answer">Create, Read, Update, Delete</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Para qué sirve `WHERE` en SQL?</span>
+            <span class="quiz-answer">Para filtrar resultados según condiciones específicas.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://sqlzoo.net/wiki/SQL_Tutorial " target="_blank">SQLZoo - Tutorial Interactivo</a></li>
+          <li><a href="https://www.w3schools.com/sql/ " target="_blank">W3Schools - SQL</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 8 -->
+    <section id="leccion-8">
+      <h2>Lección 8: Sentencias SQL</h2>
+      <p>Las sentencias más comunes incluyen `SELECT`, `INSERT INTO`, `UPDATE`, `DELETE`, y `WHERE`. Estas te permiten manipular y consultar datos en tablas.</p>
+
+      <h3>Ejemplo: Insertar datos</h3>
+      <pre><code>INSERT INTO productos (nombre, precio)
+VALUES ('Camiseta', 29.99);</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Gestiona tus tareas:</p>
+      <p class="task-desc">Crea una tabla `tareas` y agrega 5 entradas con `INSERT`. Usa `SELECT` para mostrar todas.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          SELECT -> INSERT -> UPDATE -> DELETE -> WHERE -> ORDER BY
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo borras un registro?</span>
+            <span class="quiz-answer"><code>DELETE FROM tabla WHERE condición</code></span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo actualizas un campo específico?</span>
+            <span class="quiz-answer"><code>UPDATE tabla SET campo = valor WHERE condición</code></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://www.sqltutorial.org/ " target="_blank">SQLTutorial.org - Sentencias básicas</a></li>
+          <li><a href="https://mode.com/sql-tutorial/ " target="_blank">Mode.com - Tutorial SQL</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 9 -->
+    <section id="leccion-9">
+      <h2>Lección 9: JOIN para Combinar Tablas</h2>
+      <p>Usa `JOIN` para combinar información de varias tablas relacionadas. Es fundamental para sistemas complejos como tiendas online o redes sociales.</p>
+
+      <h3>Ejemplo: INNER JOIN</h3>
+      <pre><code>SELECT u.nombre, p.titulo
+FROM usuarios u
+INNER JOIN publicaciones p ON u.id = p.usuario_id;</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Combina dos tablas:</p>
+      <p class="task-desc">Crea tablas `clientes` y `pedidos`. Haz una consulta que combine ambos con `JOIN`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          INNER JOIN -> LEFT JOIN -> RIGHT JOIN -> relaciones -> integridad referencial
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué diferencia hay entre INNER JOIN y LEFT JOIN?</span>
+            <span class="quiz-answer">INNER devuelve coincidencias en ambas tablas; LEFT devuelve también filas sin coincidencia.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué es una clave foránea?</span>
+            <span class="quiz-answer">Un campo que apunta al ID de otra tabla para establecer relaciones.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://www.w3schools.com/sql/sql_join.asp " target="_blank">W3Schools - Joins</a></li>
+          <li><a href="https://sqlzoo.net/wiki/The_JOIN " target="_blank">SQLZoo - JOIN</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 10 -->
+    <section id="leccion-10">
+      <h2>Lección 10: Conectar Node.js a una Base de Datos</h2>
+      <p>Conecta tu servidor Node.js a una base de datos PostgreSQL o MySQL usando `pg` o `mysql2`. Esto permite persistir datos entre solicitudes.</p>
+
+      <h3>Ejemplo: Conexión a PostgreSQL</h3>
+      <pre><code>const { Client } = require('pg');
+const client = new Client({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'mi_db',
+  password: 'mipassword',
+  port: 5432
+});
+client.connect();</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Consulta usuarios desde Node.js:</p>
+      <p class="task-desc">Conecta a tu base de datos y haz una consulta para obtener todos los usuarios.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Node.js -> pg/mysql2 -> conexión -> consultas -> integración
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo ejecutas una consulta con `pg`?</span>
+            <span class="quiz-answer"><code>client.query(sql, callback)</code></span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Es seguro guardar credenciales directamente en código fuente?</span>
+            <span class="quiz-answer">No, debes usar variables de entorno (ej. con `dotenv`)</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://node-postgres.com/ " target="_blank">pg - Postgres para Node.js</a></li>
+          <li><a href="https://github.com/sidorares/node-mysql2 " target="_blank">mysql2 - Documentación</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 11 -->
+    <section id="leccion-11">
+      <h2>Lección 11: Construyendo una API RESTful</h2>
+      <p>Crea una API completa con endpoints para `GET`, `POST`, `PUT` y `DELETE` que operen sobre una base de datos.</p>
+
+      <h3>Ejemplo: Endpoint GET</h3>
+      <pre><code>app.get('/api/users', (req, res) => {
+  pool.query('SELECT * FROM users', (error, results) => {
+    if (error) throw error;
+    res.json(results.rows);
+  });
+});</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">API REST de Usuarios:</p>
+      <p class="task-desc">Implementa endpoints para listar, crear, editar y eliminar usuarios usando Express y SQL.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Express -> Rutas -> DB -> Consultas -> Respuesta JSON -> API REST
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué método HTTP se usa para crear nuevos recursos?</span>
+            <span class="quiz-answer">`POST`</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo envías una respuesta JSON en Express?</span>
+            <span class="quiz-answer"><code>res.json(datos)</code></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://expressjs.com/en/guide/routing.html " target="_blank">Express Routing</a></li>
+          <li><a href="https://www.postgresqltutorial.com/postgresql-nodejs/ " target="_blank">PostgreSQL con Node.js</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Curso Fullstack | Todos los derechos reservados
+    </footer>
+
+  </main>
+
+</body>
+</html>

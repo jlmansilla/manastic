@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Módulo 4: React Avanzado</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5a623;
+      --bg-color: #1e1e1e;
+      --surface-color: #2d2d2d;
+      --text-color: #e0e0e0;
+      --text-muted-color: #aaa;
+      --border-color: #444;
+      --font-family: 'Segoe UI', sans-serif;
+      --code-font-family: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted-color);
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+    }
+
+    nav {
+      background-color: var(--bg-color);
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+      display: inline-block;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(74, 144, 226, 0.1);
+      color: var(--primary-color);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: var(--secondary-color);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      color: var(--text-muted-color);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    code {
+      background-color: var(--surface-color);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: var(--code-font-family);
+      color: #fff;
+    }
+
+    pre {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #fff;
+      font-family: var(--code-font-family);
+      margin: 1rem 0;
+    }
+
+    ul {
+      list-style: disc inside;
+      margin-left: 1rem;
+    }
+
+    .card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .task-title {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .quiz-question {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .quiz-answer {
+      color: var(--text-muted-color);
+      font-size: 0.95rem;
+    }
+
+    .mapa-mental {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      padding: 1rem;
+      border-radius: 6px;
+      color: var(--primary-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted-color);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Módulo 4: React Avanzado</h1>
+    <p>Domina conceptos avanzados de React: hooks personalizados, contexto, optimización, arquitectura y testing.</p>
+  </header>
+
+  <nav id="menu">
+    <a href="#leccion-1" class="active">Lección 1: useReducer</a>
+    <a href="#leccion-2">Lección 2: Custom Hooks</a>
+    <a href="#leccion-3">Lección 3: Context API</a>
+    <a href="#leccion-4">Lección 4: Optimización de Componentes</a>
+    <a href="#leccion-5">Lección 5: Arquitectura de Proyecto</a>
+    <a href="#leccion-6">Lección 6: React Router</a>
+    <a href="#leccion-7">Lección 7: Testing de Componentes</a>
+  </nav>
+
+  <main>
+
+    <!-- Lección 1 -->
+    <section id="leccion-1">
+      <h2>Lección 1: useReducer</h2>
+      <p>`useReducer` es útil cuando tienes un estado complejo con múltiples subvalores o cuando el próximo estado depende del anterior. Es ideal para formularios, carritos, juegos, etc.</p>
+
+      <h3>Ejemplo: Contador con useReducer</h3>
+      <pre><code>import { useReducer } from 'react';
+
+const initialState = { count: 0 };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      throw new Error();
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <p>Valor: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+    </div>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea un formulario con useReducer:</p>
+      <p class="task-desc">Usa `useReducer` para gestionar los campos de nombre, email y contraseña de un formulario de registro.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Estado Complejo -> useReducer -> Acciones -> Dispatch -> Reducers
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cuándo usar useState vs useReducer?</span>
+            <span class="quiz-answer">`useState`: para estados simples. `useReducer`: para estados complejos o interconectados.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué hace `dispatch()`?</span>
+            <span class="quiz-answer">Envía una acción al reducer para actualizar el estado.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/reference/react/useReducer " target="_blank">React Docs - useReducer</a></li>
+          <li><a href="https://beta.reactjs.org/learn/managing-state " target="_blank">Beta React - Manejo de estado</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 2 -->
+    <section id="leccion-2">
+      <h2>Lección 2: Custom Hooks</h2>
+      <p>Puedes extraer lógica común en funciones reutilizables llamadas "custom hooks". Comienzan con `use` y pueden contener otros hooks.</p>
+
+      <h3>Ejemplo: Hook personalizado</h3>
+      <pre><code>function useInput(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  function handleChange(e) {
+    setValue(e.target.value);
+  }
+
+  return {
+    value,
+    onChange: handleChange,
+    reset: () => setValue('')
+  };
+}
+
+// Uso:
+function App() {
+  const name = useInput('');
+  return (
+    <div>
+      <input {...name} placeholder="Tu nombre" />
+      <p>Hola, {name.value || 'Anónimo'}</p>
+    </div>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea un hook para validación:</p>
+      <p class="task-desc">Escribe un `useValidatedForm()` que valide correo, contraseña y devuelva errores.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Lógica -> Reutilización -> useInput -> useFetch -> useValidation
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo se llama un hook personalizado?</span>
+            <span class="quiz-answer">Siempre comienza con `use` (ej. `useCounter`, `useAuth`) para seguir las convenciones de React.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Puedes llamar un custom hook desde fuera de un componente?</span>
+            <span class="quiz-answer">No, solo dentro de componentes de React o otros hooks personalizados.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/reference/react/useState " target="_blank">React Docs - Hooks Personalizados</a></li>
+          <li><a href="https://usehooks.com/ " target="_blank">usehooks.com - Ejemplos prácticos</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 3 -->
+    <section id="leccion-3">
+      <h2>Lección 3: Context API</h2>
+      <p>Context permite compartir valores entre componentes sin pasar props manualmente. Ideal para temas, autenticación y configuraciones globales.</p>
+
+      <h3>Ejemplo: Contexto de tema</h3>
+      <pre><code>const ThemeContext = createContext('light');
+
+function App() {
+  const [theme, setTheme] = useState('dark');
+
+  return (
+    <ThemeContext.Provider value={theme}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar() {
+  const theme = useContext(ThemeContext);
+  return <p>Tema actual: {theme}</p>;
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Implementa un sistema de login con Context:</p>
+      <p class="task-desc">Crea un contexto `AuthContext` que comparta si el usuario está logueado y su información.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          createContext -> Provider -> useContext -> Estado Global -> Autenticación
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Para qué sirve `createContext()`?</span>
+            <span class="quiz-answer">Para crear un objeto que puede ser consumido por cualquier componente hijo.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo accedes al valor de un contexto?</span>
+            <span class="quiz-answer">Con `useContext(TuContexto)`</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/reference/react/createContext " target="_blank">React - createContext</a></li>
+          <li><a href="https://beta.reactjs.org/learn/passing-data-deeply-with-context " target="_blank">Beta React - Pasar datos con Context</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 4 -->
+    <section id="leccion-4">
+      <h2>Lección 4: Optimización de Componentes</h2>
+      <p>Aprende a mejorar el rendimiento de tus aplicaciones React usando memoización, `React.memo`, `useCallback` y `useMemo`.</p>
+
+      <h3>Ejemplo: Memoización de funciones</h3>
+      <pre><code>function Button({ label, onClick }) {
+  return <button onClick={onClick}>{label}</button>;
+}
+
+export default React.memo(Button);</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Optimiza una lista larga:</p>
+      <p class="task-desc">Evita renders innecesarios usando `React.memo` y `useCallback` en los manejadores de eventos.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Renderización -> Memoización -> React.memo -> useCallback -> useMemo
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué hace `React.memo()`?</span>
+            <span class="quiz-answer">Evita que un componente se renderice si sus props no han cambiado.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿En qué se diferencia `useCallback` de `useMemo`?</span>
+            <span class="quiz-answer"><code>useCallback</code> memoriza funciones, <code>useMemo</code> memoriza valores calculados.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/reference/react/memo " target="_blank">React - React.memo</a></li>
+          <li><a href="https://beta.reactjs.org/reference/react/usecallback " target="_blank">Beta React - useCallback</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 5 -->
+    <section id="leccion-5">
+      <h2>Lección 5: Arquitectura de Proyectos</h2>
+      <p>Aprende a organizar tus proyectos en carpetas claras y mantenibles. Esto facilita el trabajo en equipo y la evolución del proyecto.</p>
+
+      <h3>Ejemplo: Estructura recomendada</h3>
+      <pre><code>/src
+├── components/
+│   ├── Header/
+│   │   ├── Header.jsx
+│   │   └── Header.css
+│   └── Footer/
+├── pages/
+│   ├── Home/
+│   └── Dashboard/
+├── hooks/
+│   ├── useInput.js
+│   └── useFetch.js
+├── context/
+│   └── AuthContext.js
+└── App.js</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Reorganiza tu proyecto:</p>
+      <p class="task-desc">Toma una aplicación existente y reestructúrala en páginas, componentes reutilizables y hooks personalizados.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          src/ -> components/ -> pages/ -> hooks/ -> context/ -> App.js
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Por qué separar componentes en carpetas propias?</span>
+            <span class="quiz-answer">Para facilitar la navegación, mantenibilidad y reusabilidad.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Dónde colocas los archivos de utilidad (helpers)?</span>
+            <span class="quiz-answer">En una carpeta `/utils` o `/lib`</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://beta.reactjs.org/learn/project-structure " target="_blank">Beta React - Estructura de proyectos</a></li>
+          <li><a href="https://www.pluralsight.com/guides/structuring-large-react-applications " target="_blank">Pluralsight - Estructura en proyectos grandes</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 6 -->
+    <section id="leccion-6">
+      <h2>Lección 6: React Router</h2>
+      <p>React Router te permite crear rutas dinámicas y navegar entre vistas. Es fundamental para aplicaciones multipágina hechas con React.</p>
+
+      <h3>Ejemplo: Configurar rutas</h3>
+      <pre><code>import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
+function App() {
+  return (
+    <Router>
+      <nav>
+        <Link to="/">Inicio</Link>
+        <Link to="/perfil">Perfil</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/perfil" element={<Profile />} />
+      </Routes>
+    </Router>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea una app de varias páginas:</p>
+      <p class="task-desc">Usa `react-router` para conectar Home, About y Contacto con navegación funcional.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Navegación -> react-router -> Rutas Dinámicas -> Anidamiento -> Parámetros
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo obtienes parámetros de ruta en React Router?</span>
+            <span class="quiz-answer">Con `useParams()`</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué versión de React Router se usa en React 18?</span>
+            <span class="quiz-answer">v6.x — La más usada actualmente.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://reactrouter.com/en/main " target="_blank">React Router - Documentación Oficial</a></li>
+          <li><a href="https://beta.reactjs.org/learn/navigating-between-screens " target="_blank">Beta React - Navegación</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 7 -->
+    <section id="leccion-7">
+      <h2>Lección 7: Testing de Componentes</h2>
+      <p>El testing mejora la calidad de tu código. Aprende a probar tus componentes con React Testing Library y Jest.</p>
+
+      <h3>Ejemplo: Test de botón</h3>
+      <pre><code>import { render, screen, fireEvent } from '@testing-library/react';
+import Counter from './Counter';
+
+test('botón incrementa el contador', () => {
+  render(<Counter />);
+  fireEvent.click(screen.getByText('+'));
+  expect(screen.getByText('1')).toBeInTheDocument();
+});</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Escribe una prueba para un input:</p>
+      <p class="task-desc">Verifica que el input cambie su valor al escribir texto.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Tests -> Unitarios -> Integración -> RTL -> Jest -> CI/CD
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué herramientas recomienda React para testing?</span>
+            <span class="quiz-answer">React Testing Library + Jest</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Es obligatorio testear todos los componentes?</span>
+            <span class="quiz-answer">Prioriza los críticos y complejos. No testees lo trivial.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://testing-library.com/docs/react-testing-library/intro/ " target="_blank">React Testing Library - Guía Inicial</a></li>
+          <li><a href="https://jestjs.io/ " target="_blank">Jest - Framework de pruebas</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Curso Fullstack | Todos los derechos reservados
+    </footer>
+
+  </main>
+
+</body>
+</html>

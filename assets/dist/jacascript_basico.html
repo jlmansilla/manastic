@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Interactivo: Conceptos Básicos de JavaScript</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a1a1d;
+            --surface-color: #25282e;
+            --primary-color: #4ecca3;
+            --text-color: #e8e8e8;
+            --text-muted-color: #9a9a9a;
+            --border-color: #3a3d42;
+            --code-bg: #1e1e1e;
+            --font-main: 'Lato', sans-serif;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #table-of-contents {
+            width: 320px;
+            background-color: var(--surface-color);
+            border-right: 1px solid var(--border-color);
+            padding: 25px 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+            transition: width 0.3s ease;
+        }
+
+        #table-of-contents h1 {
+            font-size: 1.6em;
+            padding: 0 25px 20px 25px;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+
+        #chapter-nav {
+            list-style: none;
+        }
+
+        #chapter-nav a {
+            display: block;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: var(--text-muted-color);
+            font-weight: 400;
+            border-left: 4px solid transparent;
+            transition: background-color 0.2s, border-left-color 0.2s, color 0.2s;
+            font-size: 0.95em;
+        }
+
+        #chapter-nav a:hover {
+            background-color: rgba(78, 204, 163, 0.05);
+            color: var(--text-color);
+        }
+
+        #chapter-nav a.active {
+            background-color: rgba(78, 204, 163, 0.1);
+            border-left-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        #content-area {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        
+        .chapter-content h2 {
+            font-size: 2.8em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .chapter-content h3 {
+            font-size: 1.8em;
+            color: var(--text-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+        }
+        
+        .chapter-content h4 {
+            font-size: 1.4em;
+            color: var(--text-muted-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .chapter-content p, .chapter-content li {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            max-width: 80ch;
+        }
+
+        .chapter-content ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+
+        .chapter-content code {
+            font-family: var(--font-code);
+            background-color: var(--surface-color);
+            color: var(--primary-color);
+            padding: 0.2em 0.5em;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .chapter-content pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        .chapter-content pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #dcdcdc;
+        }
+        
+        .code-comment {
+            color: #6a9955; /* Green for comments */
+        }
+        
+        .code-keyword {
+            color: #569cd6; /* Blue for keywords */
+        }
+        
+        .code-string {
+            color: #ce9178; /* Orange for strings */
+        }
+        
+        .code-number {
+            color: #b5cea8; /* Light green for numbers */
+        }
+        
+        .code-function {
+             color: #dcdcaa; /* Yellow for functions */
+        }
+
+        .info-box {
+            background-color: rgba(78, 204, 163, 0.1);
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Mind Map Styling */
+        .mind-map {
+            background: var(--surface-color);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        .mind-map .central-idea {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+            padding: 15px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+        .mind-map ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        .mind-map .branch {
+            margin: 15px 0;
+            padding-left: 30px;
+            border-left: 2px dashed var(--border-color);
+            position: relative;
+        }
+        .mind-map .branch::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 2px;
+            background: var(--border-color);
+        }
+        .mind-map .branch > span {
+            background: var(--bg-color);
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .mind-map .leaf {
+            padding-left: 40px;
+            font-size: 0.9em;
+        }
+        .mind-map .leaf li {
+            margin: 8px 0;
+            font-size: 1em;
+            color: var(--text-muted-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+            #table-of-contents {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+            }
+             #table-of-contents h1 {
+                text-align: center;
+                border-bottom: none;
+                padding-bottom: 15px;
+                padding-top: 15px;
+            }
+            #chapter-nav {
+                display: flex;
+                overflow-x: auto;
+                border-top: 1px solid var(--border-color);
+            }
+            #chapter-nav a {
+                border-left: none;
+                border-bottom: 4px solid transparent;
+                padding: 15px 20px;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+            #chapter-nav a.active {
+                border-bottom-color: var(--primary-color);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <aside id="table-of-contents">
+        <h1>JS: Lo Esencial</h1>
+        <nav>
+            <ul id="chapter-nav"></ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+        <!-- Chapter content will be loaded here -->
+    </main>
+
+    <script>
+        // Data for each chapter of the tutorial
+        const chapters = [
+            {
+                id: '00-intro',
+                title: '0. Bienvenida e Introducción',
+                content: `
+                    <h2>0. Bienvenida al Mundo de JavaScript</h2>
+                    <p>¡Felicidades por dar tu primer paso en el fascinante universo de la programación con JavaScript! Este lenguaje, que comenzó como una simple herramienta para añadir interactividad a las páginas web, se ha convertido en una de las tecnologías más importantes y versátiles del mundo.</p>
+                    <h3>¿Qué es JavaScript?</h3>
+                    <p>JavaScript (a menudo abreviado como JS) es un lenguaje de programación de alto nivel, interpretado y dinámico. En el contexto del desarrollo web, es una de las tres tecnologías principales, junto con HTML y CSS.</p>
+                    <ul>
+                        <li><strong>HTML:</strong> Define la <strong>estructura y el contenido</strong> de una página web (los sustantivos: títulos, párrafos, imágenes).</li>
+                        <li><strong>CSS:</strong> Define la <strong>presentación y el estilo</strong> de esa página (los adjetivos: colores, fuentes, diseños).</li>
+                        <li><strong>JavaScript:</strong> Define el <strong>comportamiento e interactividad</strong> de la página (los verbos: qué sucede cuando haces clic en un botón, envías un formulario, o cómo se actualizan los datos en tiempo real).</li>
+                    </ul>
+                    <h3>¿Por qué aprender JavaScript en 2025?</h3>
+                    <p>JS ya no es solo para navegadores. Gracias a entornos como Node.js, puedes usar JavaScript para construir servidores, aplicaciones de escritorio, aplicaciones móviles, controlar hardware y mucho más. Es el lenguaje de la web moderna y una habilidad fundamental para cualquier desarrollador.</p>
+                    <h3>¿Cómo usar este tutorial?</h3>
+                    <p>Este tutorial está diseñado para ser práctico. La mejor manera de aprender es <strong>escribiendo código</strong>. Para empezar, solo necesitas tu navegador web.</p>
+                    <h4>La Consola del Desarrollador</h4>
+                    <p>La consola es tu primer campo de juego en JavaScript. Es una herramienta integrada en todos los navegadores modernos que te permite escribir y ejecutar código JS al instante.</p>
+                    <p><strong>Para abrir la consola:</strong></p>
+                    <ul>
+                        <li><strong>Chrome/Edge/Firefox (Windows/Linux):</strong> Presiona <code>Ctrl + Shift + I</code>, y luego selecciona la pestaña "Console".</li>
+                        <li><strong>Chrome/Edge/Firefox (Mac):</strong> Presiona <code>Cmd + Option + I</code>, y luego selecciona la pestaña "Console".</li>
+                        <li><strong>Safari (Mac):</strong> Primero, ve a Safari > Preferencias > Avanzado y marca "Mostrar el menú Desarrollo en la barra de menús". Luego, presiona <code>Cmd + Option + C</code>.</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>¡Tu primer comando!</strong>
+                        <p>Ve a la consola ahora mismo, escribe la siguiente línea y presiona Enter. ¡Verás cómo el navegador te responde!</p>
+                    </div>
+                    <pre><code class="language-js"><span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'¡Hola, Mundo desde la consola!'</span>);</code></pre>
+                    <p>A lo largo de este módulo, usaremos la consola extensivamente. ¡Prepárate para programar!</p>
+                `
+            },
+            {
+                id: '01-first-program',
+                title: '1. Tu Primer Programa',
+                content: `
+                    <h2>1. Tu Primer Programa: "Hola, Mundo"</h2>
+                    <p>El "Hola, Mundo" es una tradición sagrada en programación. Es el primer paso para verificar que tu entorno funciona y para entender la sintaxis más básica de un lenguaje.</p>
+                    <h3>La función <code>console.log()</code></h3>
+                    <p>Como viste en la introducción, <code>console.log()</code> es tu herramienta principal para "imprimir" o mostrar información. Es fundamental para depurar (encontrar y corregir errores) y para entender qué está pasando en tu código.</p>
+                    <pre><code class="language-js"><span class="code-comment">// Esta línea muestra un mensaje en la consola del desarrollador.</span>
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">"Este es mi primer programa en JavaScript."</span>);
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-number">42</span>); <span class="code-comment">// También puede mostrar números</span>
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-keyword">true</span>); <span class="code-comment">// Y otros tipos de datos</span></code></pre>
+                    <p><code>console</code> es un objeto que nos da acceso a la consola del navegador, y <code>log</code> es una función (un método de ese objeto) que toma un valor y lo muestra.</p>
+                    
+                    <h3>Comentarios en el Código</h3>
+                    <p>Los comentarios son líneas que el intérprete de JavaScript ignora por completo. Son para los humanos: para ti mismo en el futuro o para otros desarrolladores que lean tu código. Usar buenos comentarios es una práctica profesional crucial.</p>
+                    <h4>Comentarios de una sola línea:</h4>
+                    <p>Empiezan con <code>//</code>. Todo lo que sigue en esa línea es un comentario.</p>
+                    <pre><code class="language-js"><span class="code-comment">// Esto es un comentario. Explica lo que hace la siguiente línea.</span>
+<span class="code-keyword">let</span> planeta = <span class="code-string">'Tierra'</span>; <span class="code-comment">// Pueden ir al final de una línea también.</span></code></pre>
+                    
+                    <h4>Comentarios multilínea:</h4>
+                    <p>Empiezan con <code>/*</code> y terminan con <code>*/</code>. Son útiles para explicaciones más largas.</p>
+                    <pre><code class="language-js"><span class="code-comment">/*
+  Este es un comentario más largo.
+  Puede abarcar varias líneas y es útil para documentar
+  una función o una sección compleja del código.
+*/</span>
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">"Los comentarios son tus amigos."</span>);</code></pre>
+                    
+                    <div class="info-box">
+                        <strong>¡Inténtalo tú mismo!</strong>
+                        <p>En la consola, escribe un programa que:</p>
+                        <ol>
+                            <li>Muestre tu nombre.</li>
+                            <li>Muestre tu edad.</li>
+                            <li>Incluya un comentario explicando qué hace cada línea.</li>
+                        </ol>
+                    </div>
+                `
+            },
+            {
+                id: '02-variables',
+                title: '2. Variables y Constantes',
+                content: `
+                    <h2>2. Variables y Constantes: Almacenando Información</h2>
+                    <p>Imagina que necesitas guardar un dato para usarlo más tarde, como la puntuación de un jugador o el nombre de un usuario. Para eso usamos las variables. Una variable es como una caja con una etiqueta donde puedes guardar un valor.</p>
+                    
+                    <h3>Declarando Variables</h3>
+                    <p>En JavaScript moderno, tenemos tres palabras clave para declarar variables: <code>let</code>, <code>const</code> y la antigua <code>var</code>.</p>
+                    
+                    <h4><code>let</code>: Para valores que pueden cambiar</h4>
+                    <p>Usa <code>let</code> cuando sepas que el valor de la variable podría necesitar ser actualizado más adelante.</p>
+                    <pre><code class="language-js"><span class="code-keyword">let</span> puntuacion = <span class="code-number">100</span>;
+<span class="code-function">console</span>.<span class="code-function">log</span>(puntuacion); <span class="code-comment">// Muestra 100</span>
+
+puntuacion = <span class="code-number">150</span>; <span class="code-comment">// El valor se puede reasignar</span>
+<span class="code-function">console</span>.<span class="code-function">log</span>(puntuacion); <span class="code-comment">// Muestra 150</span></code></pre>
+
+                    <h4><code>const</code>: Para valores constantes</h4>
+                    <p>Usa <code>const</code> (de constante) cuando el valor no debería cambiar nunca después de ser asignado. Esto hace tu código más seguro y predecible.</p>
+                    <pre><code class="language-js"><span class="code-keyword">const</span> nombreUsuario = <span class="code-string">'Ana'</span>;
+<span class="code-function">console</span>.<span class="code-function">log</span>(nombreUsuario); <span class="code-comment">// Muestra 'Ana'</span>
+
+<span class="code-comment">// Si intentas reasignar una constante, obtendrás un error.</span>
+<span class="code-comment">// nombreUsuario = 'Carlos'; // TypeError: Assignment to constant variable.</span></code></pre>
+                    <div class="info-box">
+                        <strong>Buena práctica:</strong>
+                        <p>Usa <code>const</code> por defecto. Solo cambia a <code>let</code> si estás seguro de que necesitas reasignar la variable. Esto ayuda a prevenir errores accidentales.</p>
+                    </div>
+                    
+                    <h4><code>var</code>: La forma antigua (¡Evítala!)</h4>
+                    <p><code>var</code> era la única forma de declarar variables antes de 2015. Tiene un comportamiento de "scope" (alcance) que puede ser confuso y propenso a errores. En el código moderno, no hay casi ninguna razón para usar <code>var</code>.</p>
+                    
+                    <h3>Reglas de Nomenclatura</h3>
+                    <ul>
+                        <li>Los nombres de variables solo pueden contener letras, números, <code>$</code> y <code>_</code>.</li>
+                        <li>No pueden empezar con un número.</li>
+                        <li>Son sensibles a mayúsculas y minúsculas (<code>nombre</code> y <code>Nombre</code> son variables diferentes).</li>
+                        <li>La convención en JavaScript es usar <strong>camelCase</strong>: empieza con minúscula, y cada nueva palabra empieza con mayúscula. Ejemplo: <code>velocidadDelCoche</code>, <code>esUsuarioActivo</code>.</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <strong>¡Inténtalo tú mismo!</strong>
+                        <p>Declara las siguientes variables en la consola:</p>
+                        <ol>
+                            <li>Una constante para tu fecha de nacimiento.</li>
+                            <li>Una variable para tu color favorito (que podría cambiar).</li>
+                            <li>Intenta reasignar la constante de tu fecha de nacimiento y observa el error.</li>
+                        </ol>
+                    </div>
+                `
+            },
+            // ... More chapters would be added here in the same format
+            {
+                id: '15-final-project',
+                title: '15. Proyecto Final del Módulo',
+                content: `
+                    <h2>15. Proyecto Final: Mini Generador de Historias</h2>
+                    <p>¡Es hora de combinar todo lo que has aprendido! En este proyecto, crearás un pequeño programa que genera historias aleatorias y sin sentido. Esto te obligará a usar variables, arrays, strings, funciones y lógica condicional.</p>
+                    
+                    <h3>Objetivo</h3>
+                    <p>Crear una función que, cada vez que se ejecute, genere y muestre en la consola una historia corta y aleatoria siguiendo una plantilla.</p>
+                    
+                    <h3>Requisitos</h3>
+                    
+                    <h4>1. Almacenar los datos en Arrays</h4>
+                    <p>Crea al menos 4 arrays para almacenar las diferentes partes de la historia. Usa <code>const</code> para estos arrays.</p>
+                    <ul>
+                        <li><code>personajes</code>: Un array de nombres de personajes (ej: 'el Gato con Botas', 'Caperucita Roja', 'un dragón perezoso').</li>
+                        <li><code>lugares</code>: Un array de lugares (ej: 'en el castillo de nubes', 'en el fondo del mar', 'en una fábrica de chocolate').</li>
+                        <li><code>acciones</code>: Un array de acciones (ej: 'buscaba un tesoro perdido', 'organizaba una fiesta de té', 'aprendía a programar en JavaScript').</li>
+                        <li><code>desenlaces</code>: Un array de desenlaces (ej: 'y todos vivieron felices para siempre.', 'lo que causó una lluvia de meteoritos.', 'y por eso los martes huelen a fresa.').</li>
+                    </ul>
+                    <pre><code class="language-js"><span class="code-keyword">const</span> personajes = [<span class="code-string">'El valiente caballero'</span>, <span class="code-string">'La princesa programadora'</span>, <span class="code-string">'Un unicornio con gafas'</span>];
+<span class="code-comment">// ... crea los otros arrays</span></code></pre>
+                    
+                    <h4>2. Crear una Función para obtener un elemento aleatorio</h4>
+                    <p>Escribe una función llamada <code>obtenerElementoAleatorio</code> que reciba un array como parámetro y devuelva un elemento al azar de ese array.</p>
+                    <p><strong>Pista:</strong> Necesitarás usar <code>Math.random()</code> para generar un número aleatorio entre 0 y 1, y <code>Math.floor()</code> para redondearlo hacia abajo al entero más cercano. El índice máximo de un array es <code>array.length - 1</code>.</p>
+                    
+                    <h4>3. Crear la Función Principal <code>generarHistoria</code></h4>
+                    <p>Esta función no tomará parámetros y hará lo siguiente:</p>
+                    <ol>
+                        <li>Llamará a tu función <code>obtenerElementoAleatorio</code> una vez por cada array para obtener un personaje, un lugar, una acción y un desenlace al azar.</li>
+                        <li>Almacenará cada pieza en una variable o constante.</li>
+                        <li>Usará template literals (cadenas con comillas invertidas <code>\`\`</code>) para construir la historia final.</li>
+                        <li>La plantilla de la historia debe ser algo como: <code>[Personaje] [acción] [lugar], [desenlace]</code>.</li>
+                        <li>Finalmente, usará <code>console.log()</code> para mostrar la historia completa.</li>
+                    </ol>
+                    
+                    <h4>4. Ejecutar el programa</h4>
+                    <p>Llama a la función <code>generarHistoria()</code> varias veces al final de tu script para ver diferentes historias generadas en la consola.</p>
+                    <pre><code class="language-js"><span class="code-function">generarHistoria</span>();
+<span class="code-function">generarHistoria</span>();
+<span class="code-function">generarHistoria</span>();</code></pre>
+                    
+                    <div class="info-box">
+                        <strong>¡Desafío Extra!</strong>
+                        <p>Añade un nuevo array (por ejemplo, <code>objetos</code>) y modifica la plantilla de la historia para incluirlo. ¿Puedes hacer que a veces aparezca un adjetivo aleatorio antes del personaje?</p>
+                    </div>
+                `
+            },
+            {
+                id: '16-solutions',
+                title: '16. Soluciones a los Ejercicios',
+                content: `
+                    <h2>16. Soluciones al Proyecto y Ejercicios</h2>
+                    <p>Aquí encontrarás las soluciones comentadas para el proyecto final. Es importante que primero intentes resolverlo por tu cuenta. ¡El verdadero aprendizaje está en el intento!</p>
+                    
+                    <h3>Solución: Mini Generador de Historias</h3>
+                    <pre><code class="language-js"><span class="code-comment">// --- 1. Almacenar los datos en Arrays ---</span>
+<span class="code-comment">// Usamos const porque estas listas no cambiarán durante la ejecución del programa.</span>
+<span class="code-keyword">const</span> personajes = [
+  <span class="code-string">'El Gato con Botas'</span>,
+  <span class="code-string">'Caperucita Roja'</span>,
+  <span class="code-string">'un dragón perezoso'</span>,
+  <span class="code-string">'un robot melancólico'</span>,
+  <span class="code-string">'la Reina de las Nieves'</span>
+];
+
+<span class="code-keyword">const</span> lugares = [
+  <span class="code-string">'en el castillo de nubes'</span>,
+  <span class="code-string">'en el fondo del mar'</span>,
+  <span class="code-string">'en una fábrica de chocolate'</span>,
+  <span class="code-string">'dentro de un videojuego antiguo'</span>,
+  <span class="code-string">'en la biblioteca de los sueños perdidos'</span>
+];
+
+<span class="code-keyword">const</span> acciones = [
+  <span class="code-string">'buscaba un tesoro perdido'</span>,
+  <span class="code-string">'organizaba una fiesta de té'</span>,
+  <span class="code-string">'aprendía a programar en JavaScript'</span>,
+  <span class="code-string">'intentaba resolver un cubo de Rubik gigante'</span>,
+  <span class="code-string">'cantaba ópera a las plantas'</span>
+];
+
+<span class="code-keyword">const</span> desenlaces = [
+  <span class="code-string">'y todos vivieron felices para siempre.'</span>,
+  <span class="code-string">'lo que causó una lluvia de meteoritos de caramelo.'</span>,
+  <span class="code-string">'y por eso los martes huelen a fresa.'</span>,
+  <span class="code-string">'demostrando que la amistad es el bug más poderoso.'</span>,
+  <span class="code-string">'y el universo aplaudió en silencio.'</span>
+];
+
+
+<span class="code-comment">// --- 2. Crear una Función para obtener un elemento aleatorio ---</span>
+<span class="code-comment">/**
+ * Toma un array y devuelve uno de sus elementos de forma aleatoria.
+ * @param {Array} arr - El array del cual se extraerá el elemento.
+ * @returns {*} Un elemento aleatorio del array.
+ */</span>
+<span class="code-keyword">function</span> <span class="code-function">obtenerElementoAleatorio</span>(arr) {
+  <span class="code-comment">// Math.random() da un número entre 0 (inclusive) y 1 (exclusive).</span>
+  <span class="code-comment">// Lo multiplicamos por la longitud del array para obtener un número entre 0 y la longitud.</span>
+  <span class="code-keyword">const</span> indiceAleatorio = <span class="code-function">Math</span>.<span class="code-function">floor</span>(<span class="code-function">Math</span>.<span class="code-function">random</span>() * arr.length);
+  
+  <span class="code-comment">// Math.floor() redondea hacia abajo al entero más cercano, dándonos un índice válido (de 0 a longitud - 1).</span>
+  
+  <span class="code-comment">// Devolvemos el elemento en esa posición del array.</span>
+  <span class="code-keyword">return</span> arr[indiceAleatorio];
+}
+
+
+<span class="code-comment">// --- 3. Crear la Función Principal 'generarHistoria' ---</span>
+<span class="code-keyword">function</span> <span class="code-function">generarHistoria</span>() {
+  <span class="code-comment">// Obtenemos cada pieza de la historia llamando a nuestra función auxiliar.</span>
+  <span class="code-keyword">const</span> personaje = <span class="code-function">obtenerElementoAleatorio</span>(personajes);
+  <span class="code-keyword">const</span> lugar = <span class="code-function">obtenerElementoAleatorio</span>(lugares);
+  <span class="code-keyword">const</span> accion = <span class="code-function">obtenerElementoAleatorio</span>(acciones);
+  <span class="code-keyword">const</span> desenlace = <span class="code-function">obtenerElementoAleatorio</span>(desenlaces);
+
+  <span class="code-comment">// Usamos template literals (comillas invertidas) para construir la cadena final.</span>
+  <span class="code-comment">// Es mucho más limpio que concatenar con el signo '+'.</span>
+  <span class="code-keyword">const</span> historia = <span class="code-string">\`\${personaje} \${accion} \${lugar}, \${desenlace}\`</span>;
+
+  <span class="code-comment">// Mostramos la historia completa en la consola.</span>
+  <span class="code-function">console</span>.<span class="code-function">log</span>(historia);
+}
+
+
+<span class="code-comment">// --- 4. Ejecutar el programa ---</span>
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">"--- Generando Historias Aleatorias ---"</span>);
+<span class="code-function">generarHistoria</span>();
+<span class="code-function">generarHistoria</span>();
+<span class="code-function">generarHistoria</span>();
+<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">"------------------------------------"</span>);
+</code></pre>
+                `
+            },
+            {
+                id: '17-mind-maps',
+                title: '17. Mapas Mentales y Resumen',
+                content: `
+                    <h2>17. Mapas Mentales y Resumen del Módulo</h2>
+                    <p>Los mapas mentales son una excelente forma de visualizar cómo se conectan los conceptos. Aquí tienes un resumen gráfico de lo que hemos cubierto en este módulo.</p>
+                    
+                    <h3>Mapa Mental General de JavaScript Básico</h3>
+                    <div class="mind-map">
+                        <div class="central-idea">JavaScript Básico</div>
+                        <ul>
+                            <li class="branch">
+                                <span>Variables (Contenedores)</span>
+                                <ul class="leaf">
+                                    <li><code>let</code> (puede cambiar)</li>
+                                    <li><code>const</code> (no puede cambiar)</li>
+                                    <li>Nomenclatura (camelCase)</li>
+                                </ul>
+                            </li>
+                            <li class="branch">
+                                <span>Tipos de Datos (El Contenido)</span>
+                                <ul class="leaf">
+                                    <li>Primitivos: String, Number, Boolean</li>
+                                    <li>Especiales: null, undefined</li>
+                                </ul>
+                            </li>
+                            <li class="branch">
+                                <span>Operadores (Acciones)</span>
+                                <ul class="leaf">
+                                    <li>Aritméticos (+, -, *, /)</li>
+                                    <li>Comparación (===, >, <)</li>
+                                    <li>Lógicos (&&, ||, !)</li>
+                                </ul>
+                            </li>
+                            <li class="branch">
+                                <span>Estructuras de Control (El Flujo)</span>
+                                <ul class="leaf">
+                                    <li>Condicionales (if/else, switch)</li>
+                                    <li>Bucles (for, while)</li>
+                                </ul>
+                            </li>
+                            <li class="branch">
+                                <span>Funciones (Bloques Reutilizables)</span>
+                                <ul class="leaf">
+                                    <li>Declaración y Expresión</li>
+                                    <li>Parámetros y Argumentos</li>
+                                    <li><code>return</code></li>
+                                </ul>
+                            </li>
+                            <li class="branch">
+                                <span>Estructuras de Datos (Colecciones)</span>
+                                <ul class="leaf">
+                                    <li>Arrays ([ ... ])</li>
+                                    <li>Strings (como arrays de caracteres)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <h3>Resumen de Puntos Clave</h3>
+                    <ul>
+                        <li><strong>Consola es tu mejor amiga:</strong> Usa <code>console.log()</code> para todo. Para ver valores, para depurar, para entender el flujo.</li>
+                        <li><strong><code>const</code> > <code>let</code>:</strong> Prefiere constantes para evitar reasignaciones accidentales.</li>
+                        <li><strong>Comparación estricta:</strong> Usa siempre <code>===</code> y <code>!==</code> en lugar de <code>==</code> y <code>!=</code> para evitar conversiones de tipo inesperadas.</li>
+                        <li><strong>Funciones para todo:</strong> Encapsula lógica repetitiva en funciones. Hace tu código más limpio, fácil de leer y de mantener (principio DRY: Don't Repeat Yourself).</li>
+                        <li><strong>Los arrays son poderosos:</strong> Son la estructura de datos más común que usarás para listas de cualquier cosa.</li>
+                        <li><strong>La práctica hace al maestro:</strong> La única forma de interiorizar estos conceptos es escribiendo mucho, mucho código. ¡No te rindas!</li>
+                    </ul>
+                `
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chapterNav = document.getElementById('chapter-nav');
+            const contentArea = document.getElementById('content-area');
+
+            // Function to render the chapter content
+            function renderContent(chapterId) {
+                const chapter = chapters.find(c => c.id === chapterId);
+                if (!chapter) {
+                    contentArea.innerHTML = '<h2>Capítulo no encontrado</h2>';
+                    return;
+                }
+                contentArea.innerHTML = `<div class="chapter-content">${chapter.content}</div>`;
+                contentArea.scrollTop = 0; // Scroll to top on new chapter
+
+                // Update active link in navigation
+                document.querySelectorAll('#chapter-nav a').forEach(a => {
+                    a.classList.remove('active');
+                    if (a.dataset.id === chapterId) {
+                        a.classList.add('active');
+                    }
+                });
+            }
+
+            // Populate navigation sidebar
+            chapters.forEach(chapter => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = `#${chapter.id}`;
+                link.textContent = chapter.title;
+                link.dataset.id = chapter.id;
+                listItem.appendChild(link);
+                chapterNav.appendChild(listItem);
+            });
+
+            // Handle navigation clicks using event delegation
+            chapterNav.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    e.preventDefault();
+                    const chapterId = e.target.dataset.id;
+                    renderContent(chapterId);
+                    // Update URL hash for better history/linking
+                    window.location.hash = chapterId;
+                }
+            });
+            
+            // Handle initial page load
+            const initialChapterId = window.location.hash.substring(1) || chapters[0].id;
+            renderContent(initialChapterId);
+        });
+    </script>
+</body>
+</html>

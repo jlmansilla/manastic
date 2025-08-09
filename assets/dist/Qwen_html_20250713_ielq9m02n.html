@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Módulo 5: React</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5a623;
+      --bg-color: #1e1e1e;
+      --surface-color: #2d2d2d;
+      --text-color: #e0e0e0;
+      --text-muted-color: #aaa;
+      --border-color: #444;
+      --font-family: 'Segoe UI', sans-serif;
+      --code-font-family: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted-color);
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+    }
+
+    nav {
+      background-color: var(--bg-color);
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+      display: inline-block;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(74, 144, 226, 0.1);
+      color: var(--primary-color);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: var(--secondary-color);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      color: var(--text-muted-color);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    code {
+      background-color: var(--surface-color);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: var(--code-font-family);
+      color: #fff;
+    }
+
+    pre {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #fff;
+      font-family: var(--code-font-family);
+      margin: 1rem 0;
+    }
+
+    ul {
+      list-style: disc inside;
+      margin-left: 1rem;
+    }
+
+    .card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .task-title {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .quiz-question {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .quiz-answer {
+      color: var(--text-muted-color);
+      font-size: 0.95rem;
+    }
+
+    .mapa-mental {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      padding: 1rem;
+      border-radius: 6px;
+      color: var(--primary-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted-color);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Módulo 5: React</h1>
+    <p>Aprende la librería front-end más popular. Domina componentes, estado y hooks para crear interfaces interactivas.</p>
+  </header>
+
+  <nav id="menu">
+    <a href="#leccion-1" class="active">Lección 1: Introducción a React</a>
+    <a href="#leccion-2">Lección 2: Componentes Funcionales</a>
+    <a href="#leccion-3">Lección 3: Props</a>
+    <a href="#leccion-4">Lección 4: Renderizado de Listas</a>
+    <a href="#leccion-5">Lección 5: Manejo de Eventos</a>
+    <a href="#leccion-6">Lección 6: Estado (`useState`)</a>
+    <a href="#leccion-7">Lección 7: Renderizado Condicional</a>
+    <a href="#leccion-8">Lección 8: Elevación de Estado</a>
+    <a href="#leccion-9">Lección 9: Ciclo de Vida del Componente</a>
+    <a href="#leccion-10">Lección 10: Mini Proyecto Final</a>
+  </nav>
+
+  <main>
+
+    <!-- Lección 1 -->
+    <section id="leccion-1">
+      <h2>Lección 1: Introducción a React</h2>
+      <p>React es una biblioteca de JavaScript para construir interfaces de usuario. Se basa en componentes reutilizables y ofrece un flujo de trabajo eficiente tanto para aplicaciones pequeñas como grandes.</p>
+
+      <h3>Ejemplo: Tu primer componente</h3>
+      <pre><code>function Saludo() {
+  return <h1>¡Hola, Mundo!</h1>;
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea un componente `App`:</p>
+      <p class="task-desc">Que muestre un saludo personalizado con tu nombre usando JSX.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          React -> Componentes -> JSX -> Virtual DOM -> Declarativo
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué es JSX?</span>
+            <span class="quiz-answer">Una extensión de sintaxis para definir estructuras de interfaz dentro de JavaScript.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Para qué sirve ReactDOM.render()?</span>
+            <span class="quiz-answer">Para renderizar componentes React en el DOM real.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/learn " target="_blank">Documentación Oficial - Aprende React</a></li>
+          <li><a href="https://beta.reactjs.org/ " target="_blank">Guía Beta de React</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 2 -->
+    <section id="leccion-2">
+      <h2>Lección 2: Componentes Funcionales</h2>
+      <p>Los componentes son bloques de construcción fundamentales en React. Los componentes funcionales son funciones que devuelven JSX.</p>
+
+      <h3>Ejemplo: Componente funcional</h3>
+      <pre><code>function Boton({ texto }) {
+  return (
+    <button>{texto}</button>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Diseña un componente reutilizable:</p>
+      <p class="task-desc">Crea un componente `Card` que acepte título, cuerpo y botón, y úsalo varias veces.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Componentes -> Funcionales vs Clase -> Reutilización -> Composición
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Por qué se llaman componentes "funcionales"?</span>
+            <span class="quiz-answer">Porque son simples funciones que devuelven JSX.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cuál es la regla principal al nombrar componentes en React?</span>
+            <span class="quiz-answer">Deben comenzar con letra mayúscula para diferenciarlos de elementos nativos.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/learn/components " target="_blank">MDN Web Docs - Componentes</a></li>
+          <li><a href="https://www.w3schools.com/react/react_components.asp " target="_blank">W3Schools - Componentes Funcionales</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 3 -->
+    <section id="leccion-3">
+      <h2>Lección 3: Props</h2>
+      <p>Las props permiten pasar datos entre componentes. Son inmutables y representan información que puede cambiar dinámicamente.</p>
+
+      <h3>Ejemplo: Uso de props</h3>
+      <pre><code>function Tarjeta({ titulo, descripcion }) {
+  return (
+    <div className="tarjeta">
+      <h2>{titulo}</h2>
+      <p>{descripcion}</p>
+    </div>
+  );
+}
+
+// Uso:
+<Tarjeta titulo="Bienvenida" descripcion="Este es tu primer componente" /></code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea una lista de tarjetas:</p>
+      <p class="task-desc">Usa un array de objetos para generar múltiples tarjetas dinámicas.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Datos -> Props -> Padre -> Hijo -> Unidireccional
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Pueden modificarse las props dentro de un componente?</span>
+            <span class="quiz-answer">No, son de solo lectura.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo pasas múltiples props?</span>
+            <span class="quiz-answer">Como atributos separados o desestructurando en parámetros.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/learn/passing-props-to-a-component " target="_blank">React - Pasar Props</a></li>
+          <li><a href="https://javascript.info/jsx " target="_blank">JavaScript.info - JSX</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 4 -->
+    <section id="leccion-4">
+      <h2>Lección 4: Renderizado de Listas</h2>
+      <p>En React puedes renderizar listas fácilmente usando `.map()` sobre arrays y devolviendo JSX.</p>
+
+      <h3>Ejemplo: Lista dinámica</h3>
+      <pre><code>const items = ["Manzana", "Plátano", "Uva"];
+
+function ListaFrutas() {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Renderiza una lista de usuarios:</p>
+      <p class="task-desc">Usa un array de objetos `{nombre, edad}` y muestra cada uno en un `<div>` individual.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Array -> map() -> key -> JSX -> Listas Dinámicas
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Por qué es importante la prop `key` en listas?</span>
+            <span class="quiz-answer">Ayuda a React a identificar qué elementos han cambiado, añadido o eliminado.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Se pueden usar bucles normales para renderizar listas?</span>
+            <span class="quiz-answer">Sí, pero `.map()` es más limpio y expresivo.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/learn/rendering-lists " target="_blank">React - Listas</a></li>
+          <li><a href="https://beta.reactjs.org/learn/rendering-lists " target="_blank">Beta React - Renderizado de Listas</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 5 -->
+    <section id="leccion-5">
+      <h2>Lección 5: Manejo de Eventos</h2>
+      <p>Los eventos en React se manejan mediante props como `onClick`, `onChange`, etc., y se pasan funciones como manejadores.</p>
+
+      <h3>Ejemplo: Click en botón</h3>
+      <pre><code>function Boton() {
+  const handleClick = () => alert("¡Botón clickeado!");
+
+  return (
+    <button onClick={handleClick}>
+      Haz clic aquí
+    </button>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea un contador con botones:</p>
+      <p class="task-desc">Un botón para aumentar y otro para disminuir un número mostrado en pantalla.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Eventos -> onClick -> onChange -> onSubmit -> onInput
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo se escriben los nombres de eventos en React?</span>
+            <span class="quiz-answer">Con camelCase (ej. `onClick`, `onChange`).</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Es obligatorio usar `e.preventDefault()` en formularios?</span>
+            <span class="quiz-answer">Sí, para evitar recargas innecesarias.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/reference/react-dom/components/common#handling-events" target="_blank">React - Manejo de Eventos</a></li>
+          <li><a href=" https://javascript.info/event-basics " target="_blank">JavaScript.info - Conceptos Básicos de Eventos</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 6 -->
+    <section id="leccion-6">
+      <h2>Lección 6: Estado (`useState`)</h2>
+      <p>El estado permite a los componentes "recordar" información y actualizar la UI cuando cambia.</p>
+
+      <h3>Ejemplo: Contador con estado</h3>
+      <pre><code>import { useState } from 'react';
+
+function Contador() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Has hecho clic {count} veces</p>
+      <button onClick={() => setCount(count + 1)}>
+        Clickeame
+      </button>
+    </div>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Implementa un switch de tema:</p>
+      <p class="task-desc">Un botón que alterne entre modo claro y oscuro, almacenando el estado en `useState`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          useState -> Hook -> Valor Inicial -> Setter -> Re-render
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué hace `useState`?</span>
+            <span class="quiz-answer">Permite declarar una variable de estado y una función para actualizarla.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo se actualiza el estado?</span>
+            <span class="quiz-answer">Llamando a la función setter (ej. `setNombre(nombre)`).</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/reference/react/useState " target="_blank">React - `useState`</a></li>
+          <li><a href="https://beta.reactjs.org/learn/state-a-components-story " target="_blank">Beta React - Estado</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 7 -->
+    <section id="leccion-7">
+      <h2>Lección 7: Renderizado Condicional</h2>
+      <p>Puedes mostrar diferentes partes de la UI según condiciones usando operadores como `&&`, `||`, o condicionales comunes.</p>
+
+      <h3>Ejemplo: Mostrar mensaje condicional</h3>
+      <pre><code>function Bienvenida({ estaLogueado }) {
+  return (
+    <div>
+      {estaLogueado && <p>Bienvenido de nuevo</p>}
+      {!estaLogueado && <p>Por favor inicia sesión</p>}
+    </div>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea un login básico:</p>
+      <p class="task-desc">Mostrar mensaje diferente si el usuario está logueado o no.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          if/else -> && -> || -> state -> renderizado dinámico
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo se muestra un componente condicionalmente?</span>
+            <span class="quiz-answer">Con `if`, `&&`, `? :` u otros operadores lógicos.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué pasa si retornas `null` en un componente?</span>
+            <span class="quiz-answer">No se muestra nada.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/learn/conditional-rendering " target="_blank">React - Renderizado Condicional</a></li>
+          <li><a href="https://beta.reactjs.org/learn/conditional-rendering " target="_blank">Beta React - Condicionales</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 8 -->
+    <section id="leccion-8">
+      <h2>Lección 8: Elevación de Estado</h2>
+      <p>Cuando varios componentes necesitan compartir estado, eleva el estado al ancestro común para coordinarlos.</p>
+
+      <h3>Ejemplo: Formulario compartido</h3>
+      <pre><code>function App() {
+  const [nombre, setNombre] = useState('');
+
+  return (
+    <>
+      <Entrada nombre={nombre} setNombre={setNombre} />
+      <Saludo nombre={nombre} />
+    </>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Comparte estado entre componentes:</p>
+      <p class="task-desc">Crea dos componentes hijos que lean y modifiquen un mismo valor de estado desde su padre.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Estado compartido -> Componente Padre -> Lifting State Up
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cuándo debes elevar el estado?</span>
+            <span class="quiz-answer">Cuando dos componentes necesitan compartir la misma fuente de verdad.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo sincronizas dos componentes hermanos?</span>
+            <span class="quiz-answer">Al mover el estado al componente padre y pasarlo con props.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/learn/sharing-state-between-components " target="_blank">React - Compartir Estado</a></li>
+          <li><a href="https://beta.reactjs.org/learn/sharing-state-between-components " target="_blank">Beta React - Compartir Estado</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 9 -->
+    <section id="leccion-9">
+      <h2>Lección 9: El Ciclo de Vida del Componente</h2>
+      <p>Los componentes tienen fases: montaje, actualización y desmontaje. `useEffect` permite ejecutar efectos secundarios en estas fases.</p>
+
+      <h3>Ejemplo: useEffect</h3>
+      <pre><code>import { useEffect } from 'react';
+
+function Reloj() {
+  const [hora, setHora] = useState(new Date());
+
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setHora(new Date());
+    }, 1000);
+
+    return () => clearInterval(intervalo);
+  }, []);
+
+  return <p>{hora.toLocaleTimeString()}</p>;
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Carga de datos externos:</p>
+      <p class="task-desc">Usa `useEffect` para cargar datos desde una API pública (ej. JSONPlaceholder) y mostrarlos en la UI.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Montaje -> useEffect -> Actualización -> Desmontaje -> Limpieza
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cuál es la diferencia entre efectos con dependencias vacías y con valores?</span>
+            <span class="quiz-answer">Vacío: solo al montar/desmontar. Con valores: al inicio y cuando cambian.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Para qué sirve la función de limpieza en `useEffect`?</span>
+            <span class="quiz-answer">Para evitar fugas de memoria y cancelar suscripciones pendientes.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/reference/react/useEffect " target="_blank">React - useEffect</a></li>
+          <li><a href="https://beta.reactjs.org/learn/synchronizing-with-effects " target="_blank">Beta React - Efectos</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 10 -->
+    <section id="leccion-10">
+      <h2>Lección 10: Mini Proyecto Final</h2>
+      <p>Aplica lo aprendido creando una aplicación funcional completa. Aquí usamos todos los conceptos: componentes, props, estado, eventos y efectos.</p>
+
+      <h3>Ejemplo: To-Do List</h3>
+      <pre><code>function App() {
+  const [tareas, setTareas] = useState([]);
+  const [nuevaTarea, setNuevaTarea] = useState("");
+
+  const agregarTarea = () => {
+    setTareas([...tareas, nuevaTarea]);
+    setNuevaTarea("");
+  };
+
+  return (
+    <div>
+      <input value={nuevaTarea} onChange={(e) => setNuevaTarea(e.target.value)} />
+      <button onClick={agregarTarea}>Agregar</button>
+      <ul>
+        {tareas.map((tarea, i) => <li key={i}>{tarea}</li>)}
+      </ul>
+    </div>
+  );
+}</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Desarrolla una app de tareas:</p>
+      <p class="task-desc">Permite agregar, marcar como completadas y eliminar tareas.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Componentes -> Estado -> Props -> Eventos -> useEffect -> Interacción Completa
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué hook se usa para conectar componentes?</span>
+            <span class="quiz-answer">`useState` y `useEffect` son fundamentales para manejar cambios y efectos.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo organizas tus componentes en proyectos reales?</span>
+            <span class="quiz-answer">En carpetas por feature o por tipo (components, hooks, pages, etc.)</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://es.react.dev/learn/tutorial-todo-list " target="_blank">React - Tutorial: Lista de Tareas</a></li>
+          <li><a href="https://beta.reactjs.org/learn/tutorial-todo-list " target="_blank">Beta React - To-Do List</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Curso Fullstack | Todos los derechos reservados
+    </footer>
+
+  </main>
+
+</body>
+</html>

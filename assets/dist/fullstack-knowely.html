@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Estudios Fullstack Interactivo</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5a623;
+            --bg-color: #1e1e1e;
+            --surface-color: #2d2d2d;
+            --text-color: #e0e0e0;
+            --text-muted-color: #888;
+            --border-color: #444;
+            --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            --code-font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #sidebar {
+            width: 280px;
+            background-color: var(--surface-color);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            overflow-y: auto;
+            flex-shrink: 0;
+            transition: width 0.3s ease;
+        }
+
+        #sidebar h1 {
+            font-size: 1.5em;
+            padding: 0 20px 20px 20px;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        #module-nav {
+            list-style: none;
+        }
+
+        #module-nav a {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            border-left: 4px solid transparent;
+            transition: background-color 0.2s, border-left-color 0.2s;
+        }
+
+        #module-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        #module-nav a.active {
+            background-color: rgba(74, 144, 226, 0.1);
+            border-left-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        #content-area {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .module-content h2 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .module-content .description {
+            font-size: 1.1em;
+            color: var(--text-muted-color);
+            margin-bottom: 30px;
+            max-width: 80ch;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .card h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 .icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+        
+        .card li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .card li::before {
+            content: '✓';
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .task-list li, .quiz-list li {
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        .task-list li::before, .quiz-list li::before {
+            content: ''; margin: 0;
+        }
+        
+        .task-title, .quiz-question {
+            font-weight: bold;
+            display: block;
+            color: var(--text-color);
+        }
+        
+        .task-desc, .quiz-answer {
+            font-size: 0.9em;
+            color: var(--text-muted-color);
+            padding-top: 4px;
+        }
+
+        .card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+            color: #77b0ff;
+        }
+
+        code {
+            background-color: var(--bg-color);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: var(--code-font-family);
+            font-size: 0.9em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            #sidebar {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                display: flex;
+                align-items: center;
+                padding: 0;
+                overflow-x: auto;
+            }
+            #sidebar h1 {
+                display: none; /* Ocultar para dar más espacio a los módulos */
+            }
+            #module-nav {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+            }
+            #module-nav a {
+                border-left: none;
+                border-bottom: 4px solid transparent;
+                padding: 15px;
+                white-space: nowrap;
+            }
+            #module-nav a.active {
+                border-bottom-color: var(--primary-color);
+                border-left-color: transparent;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <aside id="sidebar">
+        <h1>Curso Fullstack</h1>
+        <nav>
+            <ul id="module-nav"></ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+        </main>
+
+    <script>
+        const courseData = [
+            {
+                id: 'js-basics',
+                title: 'Conceptos Básicos de JavaScript',
+                description: 'Escribe tu primera línea de código usando variables, cadenas, números y bucles. Ideal para principiantes, con un 80% de enfoque práctico.',
+                lessons: [
+                    'Introducción al curso y a JS', 'Tu primer programa: "Hola, Mundo!"', 'Variables (var, let, const)', 'Tipos de Datos Primitivos', 'Números y Operadores Matemáticos', 'Cadenas de texto y concatenación', 'Booleans y Lógica', 'Funciones: Declaración y Expresión', 'Operadores Condicionales (if/else, ternario)', 'Arrays: Creación y Acceso', 'Bucles (for, while)', 'Iteración de cadenas', 'Métodos básicos de cadenas', 'Casos de uso de arrays'
+                ],
+                tasks: [
+                    { title: 'Calculadora Simple', desc: 'Crea una calculadora que pueda sumar, restar, multiplicar y dividir dos números.' },
+                    { title: 'Juego: Adivina el Número', desc: 'Genera un número aleatorio y permite al usuario adivinarlo, dándole pistas.' },
+                    { title: 'Convertidor de Temperatura', desc: 'Programa una función que convierta grados Celsius a Fahrenheit y viceversa.' }
+                ],
+                quiz: [
+                    { q: '¿Cuál es la diferencia principal entre `let` y `const`?', a: '`let` permite reasignar la variable, mientras que `const` no.' },
+                    { q: '¿Qué devuelve la expresión ` "5" + 3 `?', a: 'La cadena `"53"` debido a la coerción de tipos.' },
+                    { q: '¿Para qué se utiliza el operador `%` (módulo)?', a: 'Para obtener el resto de una división.' }
+                ],
+                mindMap: 'Variables -> Tipos de Datos -> Operadores -> Estructuras de Control (Condicionales, Bucles) -> Funciones -> Arrays',
+                resources: [
+                    { text: 'MDN: Guía de JavaScript', url: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Guide' },
+                    { text: 'FreeCodeCamp: JavaScript Básico', url: 'https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/' }
+                ]
+            },
+            {
+                id: 'html-css-basics',
+                title: 'Conceptos Básicos de HTML + CSS',
+                description: 'Aprende a estructurar contenido con HTML semántico y a darle estilo con CSS, manejando fuentes, colores, el modelo de caja y responsividad básica.',
+                lessons: [
+                    'Introducción a HTML y su estructura', 'Etiquetas HTML comunes (h1, p, a, div)', 'HTML Semántico (header, footer, nav, section)', 'Introducción a CSS', 'Formas de aplicar CSS (en línea, interno, externo)', 'Selectores CSS básicos', 'Colores (hex, rgb, hsl) y Fuentes (font-family, font-size)', 'Modelo de Caja (margin, border, padding, width, height)', 'Responsividad básica y Viewport', 'Pseudo-elementos y Pseudo-clases', 'Especificidad en CSS', 'Enlaces y URLs', 'Imágenes y la etiqueta <img>', 'Media Queries básicas', 'Formularios HTML', 'Propiedad `position` (static, relative, absolute, fixed)'
+                ],
+                tasks: [
+                    { title: 'Página de Tributo', desc: 'Crea una página simple sobre tu personaje o persona favorita usando HTML semántico y CSS básico.' },
+                    { title: 'Tarjeta de Perfil', desc: 'Diseña una tarjeta de presentación personal con tu foto, nombre, y enlaces a redes sociales.' },
+                    { title: 'Clon Básico de la Búsqueda de Google', desc: 'Replica la apariencia de la página principal de Google.' }
+                ],
+                quiz: [
+                    { q: '¿Cuál es la diferencia entre `id` y `class` en HTML?', a: '`id` debe ser único en la página, mientras que `class` puede ser usado por múltiples elementos.' },
+                    { q: 'Describe el Modelo de Caja de CSS de adentro hacia afuera.', a: 'Contenido -> Padding -> Border -> Margin.' },
+                    { q: '¿Qué hace la etiqueta `<meta name="viewport" ...>`?', a: 'Controla cómo se muestra la página en dispositivos móviles, ajustando el ancho y el zoom inicial.' }
+                ],
+                mindMap: 'HTML (Estructura) + CSS (Presentación) -> Selectores (Conexión) -> Modelo de Caja (Layout) -> Responsividad (Adaptación)',
+                resources: [
+                    { text: 'MDN: Aprende HTML', url: 'https://developer.mozilla.org/es/docs/Learn/HTML' },
+                    { text: 'MDN: Aprende CSS', url: 'https://developer.mozilla.org/es/docs/Learn/CSS' },
+                    { text: 'CSS-Tricks: A Complete Guide to Flexbox', url: 'https://css-tricks.com/snippets/css/a-guide-to-flexbox/' }
+                ]
+            },
+            {
+                id: 'git-terminal',
+                title: 'Git y Terminal',
+                description: 'Domina la línea de comandos y aprende a usar Git, el sistema de control de versiones estándar de la industria, para gestionar tu código y colaborar en equipo.',
+                lessons: [
+                    'Introducción a la terminal/línea de comandos', 'Comandos básicos (ls, cd, pwd, mkdir, touch, rm)', 'Configuración de Git y GitHub', 'Conceptos básicos de Git (repository, commit, stage)', 'El ciclo de vida de Git: `add`, `commit`, `push`', 'Trabajando con Ramas (`branch`, `checkout`, `merge`)', 'Resolución de conflictos de merge', 'Trabajando con Repositorios Remotos (GitHub)', 'Clonar, `fetch`, `pull` y `push`'
+                ],
+                tasks: [
+                    { title: 'Tu Primer Repositorio', desc: 'Crea un repositorio en GitHub, clónalo, añade un archivo `README.md`, haz un commit y súbelo.' },
+                    { title: 'Flujo con Ramas', desc: 'Crea una rama `develop`, haz cambios en ella, y luego fusiónala de vuelta a la rama `main`.' }
+                ],
+                quiz: [
+                    { q: '¿Qué hace el comando `git clone`?', a: 'Crea una copia local de un repositorio remoto.' },
+                    { q: '¿Cuál es la diferencia entre `git pull` y `git fetch`?', a: '`fetch` descarga los cambios del remoto pero no los integra; `pull` hace un `fetch` y luego un `merge`.' },
+                    { q: '¿Para qué sirve el archivo `.gitignore`?', a: 'Para especificar archivos y carpetas que Git debe ignorar y no rastrear.' }
+                ],
+                mindMap: 'Terminal (Control Local) -> Git Init (Crear Repo) -> Add/Commit (Guardar Cambios) -> Branch (Experimentar) -> Push (Compartir en GitHub)',
+                resources: [
+                    { text: 'Git - La Guía Sencilla', url: 'https://rogerdudler.github.io/git-guide/index.es.html' },
+                    { text: 'GitHub Skills', url: 'https://skills.github.com/' }
+                ]
+            },
+            // ... Módulos intermedios y avanzados ...
+            {
+                id: 'js-advanced',
+                title: 'JavaScript Avanzado',
+                description: 'Profundiza en conceptos clave como el scope, closures, prototipos, `this`, y la programación asíncrona para escribir código más potente y eficiente.',
+                lessons: [
+                    'El objeto `this` y su contexto', 'Closures y Scope en profundidad', 'Programación Asíncrona: Callbacks, Promesas', '`async/await`: Sintaxis moderna para asincronía', 'Prototipos y Herencia Prototípica', 'Constructores y el operador `new`', 'Clases (ES6): Azúcar sintáctico sobre prototipos', 'Módulos en JavaScript (Import/Export)', 'Manejo de Errores (`try/catch`)', 'El Event Loop'
+                ],
+                tasks: [
+                    { title: 'API Fetcher', desc: 'Usa `fetch` con `async/await` para obtener datos de una API pública (ej. JSONPlaceholder) y mostrarlos en la consola.' },
+                    { title: 'Cronómetro con Closures', desc: 'Crea un cronómetro funcional que use closures para encapsular su estado.' }
+                ],
+                quiz: [
+                    { q: '¿Qué es un Closure en JavaScript?', a: 'Es una función que recuerda el entorno (scope) en el que fue creada, incluso si se ejecuta fuera de ese entorno.' },
+                    { q: '¿Cuál es la principal ventaja de usar Promesas sobre Callbacks anidados (Callback Hell)?', a: 'Mejoran la legibilidad y el manejo de errores en operaciones asíncronas.' }
+                ],
+                mindMap: 'Scope/Closures (Memoria) -> `this` (Contexto) -> Prototipos (Herencia) -> Clases (Abstracción) -> Promesas/async (Asincronía)',
+                resources: [
+                    { text: 'MDN: `async/await`', url: 'https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/async_function' },
+                    { text: 'JavaScript.info: Prototipos, herencia', url: 'https://javascript.info/prototypes' }
+                ]
+            },
+            {
+                id: 'react-basics',
+                title: 'React',
+                description: 'Aprende la librería front-end más popular. Domina el desarrollo basado en componentes, el manejo de estado y eventos para crear UIs interactivas.',
+                lessons: [
+                    'Introducción a React y JSX', 'Creación de Componentes (Funcionales)', 'Props: Pasando datos a componentes', 'Renderizado de Listas (`.map()`)', 'Manejo de Eventos (`onClick`, `onChange`)', 'Estado (`useState` Hook)', 'Renderizado Condicional', 'Elevación de Estado', 'El ciclo de vida de un componente', 'Hooks básicos (`useState`, `useEffect`)'
+                ],
+                tasks: [
+                    { title: 'Aplicación de Tareas (To-Do List)', desc: 'Crea una app para añadir, mostrar y eliminar tareas.' },
+                    { title: 'Buscador de Gifs', desc: 'Usa la API de Giphy para crear un buscador de GIFs en tiempo real.' }
+                ],
+                quiz: [
+                    { q: '¿Qué es JSX?', a: 'Una extensión de sintaxis para JavaScript que permite escribir HTML-como código dentro de un archivo JavaScript.' },
+                    { q: '¿Para qué sirve el Hook `useEffect`?', a: 'Para ejecutar "efectos secundarios" en componentes funcionales, como fetching de datos, suscripciones o manipulación del DOM.' }
+                ],
+                mindMap: 'Componentes (Bloques UI) -> Props (Datos hacia abajo) -> Estado (Datos que cambian) -> Eventos (Interacción del usuario) -> Hooks (Superpoderes)',
+                resources: [
+                    { text: 'Documentación Oficial de React', url: 'https://es.react.dev/' },
+                    { text: 'Create React App', url: 'https://create-react-app.dev/' }
+                ]
+            },
+            {
+                id: 'node-sql',
+                title: 'Node.js y SQL',
+                description: 'Construye el backend de tus aplicaciones. Aprende a crear servidores con Node.js y Express, y a gestionar datos con bases de datos relacionales SQL.',
+                lessons: [
+                    'Introducción a Node.js', 'Módulos y `npm`', 'Creando un servidor HTTP básico', 'Introducción a Express.js', 'Rutas y Controladores', 'Middleware en Express', 'Introducción a SQL y Bases de Datos Relacionales', 'Sentencias SQL: `SELECT`, `INSERT`, `UPDATE`, `DELETE`', '`JOIN` para combinar tablas', 'Conectando Node.js a una base de datos (ej. PostgreSQL)', 'Construyendo una API RESTful básica'
+                ],
+                tasks: [
+                    { title: 'API REST para un Blog', desc: 'Crea una API con endpoints para crear, leer, actualizar y eliminar posts de un blog, guardando los datos en una base de datos SQL.' },
+                    { title: 'Sistema de Autenticación Simple', desc: 'Implementa registro de usuarios e inicio de sesión usando contraseñas hasheadas.' }
+                ],
+                quiz: [
+                    { q: '¿Qué es Express.js?', a: 'Un framework minimalista y flexible para Node.js que proporciona un conjunto robusto de características para aplicaciones web y móviles.' },
+                    { q: '¿Para qué se utiliza la sentencia `JOIN` en SQL?', a: 'Para combinar filas de dos o más tablas basándose en una columna relacionada entre ellas.' }
+                ],
+                mindMap: 'Node.js (Entorno Backend) -> Express (Framework Web) -> Rutas (Endpoints API) -> SQL (Base de Datos) -> `SELECT/INSERT` (Manipulación de Datos)',
+                resources: [
+                    { text: 'Documentación de Node.js', url: 'https://nodejs.org/es/docs/' },
+                    { text: 'Documentación de Express.js', url: 'https://expressjs.com/es/' },
+                    { text: 'SQLZoo - Tutorial Interactivo', url: 'https://sqlzoo.net/wiki/SQL_Tutorial' }
+                ]
+            },
+            {
+                id: 'deployment-devops',
+                title: 'Despliegue y DevOps',
+                description: 'Lleva tus aplicaciones del desarrollo a la producción. Aprende a desplegar tus proyectos en la nube y los conceptos básicos de DevOps.',
+                lessons: [
+                    '¿Qué es el despliegue?', 'Variables de Entorno (.env)', 'Despliegue de Frontend (Vercel, Netlify)', 'Despliegue de Backend (Heroku, Render)', 'Introducción a Docker: Contenedores', 'Integración Continua y Despliegue Continuo (CI/CD)', 'Conceptos básicos de GitHub Actions'
+                ],
+                tasks: [
+                    { title: 'Desplegar tu Portfolio', desc: 'Despliega tu página de portfolio (hecha con React) en Vercel o Netlify.' },
+                    { title: 'Desplegar tu API REST', desc: 'Despliega la API de blog que construiste en un servicio como Render.' }
+                ],
+                quiz: [
+                    { q: '¿Por qué son importantes las variables de entorno?', a: 'Permiten configurar una aplicación para diferentes entornos (desarrollo, producción) sin cambiar el código, y para mantener seguras las claves secretas.' },
+                    { q: '¿Qué problema principal resuelve Docker?', a: 'Resuelve el problema de "funciona en mi máquina" al empaquetar una aplicación con todas sus dependencias en una unidad estandarizada llamada contenedor.' }
+                ],
+                mindMap: 'Código Local -> Git Push -> CI/CD (Tests, Build) -> Contenedor (Docker) -> Despliegue en la Nube (Vercel/Render)',
+                resources: [
+                    { text: 'Guía de Despliegue de Vercel', url: 'https://vercel.com/docs' },
+                    { text: 'Documentación de Docker', url: 'https://docs.docker.com/' }
+                ]
+            },
+            {
+                id: 'career-skills',
+                title: 'Habilidades Blandas y Carrera',
+                description: 'El código es solo una parte. Aprende a trabajar en equipo, a comunicarte eficazmente y a planificar tu carrera como desarrollador.',
+                lessons: [
+                    'Metodologías Ágiles (Scrum, Kanban)', 'Cómo leer y entender código de otros', 'Escribiendo código limpio y mantenible', 'Comunicación efectiva en equipos técnicos', 'Construyendo tu portfolio y marca personal', 'Preparación para entrevistas técnicas (algoritmos, sistemas)', 'Networking y comunidad'
+                ],
+                tasks: [
+                    { title: 'Refactoriza un Proyecto', desc: 'Toma uno de tus proyectos anteriores y aplica principios de código limpio.' },
+                    { title: 'Simulacro de Entrevista', desc: 'Grábate resolviendo un problema de código y explicando tu proceso.' }
+                ],
+                quiz: [
+                    { q: '¿Cuál es el objetivo principal de una "daily stand-up" en Scrum?', a: 'Sincronizar al equipo, discutir el progreso y identificar impedimentos.' },
+                    { q: '¿Qué significa el principio "DRY"?', a: 'Don\'t Repeat Yourself (No te repitas), promueve la reutilización de código para evitar la duplicación.' }
+                ],
+                mindMap: 'Código Limpio -> Trabajo en Equipo (Agile) -> Comunicación -> Portfolio (Tu Vitrina) -> Entrevistas (El Desafío)',
+                resources: [
+                    { text: 'Libro: "Clean Code" de Robert C. Martin', url: 'https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882' },
+                    { text: 'roadmap.sh - Rutas de Aprendizaje', url: 'https://roadmap.sh/' }
+                ]
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const moduleNav = document.getElementById('module-nav');
+            const contentArea = document.getElementById('content-area');
+            const sidebar = document.getElementById('sidebar');
+
+            function renderModule(moduleId) {
+                const module = courseData.find(m => m.id === moduleId);
+                if (!module) return;
+
+                const resourcesHTML = module.resources ? module.resources.map(r => `<li><a href="${r.url}" target="_blank">${r.text}</a></li>`).join('') : '';
+                const tasksHTML = module.tasks ? module.tasks.map(t => `<li class="task-item"><span class="task-title">${t.title}</span><span class="task-desc">${t.desc}</span></li>`).join('') : '';
+                const quizHTML = module.quiz ? module.quiz.map(q => `<li class="quiz-item"><span class="quiz-question">${q.q}</span><span class="quiz-answer">${q.a}</span></li>`).join('') : '';
+
+                contentArea.innerHTML = `
+                    <div class="module-content">
+                        <h2>${module.title}</h2>
+                        <p class="description">${module.description}</p>
+                        <div class="content-grid">
+                            <div class="card">
+                                <h3><span class="icon">📚</span>Lecciones</h3>
+                                <ul>${module.lessons.map(lesson => `<li>${lesson}</li>`).join('')}</ul>
+                            </div>
+                            <div class="card">
+                                <h3><span class="icon">🛠️</span>Tareas Prácticas</h3>
+                                <ul class="task-list">${tasksHTML}</ul>
+                            </div>
+                            <div class="card">
+                                <h3><span class="icon">❓</span>Cuestionario Rápido</h3>
+                                <ul class="quiz-list">${quizHTML}</ul>
+                            </div>
+                            <div class="card">
+                                <h3><span class="icon">🧠</span>Mapa Mental / Conceptos Clave</h3>
+                                <ul><li><code>${module.mindMap}</code></li></ul>
+                            </div>
+                            <div class="card">
+                                <h3><span class="icon">🔗</span>Recursos y Tutoriales</h3>
+                                <ul>${resourcesHTML}</ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Update active link
+                document.querySelectorAll('#module-nav a').forEach(a => {
+                    a.classList.remove('active');
+                    if (a.dataset.id === moduleId) {
+                        a.classList.add('active');
+                    }
+                });
+            }
+
+            // Populate sidebar
+            courseData.forEach(module => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = module.title;
+                link.dataset.id = module.id;
+                listItem.appendChild(link);
+                moduleNav.appendChild(listItem);
+            });
+
+            // Handle navigation clicks
+            sidebar.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    e.preventDefault();
+                    const moduleId = e.target.dataset.id;
+                    renderModule(moduleId);
+                }
+            });
+
+            // Initial render
+            if (courseData.length > 0) {
+                renderModule(courseData[0].id);
+            }
+        });
+    </script>
+</body>
+</html>

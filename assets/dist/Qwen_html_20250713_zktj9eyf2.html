@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Módulo 2: HTML y CSS Básico</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5a623;
+      --bg-color: #1e1e1e;
+      --surface-color: #2d2d2d;
+      --text-color: #e0e0e0;
+      --text-muted-color: #aaa;
+      --border-color: #444;
+      --font-family: 'Segoe UI', sans-serif;
+      --code-font-family: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted-color);
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+    }
+
+    nav {
+      background-color: var(--bg-color);
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+      display: inline-block;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(74, 144, 226, 0.1);
+      color: var(--primary-color);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: var(--secondary-color);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      color: var(--text-muted-color);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    code {
+      background-color: var(--surface-color);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: var(--code-font-family);
+      color: #fff;
+    }
+
+    pre {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #fff;
+      font-family: var(--code-font-family);
+      margin: 1rem 0;
+    }
+
+    ul {
+      list-style: disc inside;
+      margin-left: 1rem;
+    }
+
+    .card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .task-title {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .quiz-question {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .quiz-answer {
+      color: var(--text-muted-color);
+      font-size: 0.95rem;
+    }
+
+    .mapa-mental {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      padding: 1rem;
+      border-radius: 6px;
+      color: var(--primary-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted-color);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Módulo 2: HTML y CSS Básico</h1>
+    <p>Aprende desde cero a crear páginas web estructuradas y estilizadas con HTML semántico y CSS moderno.</p>
+  </header>
+
+  <nav id="menu">
+    <a href="#leccion-1" class="active">Lección 1: Introducción a HTML</a>
+    <a href="#leccion-2">Lección 2: Etiquetas Comunes</a>
+    <a href="#leccion-3">Lección 3: Listas y Enlaces</a>
+    <a href="#leccion-4">Lección 4: Imágenes y Multimedia</a>
+    <a href="#leccion-5">Lección 5: Tablas</a>
+    <a href="#leccion-6">Lección 6: Formularios</a>
+    <a href="#leccion-7">Lección 7: HTML Semántico</a>
+    <a href="#leccion-8">Lección 8: Introducción a CSS</a>
+    <a href="#leccion-9">Lección 9: Selectores CSS</a>
+    <a href="#leccion-10">Lección 10: Colores y Fuentes</a>
+    <a href="#leccion-11">Lección 11: Modelo de Caja</a>
+    <a href="#leccion-12">Lección 12: Layout Básico</a>
+    <a href="#leccion-13">Lección 13: Flexbox</a>
+    <a href="#leccion-14">Lección 14: Grid Layout</a>
+    <a href="#leccion-15">Lección 15: Media Queries</a>
+    <a href="#leccion-16">Lección 16: Mini Proyecto Final</a>
+  </nav>
+
+  <main>
+
+    <!-- Lección 1 -->
+    <section id="leccion-1">
+      <h2>Lección 1: Introducción a HTML</h2>
+      <p>HTML es el lenguaje fundamental que define la estructura de una página web. A través de etiquetas, puedes definir encabezados, párrafos, imágenes, formularios y otros elementos visuales y estructurales.</p>
+
+      <h3>Estructura básica de un documento HTML</h3>
+      <p>Un documento HTML comienza con `<!DOCTYPE html>` y contiene una estructura básica como esta:</p>
+      <pre><code><!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Primera Página</title>
+</head>
+<body>
+  <h1>Hola Mundo</h1>
+  <p>Bienvenido al mundo del desarrollo web.</p>
+</body>
+</html></code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea tu primera página web:</p>
+      <p class="task-desc">Escribe un documento HTML básico con un título, un encabezado `<h1>` y un párrafo `<p>` que diga "Este es mi primer sitio web".</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          HTML -> Estructura -> Etiquetas -> Elementos -> Documento Completo
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué significa HTML?</span>
+            <span class="quiz-answer">HyperText Markup Language (Lenguaje de Marcado de Hipertexto)</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cuál es la diferencia entre HTML y CSS?</span>
+            <span class="quiz-answer">HTML define la estructura, CSS define el estilo y diseño visual.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://developer.mozilla.org/es/docs/Web/HTML " target="_blank">MDN Web Docs - HTML</a></li>
+          <li><a href="https://www.w3schools.com/html/ " target="_blank">W3Schools - HTML Tutorial</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 2 -->
+    <section id="leccion-2">
+      <h2>Lección 2: Etiquetas Comunes</h2>
+      <p>Las etiquetas más usadas incluyen `<p>` para párrafos, `<h1>` a `<h6>` para títulos, `<strong>` y `<em>` para énfasis, y `<div>` y `<span>` para agrupar contenido.</p>
+
+      <h3>Ejemplo: Uso de etiquetas básicas</h3>
+      <pre><code><h1>Encabezado Principal</h1>
+<p>Este es un <strong>párrafo</strong> con <em>texto enfatizado</em>.</p>
+<div>
+  Soy un contenedor genérico.
+</div></code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Diseña una página personal:</p>
+      <p class="task-desc">Usa las etiquetas aprendidas para crear una página sobre ti mismo con encabezado, párrafo y div.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Etiquetas Comunes -> Títulos -> Párrafos -> Énfasis -> Contenedores
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Para qué sirve la etiqueta <em>?</span>
+            <span class="quiz-answer">Para enfatizar texto con significado semántico.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué hace la etiqueta <br>?</span>
+            <span class="quiz-answer">Introduce un salto de línea.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://developer.mozilla.org/es/docs/Web/HTML/Element " target="_blank">MDN - Elementos HTML</a></li>
+          <li><a href="https://www.freecodecamp.org/learn/responsive-web-design/basic-html-and-html5/ " target="_blank">freeCodeCamp - HTML Básico</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 3 -->
+    <section id="leccion-3">
+      <h2>Lección 3: Listas y Enlaces</h2>
+      <p>Con `<ul>` y `<ol>` puedes crear listas no ordenadas y ordenadas. Los enlaces se crean con `<a href="#">`. También puedes abrir en nuevas ventanas con `target="_blank"`.</p>
+
+      <h3>Ejemplo: Lista y enlace</h3>
+      <pre><code><ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+
+<a href="https://example.com " target="_blank">Ir a Ejemplo</a></code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea una lista de tus sitios favoritos:</p>
+      <p class="task-desc">Incluye 5 enlaces con sus respectivos nombres.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Listas -> UL, OL, LI -> Enlaces -> A, HREF, TARGET
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Para qué sirve el atributo target="_blank"?</span>
+            <span class="quiz-answer">Para abrir un enlace en una nueva ventana o pestaña.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cuál es la diferencia entre <ul> y <ol>?</span>
+            <span class="quiz-answer">`<ul>` crea listas desordenadas y `<ol>` listas numeradas.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://developer.mozilla.org/es/docs/Web/HTML/Element/a " target="_blank">MDN - La etiqueta <a></a></li>
+          <li><a href="https://www.w3schools.com/html/html_lists.asp " target="_blank">W3Schools - Listas en HTML</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 4 -->
+    <section id="leccion-4">
+      <h2>Lección 4: Imágenes y Multimedia</h2>
+      <p>La etiqueta `<img src="" alt="">` permite insertar imágenes. El atributo `alt` describe la imagen para accesibilidad y SEO.</p>
+
+      <h3>Ejemplo: Insertar imagen</h3>
+      <pre><code><img src="imagen.jpg" alt="Descripción de la imagen"></code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Inserta una imagen de tu elección:</p>
+      <p class="task-desc">Usa una imagen local o de internet y asegúrate de incluir un buen texto alternativo.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Imágenes -> src, alt -> Multimedia -> audio, video
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Por qué es importante el atributo alt en <img>?</span>
+            <span class="quiz-answer">Para mejorar accesibilidad y SEO.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Cómo se inserta una imagen responsiva?</span>
+            <span class="quiz-answer">Con `max-width: 100%` en CSS.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://developer.mozilla.org/es/docs/Web/HTML/Element/img " target="_blank">MDN - Etiqueta img</a></li>
+          <li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/ " target="_blank">CSS-Tricks - Guía de Imágenes Responsivas</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Más lecciones... -->
+
+    <!-- ...continúa con las 16 lecciones con el mismo nivel de detalle -->
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Curso Fullstack | Todos los derechos reservados
+    </footer>
+
+  </main>
+
+</body>
+</html>

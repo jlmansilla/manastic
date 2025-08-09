@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Módulo 7: Despliegue y DevOps</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --secondary-color: #f5a623;
+      --bg-color: #1e1e1e;
+      --surface-color: #2d2d2d;
+      --text-color: #e0e0e0;
+      --text-muted-color: #aaa;
+      --border-color: #444;
+      --font-family: 'Segoe UI', sans-serif;
+      --code-font-family: 'Fira Code', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: var(--surface-color);
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--text-muted-color);
+      max-width: 700px;
+      margin: 0.5rem auto 0;
+    }
+
+    nav {
+      background-color: var(--bg-color);
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav a {
+      display: inline-block;
+      color: var(--text-color);
+      text-decoration: none;
+      padding: 0.75rem 1.25rem;
+      margin-right: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background-color: rgba(74, 144, 226, 0.1);
+      color: var(--primary-color);
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      color: var(--secondary-color);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p, li {
+      color: var(--text-muted-color);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    code {
+      background-color: var(--surface-color);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: var(--code-font-family);
+      color: #fff;
+    }
+
+    pre {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      color: #fff;
+      font-family: var(--code-font-family);
+      margin: 1rem 0;
+    }
+
+    ul {
+      list-style: disc inside;
+      margin-left: 1rem;
+    }
+
+    .card {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .task-title {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+
+    .quiz-question {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .quiz-answer {
+      color: var(--text-muted-color);
+      font-size: 0.95rem;
+    }
+
+    .mapa-mental {
+      font-family: monospace;
+      background-color: var(--bg-color);
+      padding: 1rem;
+      border-radius: 6px;
+      color: var(--primary-color);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted-color);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Módulo 7: Despliegue y DevOps</h1>
+    <p>Lleva tus aplicaciones del entorno local al mundo real. Domina herramientas como Docker, GitHub Actions y servicios de despliegue.</p>
+  </header>
+
+  <nav id="menu">
+    <a href="#leccion-1" class="active">Lección 1: ¿Qué es el despliegue?</a>
+    <a href="#leccion-2">Lección 2: Variables de Entorno (.env)</a>
+    <a href="#leccion-3">Lección 3: Despliegue de Frontend</a>
+    <a href="#leccion-4">Lección 4: Despliegue de Backend</a>
+    <a href="#leccion-5">Lección 5: Introducción a Docker</a>
+    <a href="#leccion-6">Lección 6: CI/CD Básico</a>
+    <a href="#leccion-7">Lección 7: GitHub Actions</a>
+  </nav>
+
+  <main>
+
+    <!-- Lección 1 -->
+    <section id="leccion-1">
+      <h2>Lección 1: ¿Qué es el despliegue?</h2>
+      <p>El despliegue es el proceso mediante el cual tu aplicación o sitio web se hace disponible públicamente para usuarios reales. Es el paso final que lleva tu trabajo del entorno de desarrollo al entorno de producción.</p>
+
+      <h3>Ejemplo: Flujo básico de despliegue</h3>
+      <pre><code>// Flujo básico:
+// 1. Compilación (build)
+// 2. Pruebas automatizadas
+// 3. Subida a servidor
+// 4. Configuración de entorno
+// 5. Puesta en línea</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Describe tu propio flujo de despliegue:</p>
+      <p class="task-desc">Imagina cómo sería llevar tu última aplicación al mundo real. Describe cada paso que tomarías.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Código Local -> Build -> Tests -> Despliegue -> Producción
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cuál es la diferencia entre entorno de desarrollo y producción?</span>
+            <span class="quiz-answer">Desarrollo: donde desarrollas; Producción: donde los usuarios lo ven.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Por qué es importante probar antes de desplegar?</span>
+            <span class="quiz-answer">Para evitar errores visibles para los usuarios finales.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://developer.mozilla.org/es/docs/Glossary/Deployment " target="_blank">MDN - Despliegue</a></li>
+          <li><a href="https://www.freecodecamp.org/news/what-is-deployment/ " target="_blank">freeCodeCamp - ¿Qué es el despliegue?</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 2 -->
+    <section id="leccion-2">
+      <h2>Lección 2: Variables de Entorno (.env)</h2>
+      <p>Las variables de entorno permiten configurar tu aplicación según el ambiente donde se ejecuta: desarrollo, staging o producción. Son ideales para guardar claves secretas sin exponerlas en el repositorio.</p>
+
+      <h3>Ejemplo: Archivo .env</h3>
+      <pre><code>// .env
+PORT=3000
+DB_USER=admin
+DB_PASSWORD=mipassword
+NODE_ENV=development</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Crea tu primer archivo `.env`:</p>
+      <p class="task-desc">Define tres variables: `API_KEY`, `DATABASE_URL`, `DEBUG_MODE`. Luego accede a ellas desde Node.js usando `process.env`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Entorno -> Variables -> Seguridad -> Configuración -> Desarrollo vs Producción
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Para qué sirve `dotenv` en Node.js?</span>
+            <span class="quiz-answer">Para cargar automáticamente las variables desde `.env` a `process.env`</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Deberían subirse los archivos `.env` al repositorio Git?</span>
+            <span class="quiz-answer">No, siempre deben estar en `.gitignore` por seguridad.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://nodejs.dev/en/learn/how-to-read-environment-variables-from-nodejs/ " target="_blank">Node.js - Leer variables de entorno</a></li>
+          <li><a href="https://github.com/motdotla/dotenv " target="_blank">GitHub - dotenv</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 3 -->
+    <section id="leccion-3">
+      <h2>Lección 3: Despliegue de Frontend (Vercel, Netlify)</h2>
+      <p>Servicios como Vercel o Netlify ofrecen despliegues rápidos y gratuitos para proyectos frontend como React, Vue, Angular o páginas estáticas.</p>
+
+      <h3>Ejemplo: Comandos comunes</h3>
+      <pre><code>npx create-react-app my-app
+cd my-app
+npm run build
+# Subir carpeta /build o /dist</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Sube tu portfolio a Vercel:</p>
+      <p class="task-desc">Usa el CLI de Vercel para desplegar tu proyecto de React o página estática en segundos.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Frontend -> Build -> Vercel/Netlify -> Dominio -> Automatización
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Cómo se llama la carpeta típica generada por `npm run build`?</span>
+            <span class="quiz-answer"><code>/build</code>, <code>/dist</code> o <code>/public</code> dependiendo del framework.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Ofrece Vercel dominios personalizados?</span>
+            <span class="quiz-answer">Sí, también permite conectar dominios propios y SSL automático.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://vercel.com/docs " target="_blank">Vercel - Guía Oficial</a></li>
+          <li><a href="https://docs.netlify.com/ " target="_blank">Netlify - Documentación</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 4 -->
+    <section id="leccion-4">
+      <h2>Lección 4: Despliegue de Backend (Heroku, Render)</h2>
+      <p>Plataformas como Heroku y Render permiten desplegar aplicaciones backend hechas con Node.js, Python, Ruby, etc., sin necesidad de configurar servidores manualmente.</p>
+
+      <h3>Ejemplo: Comandos para Heroku</h3>
+      <pre><code>heroku login
+heroku create miapp
+git remote add heroku https://git.heroku.com/tuapp.git 
+git push heroku main</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Despliega una API REST básica:</p>
+      <p class="task-desc">Usa Render o Heroku para desplegar tu proyecto de Node.js + Express y prueba su funcionamiento desde el navegador.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Servidor Backend -> Plataforma de Despliegue -> Base de Datos -> Endpoint Público -> Escalabilidad
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Es necesario tener un `Procfile` para Heroku?</span>
+            <span class="quiz-answer">Sí, define cómo se inicia tu aplicación.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Render soporta bases de datos PostgreSQL?</span>
+            <span class="quiz-answer">Sí, ofrece opciones gratuitas para pruebas.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://render.com/docs/deploy-node-express-app " target="_blank">Render - Desplegar API en Node.js</a></li>
+          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs " target="_blank">Heroku - Guía Inicial con Node.js</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 5 -->
+    <section id="leccion-5">
+      <h2>Lección 5: Introducción a Docker</h2>
+      <p>Docker empaqueta tu aplicación junto con todas sus dependencias en un contenedor estandarizado. Esto asegura que funcione igual en cualquier entorno.</p>
+
+      <h3>Ejemplo: Dockerfile básico</h3>
+      <pre><code>// Dockerfile
+FROM node:18
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Empaqueta tu app con Docker:</p>
+      <p class="task-desc">Crea un `Dockerfile` y construye una imagen con `docker build`. Luego ejecútala con `docker run`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Aplicación -> Dockerfile -> Imagen -> Contenedor -> Nube / CI/CD
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué es un contenedor Docker?</span>
+            <span class="quiz-answer">Una unidad ligera e independiente que incluye todo lo necesario para ejecutar una aplicación.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Para qué sirve `docker-compose`?</span>
+            <span class="quiz-answer">Para definir múltiples servicios (como base de datos + backend) en un solo archivo YAML.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://docs.docker.com/get-started/ " target="_blank">Docker - Guía de Inicio</a></li>
+          <li><a href="https://labs.play-with-docker.com/ " target="_blank">Play with Docker - Entorno interactivo</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 6 -->
+    <section id="leccion-6">
+      <h2>Lección 6: CI/CD Básico</h2>
+      <p>La Integración Continua y el Despliegue Continuo (CI/CD) son procesos automatizados que verifican, construyen y despliegan tu aplicación cada vez que hay cambios en el código.</p>
+
+      <h3>Ejemplo: Pipeline sencillo</h3>
+      <pre><code>stages:
+  - build
+  - test
+  - deploy
+
+build:
+  script:
+    - npm install
+    - npm run build
+
+deploy:
+  script:
+    - echo "Desplegando..."
+    - scp dist/* user@server:/var/www/html</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Configura un pipeline básico:</p>
+      <p class="task-desc">Usa GitHub Actions o GitLab CI para crear un flujo de trabajo que ejecute `npm install` y `npm run build` cuando se haga un push a `main`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          Push de Código -> Pruebas -> Build -> Despliegue -> Notificación
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Qué significa CI/CD?</span>
+            <span class="quiz-answer">Integración Continua / Despliegue Continuo</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿En qué plataforma puedes usar CI/CD de forma gratuita?</span>
+            <span class="quiz-answer">GitHub Actions, GitLab CI, Travis CI, CircleCI, entre otras.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h-code>
+          <li><a href="https://docs.gitlab.com/ee/ci/ " target="_blank">GitLab CI - Guía completa</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Lección 7 -->
+    <section id="leccion-7">
+      <h2>Lección 7: GitHub Actions</h2>
+      <p>GitHub Actions te permite automatizar flujos de trabajo directamente desde tu repositorio. Desde correr tests hasta desplegar automáticamente tu aplicación en cada commit.</p>
+
+      <h3>Ejemplo: Workflow básico</h3>
+      <pre><code>// .github/workflows/deploy.yml
+name: Deploy App
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: npm install
+      - run: npm run build
+      - run: npm run deploy</code></pre>
+
+      <h3>Ejercicio Práctico</h3>
+      <p class="task-title">Automatiza el despliegue:</p>
+      <p class="task-desc">Crea un workflow que ejecute pruebas y despliegue tu aplicación cada vez que se haga un push a `main`.</p>
+
+      <div class="card">
+        <h3 class="icon">🧠 Mapa Mental</h3>
+        <div class="mapa-mental">
+          GitHub -> Actions -> Workflows -> Jobs -> Steps -> Despliegue Automático
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">❓ Quiz Rápido</h3>
+        <ul class="quiz-list">
+          <li>
+            <span class="quiz-question">¿Para qué sirve el evento `on.push.branches` en GitHub Actions?</span>
+            <span class="quiz-answer">Para activar el workflow cuando se hace un push a ciertas ramas.</span>
+          </li>
+          <li>
+            <span class="quiz-question">¿Qué es un job en GitHub Actions?</span>
+            <span class="quiz-answer">Un conjunto de pasos que se ejecutan en una máquina virtual o contenedor.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="icon">🔗 Recursos</h3>
+        <ul>
+          <li><a href="https://docs.github.com/es/actions " target="_blank">GitHub Actions - Documentación Oficial</a></li>
+          <li><a href="https://www.w3schools.com/dev/github-actions.asp " target="_blank">W3Schools - GitHub Actions</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2025 Curso Fullstack | Todos los derechos reservados
+    </footer>
+
+  </main>
+
+</body>
+</html>

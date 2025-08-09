@@ -23,15 +23,28 @@
             border-radius: 0.5rem;
             background-color: #f9fafb;
             border: 1px solid #e5e7eb;
+            min-height: 400px;
+            overflow: visible;
+        }
+        .mindmap svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
         .mindmap-center {
-            position: relative;
+            position: absolute;
             background-color: #6366f1;
             color: white;
             padding: 1rem 1.5rem;
             border-radius: 9999px;
             font-weight: 600;
             z-index: 10;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
         }
         .mindmap-node {
             position: absolute;
@@ -42,11 +55,14 @@
             border: 1px solid #d1d5db;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
             z-index: 10;
+            white-space: nowrap;
         }
         .mindmap-line {
             position: absolute;
             background-color: #d1d5db;
             z-index: 1;
+            height: 2px;
+            transform-origin: left center;
         }
     </style>
 </head>
@@ -111,18 +127,19 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap h-96" id="mindmap1">
-                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Producto Digital</div>
+                    <div class="mindmap min-h-[400px]" id="mindmap1">
+                        <svg></svg>
+                        <div class="mindmap-center">Producto Digital</div>
                         <!-- Nodos -->
-                        <div class="mindmap-node" style="top: 10%; left: 45%;">Diseño (UX/UI)</div>
-                        <div class="mindmap-node" style="top: 50%; left: 5%;">Desarrollo Front-End</div>
-                        <div class="mindmap-node" style="top: 85%; left: 45%;">Herramientas</div>
-                        <div class="mindmap-node" style="top: 50%; left: 75%;">Guías de Estilo</div>
+                        <div class="mindmap-node" data-angle="0" data-radius="120">Diseño (UX/UI)</div>
+                        <div class="mindmap-node" data-angle="90" data-radius="120">Desarrollo Front-End</div>
+                        <div class="mindmap-node" data-angle="180" data-radius="120">Herramientas</div>
+                        <div class="mindmap-node" data-angle="270" data-radius="120">Guías de Estilo</div>
                         <!-- Sub-nodos -->
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 15%;">UX: Usabilidad</div>
-                        <div class="mindmap-node text-sm" style="top: 20%; left: 15%;">UI: Visual</div>
-                        <div class="mindmap-node text-sm" style="top: 75%; left: 15%;">Metodologías CSS</div>
-                        <div class="mindmap-node text-sm" style="top: 90%; left: 15%;">Preprocesadores</div>
+                        <div class="mindmap-node text-sm" data-parent="Diseño (UX/UI)" data-angle="-30" data-radius="200">UX: Usabilidad</div>
+                        <div class="mindmap-node text-sm" data-parent="Diseño (UX/UI)" data-angle="30" data-radius="200">UI: Visual</div>
+                        <div class="mindmap-node text-sm" data-parent="Herramientas" data-angle="150" data-radius="200">Metodologías CSS</div>
+                        <div class="mindmap-node text-sm" data-parent="Herramientas" data-angle="210" data-radius="200">Preprocesadores</div>
                     </div>
                 </div>
 
@@ -187,24 +204,25 @@
                 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap h-96" id="mindmap2">
-                         <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Metodologías CSS</div>
-                         <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">BEM</div>
-                         <div class="mindmap-node" style="top: 50%; left: 10%;">OOCSS</div>
-                         <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">SMACSS</div>
-                         <!-- Sub-nodos BEM -->
-                         <div class="mindmap-node text-sm" style="top: 5%; left: 20%;">Bloque</div>
-                         <div class="mindmap-node text-sm" style="top: 5%; left: 50%; transform: translateX(-50%);">Elemento</div>
-                         <div class="mindmap-node text-sm" style="top: 5%; left: 80%; transform: translateX(-100%);">Modificador</div>
-                         <!-- Sub-nodos OOCSS -->
-                         <div class="mindmap-node text-sm" style="top: 30%; left: 5%;">Separar Estructura y Skin</div>
-                         <div class="mindmap-node text-sm" style="top: 70%; left: 5%;">Separar Contenedor y Contenido</div>
-                         <!-- Sub-nodos SMACSS -->
-                         <div class="mindmap-node text-sm" style="top: 85%; left: 5%;">Base</div>
-                         <div class="mindmap-node text-sm" style="top: 95%; left: 25%;">Layout</div>
-                         <div class="mindmap-node text-sm" style="top: 95%; left: 50%; transform: translateX(-50%);">Module</div>
-                         <div class="mindmap-node text-sm" style="top: 95%; left: 75%; transform: translateX(-100%);">State</div>
-                         <div class="mindmap-node text-sm" style="top: 85%; left: 95%; transform: translateX(-100%);">Theme</div>
+                    <div class="mindmap min-h-[400px]" id="mindmap2">
+                        <svg></svg>
+                        <div class="mindmap-center">Metodologías CSS</div>
+                        <div class="mindmap-node" data-angle="0" data-radius="120">BEM</div>
+                        <div class="mindmap-node" data-angle="120" data-radius="120">OOCSS</div>
+                        <div class="mindmap-node" data-angle="240" data-radius="120">SMACSS</div>
+                        <!-- Sub-nodos BEM -->
+                        <div class="mindmap-node text-sm" data-parent="BEM" data-angle="-30" data-radius="200">Bloque</div>
+                        <div class="mindmap-node text-sm" data-parent="BEM" data-angle="0" data-radius="200">Elemento</div>
+                        <div class="mindmap-node text-sm" data-parent="BEM" data-angle="30" data-radius="200">Modificador</div>
+                        <!-- Sub-nodos OOCSS -->
+                        <div class="mindmap-node text-sm" data-parent="OOCSS" data-angle="90" data-radius="200">Separar Estructura y Skin</div>
+                        <div class="mindmap-node text-sm" data-parent="OOCSS" data-angle="150" data-radius="200">Separar Contenedor y Contenido</div>
+                        <!-- Sub-nodos SMACSS -->
+                        <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="210" data-radius="200">Base</div>
+                        <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="240" data-radius="200">Layout</div>
+                        <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="270" data-radius="200">Module</div>
+                        <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="300" data-radius="200">State</div>
+                        <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="330" data-radius="200">Theme</div>
                     </div>
                 </div>
 
@@ -251,20 +269,21 @@
                 
                  <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap h-[450px]" id="mindmap3">
-                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">SASS</div>
+                    <div class="mindmap min-h-[400px]" id="mindmap3">
+                        <svg></svg>
+                        <div class="mindmap-center">SASS</div>
                         <!-- Nodos -->
-                        <div class="mindmap-node" style="top: 5%; left: 50%; transform: translateX(-50%);">Características</div>
-                        <div class="mindmap-node" style="top: 50%; left: 5%;">Instalación</div>
-                        <div class="mindmap-node" style="top: 90%; left: 50%; transform: translateX(-50%);">Estructura</div>
-                        <div class="mindmap-node" style="top: 50%; left: 80%;">Compilación</div>
+                        <div class="mindmap-node" data-angle="0" data-radius="120">Características</div>
+                        <div class="mindmap-node" data-angle="90" data-radius="120">Instalación</div>
+                        <div class="mindmap-node" data-angle="180" data-radius="120">Estructura</div>
+                        <div class="mindmap-node" data-angle="270" data-radius="120">Compilación</div>
                         <!-- Sub-nodos -->
-                        <div class="mindmap-node text-sm" style="top: 15%; left: 10%;">Variables</div>
-                        <div class="mindmap-node text-sm" style="top: 15%; left: 30%;">Anidación</div>
-                        <div class="mindmap-node text-sm" style="top: 15%; left: 50%;">Mixins</div>
-                        <div class="mindmap-node text-sm" style="top: 15%; left: 70%;">Imports</div>
-                        <div class="mindmap-node text-sm" style="top: 15%; left: 90%;">Extend</div>
-                        <div class="mindmap-node text-sm" style="top: 90%; left: 20%; transform: translateX(-50%);">Patrón 7-1</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="-30" data-radius="200">Variables</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="0" data-radius="200">Anidación</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="30" data-radius="200">Mixins</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="60" data-radius="200">Imports</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="90" data-radius="200">Extend</div>
+                        <div class="mindmap-node text-sm" data-parent="Estructura" data-angle="150" data-radius="200">Patrón 7-1</div>
                     </div>
                 </div>
 
@@ -325,25 +344,26 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap h-[450px]" id="mindmap4">
-                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Layout CSS</div>
-                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Modelo de Cajas</div>
-                        <div class="mindmap-node" style="top: 50%; left: 10%;">Tipos de Elementos</div>
-                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Posicionamiento</div>
+                    <div class="mindmap min-h-[400px]" id="mindmap4">
+                        <svg></svg>
+                        <div class="mindmap-center">Layout CSS</div>
+                        <div class="mindmap-node" data-angle="0" data-radius="120">Modelo de Cajas</div>
+                        <div class="mindmap-node" data-angle="90" data-radius="120">Tipos de Elementos</div>
+                        <div class="mindmap-node" data-angle="180" data-radius="120">Posicionamiento</div>
                         <!-- Sub-nodos Modelo de Cajas -->
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 20%;">Margin</div>
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 40%;">Border</div>
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 60%;">Padding</div>
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 80%;">Content</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="-30" data-radius="200">Margin</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="0" data-radius="200">Border</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="30" data-radius="200">Padding</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="60" data-radius="200">Content</div>
                         <!-- Sub-nodos Tipos -->
-                        <div class="mindmap-node text-sm" style="top: 30%; left: 5%;">Bloque</div>
-                        <div class="mindmap-node text-sm" style="top: 70%; left: 5%;">En Línea</div>
+                        <div class="mindmap-node text-sm" data-parent="Tipos de Elementos" data-angle="60" data-radius="200">Bloque</div>
+                        <div class="mindmap-node text-sm" data-parent="Tipos de Elementos" data-angle="120" data-radius="200">En Línea</div>
                         <!-- Sub-nodos Posicionamiento -->
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 10%;">Static</div>
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 30%;">Relative</div>
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 50%;">Absolute</div>
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 70%;">Fixed</div>
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 90%;">Float</div>
+                        <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="150" data-radius="200">Static</div>
+                        <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="180" data-radius="200">Relative</div>
+                        <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="210" data-radius="200">Absolute</div>
+                        <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="240" data-radius="200">Fixed</div>
+                        <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="270" data-radius="200">Float</div>
                     </div>
                 </div>
 
@@ -400,26 +420,27 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap h-[450px]" id="mindmap5">
-                        <div class="mindmap-center" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">Bootstrap 4</div>
-                        <div class="mindmap-node" style="top: 15%; left: 50%; transform: translateX(-50%);">Sistema de Rejilla</div>
-                        <div class="mindmap-node" style="top: 50%; left: 10%;">Componentes</div>
-                        <div class="mindmap-node" style="top: 85%; left: 50%; transform: translateX(-50%);">Utilidades</div>
-                        <div class="mindmap-node" style="top: 50%; left: 80%;">Personalización</div>
+                    <div class="mindmap min-h-[400px]" id="mindmap5">
+                        <svg></svg>
+                        <div class="mindmap-center">Bootstrap 4</div>
+                        <div class="mindmap-node" data-angle="0" data-radius="120">Sistema de Rejilla</div>
+                        <div class="mindmap-node" data-angle="90" data-radius="120">Componentes</div>
+                        <div class="mindmap-node" data-angle="180" data-radius="120">Utilidades</div>
+                        <div class="mindmap-node" data-angle="270" data-radius="120">Personalización</div>
                         <!-- Sub-nodos Grid -->
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 30%;">.container</div>
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 50%;">.row</div>
-                        <div class="mindmap-node text-sm" style="top: 5%; left: 70%;">.col</div>
+                        <div class="mindmap-node text-sm" data-parent="Sistema de Rejilla" data-angle="-30" data-radius="200">.container</div>
+                        <div class="mindmap-node text-sm" data-parent="Sistema de Rejilla" data-angle="0" data-radius="200">.row</div>
+                        <div class="mindmap-node text-sm" data-parent="Sistema de Rejilla" data-angle="30" data-radius="200">.col</div>
                         <!-- Sub-nodos Componentes -->
-                        <div class="mindmap-node text-sm" style="top: 30%; left: 5%;">Botones</div>
-                        <div class="mindmap-node text-sm" style="top: 50%; left: 5%;">Tarjetas</div>
-                        <div class="mindmap-node text-sm" style="top: 70%; left: 5%;">Modales</div>
+                        <div class="mindmap-node text-sm" data-parent="Componentes" data-angle="60" data-radius="200">Botones</div>
+                        <div class="mindmap-node text-sm" data-parent="Componentes" data-angle="90" data-radius="200">Tarjetas</div>
+                        <div class="mindmap-node text-sm" data-parent="Componentes" data-angle="120" data-radius="200">Modales</div>
                          <!-- Sub-nodos Utilidades -->
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 30%;">Espaciado</div>
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 50%;">Colores</div>
-                        <div class="mindmap-node text-sm" style="top: 95%; left: 70%;">Bordes</div>
+                        <div class="mindmap-node text-sm" data-parent="Utilidades" data-angle="150" data-radius="200">Espaciado</div>
+                        <div class="mindmap-node text-sm" data-parent="Utilidades" data-angle="180" data-radius="200">Colores</div>
+                        <div class="mindmap-node text-sm" data-parent="Utilidades" data-angle="210" data-radius="200">Bordes</div>
                         <!-- Sub-nodos Personalización -->
-                        <div class="mindmap-node text-sm" style="top: 50%; left: 95%; transform: translateX(-100%);">Sass</div>
+                        <div class="mindmap-node text-sm" data-parent="Personalización" data-angle="270" data-radius="200">Sass</div>
                     </div>
                 </div>
 
@@ -491,43 +512,79 @@
             updateContent(window.location.hash);
             
             // --- Funciones para dibujar los mapas mentales ---
-            function drawMindMapLines(mapId) {
+            function drawMindMap(mapId) {
                 const map = document.getElementById(mapId);
                 if (!map) return;
                 
                 const center = map.querySelector('.mindmap-center');
                 const nodes = map.querySelectorAll('.mindmap-node');
+                const svg = map.querySelector('svg');
                 
+                // Limpiar el SVG
+                svg.innerHTML = '';
+                
+                // Obtener las coordenadas del centro
                 const centerX = center.offsetLeft + center.offsetWidth / 2;
                 const centerY = center.offsetTop + center.offsetHeight / 2;
-
+                
+                // Posicionar los nodos y dibujar líneas
                 nodes.forEach(node => {
+                    // Si el nodo tiene un ángulo y radio, posicionarlo en coordenadas polares
+                    if (node.dataset.angle !== undefined && node.dataset.radius !== undefined) {
+                        const angle = parseFloat(node.dataset.angle) * (Math.PI / 180);
+                        const radius = parseFloat(node.dataset.radius);
+                        
+                        const x = centerX + radius * Math.cos(angle);
+                        const y = centerY + radius * Math.sin(angle);
+                        
+                        node.style.left = `${x}px`;
+                        node.style.top = `${y}px`;
+                        node.style.transform = 'translate(-50%, -50%)';
+                    }
+                    
+                    // Dibujar línea desde el centro hasta el nodo (si es un nodo principal) o desde su padre
                     const nodeX = node.offsetLeft + node.offsetWidth / 2;
                     const nodeY = node.offsetTop + node.offsetHeight / 2;
-
-                    const line = document.createElement('div');
-                    line.classList.add('mindmap-line');
                     
-                    const distance = Math.sqrt(Math.pow(nodeX - centerX, 2) + Math.pow(nodeY - centerY, 2));
-                    const angle = Math.atan2(nodeY - centerY, nodeX - centerX) * (180 / Math.PI);
-
-                    line.style.width = `${distance}px`;
-                    line.style.height = '2px';
-                    line.style.left = `${centerX}px`;
-                    line.style.top = `${centerY}px`;
-                    line.style.transformOrigin = 'left center';
-                    line.style.transform = `rotate(${angle}deg)`;
+                    let startX = centerX;
+                    let startY = centerY;
                     
-                    map.prepend(line); // Usar prepend para que las líneas estén detrás de los nodos
+                    // Si el nodo tiene un padre, buscar el nodo padre y usar sus coordenadas
+                    if (node.dataset.parent) {
+                        const parent = Array.from(nodes).find(n => n.textContent.trim() === node.dataset.parent);
+                        if (parent) {
+                            startX = parent.offsetLeft + parent.offsetWidth / 2;
+                            startY = parent.offsetTop + parent.offsetHeight / 2;
+                        }
+                    }
+                    
+                    // Crear la línea en SVG
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', startX);
+                    line.setAttribute('y1', startY);
+                    line.setAttribute('x2', nodeX);
+                    line.setAttribute('y2', nodeY);
+                    line.setAttribute('stroke', '#d1d5db');
+                    line.setAttribute('stroke-width', '2');
+                    svg.appendChild(line);
                 });
             }
 
             // Dibujar todas las líneas de los mapas mentales
-            drawMindMapLines('mindmap1');
-            drawMindMapLines('mindmap2');
-            drawMindMapLines('mindmap3');
-            drawMindMapLines('mindmap4');
-            drawMindMapLines('mindmap5');
+            drawMindMap('mindmap1');
+            drawMindMap('mindmap2');
+            drawMindMap('mindmap3');
+            drawMindMap('mindmap4');
+            drawMindMap('mindmap5');
+            
+            // Redibujar mapas mentales cuando se cambia el tamaño de la ventana
+            window.addEventListener('resize', function() {
+                drawMindMap('mindmap1');
+                drawMindMap('mindmap2');
+                drawMindMap('mindmap3');
+                drawMindMap('mindmap4');
+                drawMindMap('mindmap5');
+            });
         });
     </script>
 

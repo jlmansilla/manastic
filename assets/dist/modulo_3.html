@@ -23,8 +23,9 @@
             border-radius: 0.5rem;
             background-color: #f9fafb;
             border: 1px solid #e5e7eb;
-            min-height: 400px;
+            min-height: 500px;
             overflow: visible;
+            width: 100%;
         }
         .mindmap svg {
             position: absolute;
@@ -33,6 +34,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            pointer-events: none;
         }
         .mindmap-center {
             position: absolute;
@@ -45,6 +47,7 @@
             transform: translate(-50%, -50%);
             top: 50%;
             left: 50%;
+            white-space: nowrap;
         }
         .mindmap-node {
             position: absolute;
@@ -56,13 +59,7 @@
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
             z-index: 10;
             white-space: nowrap;
-        }
-        .mindmap-line {
-            position: absolute;
-            background-color: #d1d5db;
-            z-index: 1;
-            height: 2px;
-            transform-origin: left center;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -127,10 +124,10 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap min-h-[400px]" id="mindmap1">
+                    <div class="mindmap" id="mindmap1">
                         <svg></svg>
                         <div class="mindmap-center">Producto Digital</div>
-                        <!-- Nodos -->
+                        <!-- Nodos principales -->
                         <div class="mindmap-node" data-angle="0" data-radius="120">Diseño (UX/UI)</div>
                         <div class="mindmap-node" data-angle="90" data-radius="120">Desarrollo Front-End</div>
                         <div class="mindmap-node" data-angle="180" data-radius="120">Herramientas</div>
@@ -204,7 +201,7 @@
                 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap min-h-[400px]" id="mindmap2">
+                    <div class="mindmap" id="mindmap2">
                         <svg></svg>
                         <div class="mindmap-center">Metodologías CSS</div>
                         <div class="mindmap-node" data-angle="0" data-radius="120">BEM</div>
@@ -215,17 +212,14 @@
                         <div class="mindmap-node text-sm" data-parent="BEM" data-angle="0" data-radius="200">Elemento</div>
                         <div class="mindmap-node text-sm" data-parent="BEM" data-angle="30" data-radius="200">Modificador</div>
                         <!-- Sub-nodos OOCSS -->
-                        <div class="mindmap-node text-sm" data-parent="OOCSS" data-angle="90" data-radius="200">Separar Estructura y Skin</div>
-                        <div class="mindmap-node text-sm" data-parent="OOCSS" data-angle="150" data-radius="200">Separar Contenedor y Contenido</div>
+                        <div class="mindmap-node text-sm" data-parent="OOCSS" data-angle="90" data-radius="200">Separar Estructura</div>
+                        <div class="mindmap-node text-sm" data-parent="OOCSS" data-angle="150" data-radius="200">Separar Contenedor</div>
                         <!-- Sub-nodos SMACSS -->
                         <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="210" data-radius="200">Base</div>
                         <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="240" data-radius="200">Layout</div>
                         <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="270" data-radius="200">Module</div>
-                        <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="300" data-radius="200">State</div>
-                        <div class="mindmap-node text-sm" data-parent="SMACSS" data-angle="330" data-radius="200">Theme</div>
                     </div>
                 </div>
-
 
                 <div class="bg-white p-6 rounded-lg shadow-sm">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Recursos Útiles</h3>
@@ -269,7 +263,7 @@
                 
                  <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap min-h-[400px]" id="mindmap3">
+                    <div class="mindmap" id="mindmap3">
                         <svg></svg>
                         <div class="mindmap-center">SASS</div>
                         <!-- Nodos -->
@@ -278,12 +272,11 @@
                         <div class="mindmap-node" data-angle="180" data-radius="120">Estructura</div>
                         <div class="mindmap-node" data-angle="270" data-radius="120">Compilación</div>
                         <!-- Sub-nodos -->
-                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="-30" data-radius="200">Variables</div>
-                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="0" data-radius="200">Anidación</div>
-                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="30" data-radius="200">Mixins</div>
-                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="60" data-radius="200">Imports</div>
-                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="90" data-radius="200">Extend</div>
-                        <div class="mindmap-node text-sm" data-parent="Estructura" data-angle="150" data-radius="200">Patrón 7-1</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="-45" data-radius="200">Variables</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="-15" data-radius="200">Anidación</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="15" data-radius="200">Mixins</div>
+                        <div class="mindmap-node text-sm" data-parent="Características" data-angle="45" data-radius="200">Imports</div>
+                        <div class="mindmap-node text-sm" data-parent="Estructura" data-angle="180" data-radius="200">Patrón 7-1</div>
                     </div>
                 </div>
 
@@ -344,17 +337,17 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap min-h-[400px]" id="mindmap4">
+                    <div class="mindmap" id="mindmap4">
                         <svg></svg>
                         <div class="mindmap-center">Layout CSS</div>
                         <div class="mindmap-node" data-angle="0" data-radius="120">Modelo de Cajas</div>
                         <div class="mindmap-node" data-angle="90" data-radius="120">Tipos de Elementos</div>
                         <div class="mindmap-node" data-angle="180" data-radius="120">Posicionamiento</div>
                         <!-- Sub-nodos Modelo de Cajas -->
-                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="-30" data-radius="200">Margin</div>
-                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="0" data-radius="200">Border</div>
-                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="30" data-radius="200">Padding</div>
-                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="60" data-radius="200">Content</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="-45" data-radius="200">Content</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="-15" data-radius="200">Padding</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="15" data-radius="200">Border</div>
+                        <div class="mindmap-node text-sm" data-parent="Modelo de Cajas" data-angle="45" data-radius="200">Margin</div>
                         <!-- Sub-nodos Tipos -->
                         <div class="mindmap-node text-sm" data-parent="Tipos de Elementos" data-angle="60" data-radius="200">Bloque</div>
                         <div class="mindmap-node text-sm" data-parent="Tipos de Elementos" data-angle="120" data-radius="200">En Línea</div>
@@ -363,7 +356,6 @@
                         <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="180" data-radius="200">Relative</div>
                         <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="210" data-radius="200">Absolute</div>
                         <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="240" data-radius="200">Fixed</div>
-                        <div class="mindmap-node text-sm" data-parent="Posicionamiento" data-angle="270" data-radius="200">Float</div>
                     </div>
                 </div>
 
@@ -420,7 +412,7 @@
 
                 <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
                     <h3 class="text-xl font-semibold mb-3 text-indigo-700">Mapa Mental Explicativo</h3>
-                    <div class="mindmap min-h-[400px]" id="mindmap5">
+                    <div class="mindmap" id="mindmap5">
                         <svg></svg>
                         <div class="mindmap-center">Bootstrap 4</div>
                         <div class="mindmap-node" data-angle="0" data-radius="120">Sistema de Rejilla</div>
@@ -440,7 +432,7 @@
                         <div class="mindmap-node text-sm" data-parent="Utilidades" data-angle="180" data-radius="200">Colores</div>
                         <div class="mindmap-node text-sm" data-parent="Utilidades" data-angle="210" data-radius="200">Bordes</div>
                         <!-- Sub-nodos Personalización -->
-                        <div class="mindmap-node text-sm" data-parent="Personalización" data-angle="270" data-radius="200">Sass</div>
+                        <div class="mindmap-node text-sm" data-parent="Personalización" data-angle="270" data-radius="200">Variables Sass</div>
                     </div>
                 </div>
 
@@ -477,9 +469,19 @@
                 const activeSection = document.querySelector(hash);
                 if (activeSection) {
                     activeSection.classList.add('active');
+                    
+                    // Redibujar el mapa mental de la sección activa después de un pequeño delay
+                    // para asegurarnos de que el DOM esté completamente renderizado
+                    setTimeout(() => {
+                        const mindmapId = activeSection.querySelector('.mindmap')?.id;
+                        if (mindmapId) {
+                            drawMindMap(mindmapId);
+                        }
+                    }, 50);
                 } else {
                     // Si el hash no es válido, mostrar el primero por defecto
                     document.querySelector('#ae1').classList.add('active');
+                    setTimeout(() => drawMindMap('mindmap1'), 50);
                 }
 
                 // Actualizar el estado activo del enlace de navegación
@@ -508,9 +510,6 @@
                 updateContent(window.location.hash);
             });
 
-            // Mostrar el contenido inicial basado en el hash de la URL
-            updateContent(window.location.hash);
-            
             // --- Funciones para dibujar los mapas mentales ---
             function drawMindMap(mapId) {
                 const map = document.getElementById(mapId);
@@ -520,12 +519,27 @@
                 const nodes = map.querySelectorAll('.mindmap-node');
                 const svg = map.querySelector('svg');
                 
+                if (!center || !svg) return;
+                
                 // Limpiar el SVG
                 svg.innerHTML = '';
                 
-                // Obtener las coordenadas del centro
-                const centerX = center.offsetLeft + center.offsetWidth / 2;
-                const centerY = center.offsetTop + center.offsetHeight / 2;
+                // Asegurar que el SVG tenga el tamaño correcto
+                const mapRect = map.getBoundingClientRect();
+                svg.setAttribute('width', map.offsetWidth);
+                svg.setAttribute('height', map.offsetHeight);
+                
+                // Obtener las coordenadas del centro relativas al contenedor del mapa
+                const mapOffset = {
+                    left: map.offsetLeft,
+                    top: map.offsetTop
+                };
+                
+                const centerRect = center.getBoundingClientRect();
+                const mapContainerRect = map.getBoundingClientRect();
+                
+                const centerX = centerRect.left - mapContainerRect.left + centerRect.width / 2;
+                const centerY = centerRect.top - mapContainerRect.top + centerRect.height / 2;
                 
                 // Posicionar los nodos y dibujar líneas
                 nodes.forEach(node => {
@@ -539,51 +553,58 @@
                         
                         node.style.left = `${x}px`;
                         node.style.top = `${y}px`;
-                        node.style.transform = 'translate(-50%, -50%)';
                     }
-                    
-                    // Dibujar línea desde el centro hasta el nodo (si es un nodo principal) o desde su padre
-                    const nodeX = node.offsetLeft + node.offsetWidth / 2;
-                    const nodeY = node.offsetTop + node.offsetHeight / 2;
-                    
-                    let startX = centerX;
-                    let startY = centerY;
-                    
-                    // Si el nodo tiene un padre, buscar el nodo padre y usar sus coordenadas
-                    if (node.dataset.parent) {
-                        const parent = Array.from(nodes).find(n => n.textContent.trim() === node.dataset.parent);
-                        if (parent) {
-                            startX = parent.offsetLeft + parent.offsetWidth / 2;
-                            startY = parent.offsetTop + parent.offsetHeight / 2;
+                });
+                
+                // Esperar un frame para que se actualicen las posiciones y luego dibujar las líneas
+                requestAnimationFrame(() => {
+                    nodes.forEach(node => {
+                        // Obtener las coordenadas del nodo relativas al contenedor
+                        const nodeRect = node.getBoundingClientRect();
+                        const nodeX = nodeRect.left - mapContainerRect.left + nodeRect.width / 2;
+                        const nodeY = nodeRect.top - mapContainerRect.top + nodeRect.height / 2;
+                        
+                        let startX = centerX;
+                        let startY = centerY;
+                        
+                        // Si el nodo tiene un padre, buscar el nodo padre y usar sus coordenadas
+                        if (node.dataset.parent) {
+                            const parent = Array.from(nodes).find(n => 
+                                n.textContent.trim() === node.dataset.parent.trim()
+                            );
+                            if (parent) {
+                                const parentRect = parent.getBoundingClientRect();
+                                startX = parentRect.left - mapContainerRect.left + parentRect.width / 2;
+                                startY = parentRect.top - mapContainerRect.top + parentRect.height / 2;
+                            }
                         }
-                    }
-                    
-                    // Crear la línea en SVG
-                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    line.setAttribute('x1', startX);
-                    line.setAttribute('y1', startY);
-                    line.setAttribute('x2', nodeX);
-                    line.setAttribute('y2', nodeY);
-                    line.setAttribute('stroke', '#d1d5db');
-                    line.setAttribute('stroke-width', '2');
-                    svg.appendChild(line);
+                        
+                        // Crear la línea en SVG
+                        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', startX);
+                        line.setAttribute('y1', startY);
+                        line.setAttribute('x2', nodeX);
+                        line.setAttribute('y2', nodeY);
+                        line.setAttribute('stroke', '#d1d5db');
+                        line.setAttribute('stroke-width', '2');
+                        svg.appendChild(line);
+                    });
                 });
             }
 
-            // Dibujar todas las líneas de los mapas mentales
-            drawMindMap('mindmap1');
-            drawMindMap('mindmap2');
-            drawMindMap('mindmap3');
-            drawMindMap('mindmap4');
-            drawMindMap('mindmap5');
+            // Mostrar el contenido inicial basado en el hash de la URL
+            updateContent(window.location.hash);
             
             // Redibujar mapas mentales cuando se cambia el tamaño de la ventana
             window.addEventListener('resize', function() {
-                drawMindMap('mindmap1');
-                drawMindMap('mindmap2');
-                drawMindMap('mindmap3');
-                drawMindMap('mindmap4');
-                drawMindMap('mindmap5');
+                // Solo redibujar el mapa mental de la sección activa
+                const activeSection = document.querySelector('.content-section.active');
+                if (activeSection) {
+                    const mindmapId = activeSection.querySelector('.mindmap')?.id;
+                    if (mindmapId) {
+                        setTimeout(() => drawMindMap(mindmapId), 100);
+                    }
+                }
             });
         });
     </script>
